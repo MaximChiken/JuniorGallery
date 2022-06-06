@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">JuniorGallery</string>
+
+    <string name="create_account">Create an account</string>
+    <string name="have_account">I already have an account</string>
+
+    <string name="sign_in_underlined"><u>Sign In</u></string>
+    <string name="sign_up_underlined"><u>Sign Up</u></string>
+
+    <string name="email_sign_in">Email</string>
+    <string name="password_sign_in">Password</string>
+
+    <string name="username">User Name<font color='#FF0000'>*</font></string>
+    <string name="birthday">Birthday</string>
+    <string name="email_sign_up">Email<font color='#FF0000'>*</font></string>
+    <string name="password_sign_up">Password<font color='#FF0000'>*</font></string>
+    <string name="password_confirm_sign_up">Confirm Password<font color='#FF0000'>*</font></string>
+
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+</resources>
