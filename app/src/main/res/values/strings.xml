@@ -4,18 +4,25 @@
     <string name="create_account">Create an account</string>
     <string name="have_account">I already have an account</string>
 
-    <string name="sign_in_underlined"><u>Sign In</u></string>
-    <string name="sign_up_underlined"><u>Sign Up</u></string>
-
-    <string name="email_sign_in">Email</string>
-    <string name="password_sign_in">Password</string>
-
-    <string name="username">User Name<font color='#FF0000'>*</font></string>
-    <string name="birthday">Birthday</string>
-    <string name="email_sign_up">Email<font color='#FF0000'>*</font></string>
-    <string name="password_sign_up">Password<font color='#FF0000'>*</font></string>
-    <string name="password_confirm_sign_up">Confirm Password<font color='#FF0000'>*</font></string>
+    <string name="cancel">Cancel</string>
 
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+
+    <string name="email_sign_in"><font color='#C4C4C4'>Email</font></string>
+    <string name="password_sign_in"><font color='#C4C4C4'>Password</font></string>
+
+    <string name="wrong_email_or_password"><font color='#FF0000'>Incorrect Email or Password</font></string>
+
+    <string name="username"><font color='#C4C4C4'>User Name</font><font color='#FF0000'>*</font></string>
+    <string name="birthday"><font color='#C4C4C4'>Birthday</font></string>
+    <string name="email_sign_up"><font color='#C4C4C4'>Email</font><font color='#FF0000'>*</font></string>
+    <string name="password_sign_up"><font color='#C4C4C4'>Password</font><font color='#FF0000'>*</font></string>
+    <string name="password_confirm_sign_up"><font color='#C4C4C4'>Confirm Password</font><font color='#FF0000'>*</font></string>
+
+    <string name="no_user_name"><font color='#FF0000'>Invalid or empty username</font></string>
+    <string name="no_email"><font color='#FF0000'>Invalid or empty email</font></string>
+    <string name="no_password"><font color='#FF0000'>Invalid or empty password</font></string>
+    <string name="no_confirm_password"><font color='#FF0000'>Password does not match</font></string>
+
 </resources>

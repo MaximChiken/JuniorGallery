@@ -1,4 +1,7 @@
 package com.example.juniorgallery.loginfragment
 
-interface LoginView {
+import com.example.juniorgallery.base.base_mvp.BaseView
+
+
+interface LoginView: BaseView {
 }
