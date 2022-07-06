@@ -1,11 +1,10 @@
 package com.example.juniorgallery.registrationfragmnet
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.juniorgallery.masks.DateMask
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
@@ -29,6 +28,7 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
         super.onViewCreated(view, savedInstanceState)
 
 
+
         with(binding) {
             signInButton.setOnClickListener {
                 findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
@@ -38,22 +38,12 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
                 findNavController().navigate(R.id.action_registrationFragment_to_welcomeFragment)
             }
 
-            birthdayEditText.addTextChangedListener(object : TextWatcher {
-
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    presenter.setBirthDateMask(s)
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-                }
-            })
+            DateMask(birthdayEditText).listen()
 
             signUpButton.setOnClickListener {
                 val usernameToText = userNameEditText.text.toString()
-                val dateOfBirth = birthdayEditText.text.toString()
+                var dateOfBirth = birthdayEditText.text.toString()
+                if (dateOfBirth == "") dateOfBirth = "00/00/0001"
                 val emailToText = emailSignUpEditText.text.toString()
                 val passwordToText = passwordSignUpEditText.text.toString()
                 val confirmPasswordToText = confirmPasswordSignUpEditText.text.toString()
@@ -67,50 +57,33 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
         }
     }
 
-    override fun setBirthdate(date: String, sel: Int) {
-        with(binding) {
-            birthdayEditText.setText(date)
-            birthdayEditText.setSelection(if (sel < date.length) sel
-            else date.length)
-        }
+
+
+    override fun checkUserName(errorText: Int?) = with(binding.userNameInputLayout) {
+        error = errorText?.let { getString(it).ifEmpty { null } }
+
     }
 
-    override fun checkUserName(boolean: Boolean) {
-        if (boolean) {
-            binding.userNameInputLayout.error = null
-        } else {
-            binding.userNameInputLayout.error = getString(R.string.no_user_name)
-        }
+    override fun checkEmail(errorText: Int?) = with(binding.emailRegistrationInputLayout) {
+        error = errorText?.let { getString(it).ifEmpty { null } }
     }
 
-    override fun checkEmail(boolean: Boolean) {
-        if (boolean) {
-            binding.emailRegistrationInputLayout.error = null
-        } else {
-            binding.emailRegistrationInputLayout.error = getString(R.string.no_email)
-        }
+    override fun checkPassword(errorText: Int?) = with(binding.passwordInputLayout) {
+        error = errorText?.let { getString(it).ifEmpty { null } }
+
     }
 
-    override fun checkPassword(boolean: Boolean) {
-        if (boolean) {
-            binding.passwordInputLayout.error = null
-        } else {
-            binding.passwordInputLayout.error = getString(R.string.no_password)
-        }
+    override fun checkConfirmPassword(errorText: Int?) = with(binding.confirmInputLayout) {
+        error = errorText?.let { getString(it).ifEmpty { null } }
     }
 
-    override fun checkConfirmPassword(boolean: Boolean) {
-        if (boolean) {
-            binding.confirmInputLayout.error = null
-        } else {
-            binding.confirmInputLayout.error = getString(R.string.no_confirm_password)
-        }
-    }
-
-    override fun toast() {
+    override fun toastsucc() {
         Toast.makeText(context, "Все отлично", Toast.LENGTH_SHORT).show()
     }
 
+    override fun toasterr() {
+        Toast.makeText(context, "Хуйнябля", Toast.LENGTH_SHORT).show()
+    }
 }
 
 

@@ -6,22 +6,23 @@ import moxy.viewstate.strategy.StateStrategyType
 
 interface RegistrationView : BaseView {
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun setBirthdate(date: String, sel: Int)
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun checkUserName(boolean: Boolean)
+    fun checkUserName(errorText: Int?)
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun checkEmail(boolean: Boolean)
+    fun checkEmail(errorText: Int?)
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun checkPassword(boolean: Boolean)
+    fun checkPassword(errorText: Int?)
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun checkConfirmPassword(boolean: Boolean)
+    fun checkConfirmPassword(errorText: Int?)
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun toast()
+    fun toastsucc()
+
+    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    fun toasterr()
 
 }
