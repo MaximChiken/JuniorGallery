@@ -1,8 +1,8 @@
-package com.example.juniorgallery.loginfragment
+package com.example.juniorgallery.fragments.loginfragment
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
@@ -33,12 +33,20 @@ class LoginFragment: BaseFragment<LoginFragmentBinding, LoginPresenter>(), Login
                 findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
             }
 
-            /*signInButton.setOnClickListener {
-
-            }*/
+            signInButton.setOnClickListener {
+                val usernameToText = usernameSignInEditText.text.toString()
+                val password = passwordSignInEditText.text.toString()
+                presenter.proceedLogin(usernameToText, password)
+            }
         }
     }
 
+    override fun toastsucc() {
+        Toast.makeText(context, "Все отлично", Toast.LENGTH_SHORT).show()
+    }
 
+    override fun toasterr() {
+        Toast.makeText(context, "Хуйнябля", Toast.LENGTH_SHORT).show()
+    }
 
 }

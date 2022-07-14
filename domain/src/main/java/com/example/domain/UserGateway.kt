@@ -1,13 +1,13 @@
 package com.example.domain
 
-import com.example.domain.entities.LoginResponse
-import com.example.domain.entities.UserRequest
+import com.example.domain.core.BaseGateway
+import com.example.domain.entities.*
 import io.reactivex.rxjava3.core.Single
 
 
-interface UserGateway {
+interface UserGateway<R: Any>: BaseGateway<R> {
 
-    fun postUser(userRequest: UserRequest): Single<UserRequest>
+    fun postUser(registrationRequest: UserFullInfoEntity): Single<UserIdEntity>
 
-    fun loginUser(username: String, password: String): Single<LoginResponse>
+    fun loginUser(loginRequest: UserInfoEntity): Single<TokenEntity>
 }

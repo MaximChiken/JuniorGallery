@@ -1,4 +1,4 @@
-package com.example.juniorgallery.registrationfragmnet
+package com.example.juniorgallery.fragments.registrationfragmnet
 
 import android.os.Bundle
 import android.view.View

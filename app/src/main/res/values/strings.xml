@@ -9,7 +9,7 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
 
-    <string name="email_sign_in"><font color='#C4C4C4'>Email</font></string>
+    <string name="username_sign_in"><font color='#C4C4C4'>Username</font></string>
     <string name="password_sign_in"><font color='#C4C4C4'>Password</font></string>
 
     <string name="wrong_email_or_password"><font color='#FF0000'>Incorrect Email or Password</font></string>

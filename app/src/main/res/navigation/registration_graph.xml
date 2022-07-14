@@ -6,7 +6,7 @@
     app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.juniorgallery.welcomefragment.WelcomeFragment"
+        android:name="com.example.juniorgallery.fragments.welcomefragment.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/welcome_fragment">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.juniorgallery.loginfragment.LoginFragment"
+        android:name="com.example.juniorgallery.fragments.loginfragment.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/login_fragment">
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.juniorgallery.registrationfragmnet.RegistrationFragment"
+        android:name="com.example.juniorgallery.fragments.registrationfragmnet.RegistrationFragment"
         android:label="RegistrationFragment"
         tools:layout="@layout/registration_fragment">
         <action

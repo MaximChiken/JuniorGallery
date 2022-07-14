@@ -1,4 +1,4 @@
-package com.example.juniorgallery.registrationfragmnet
+package com.example.juniorgallery.fragments.registrationfragmnet
 
 import com.example.juniorgallery.base.base_mvp.BaseView
 import moxy.viewstate.strategy.OneExecutionStateStrategy

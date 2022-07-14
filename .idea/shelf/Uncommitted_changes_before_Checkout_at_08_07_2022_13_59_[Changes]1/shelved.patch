@@ -1,0 +1,33 @@
+Index: app/src/main/java/com/example/juniorgallery/loginfragment/LoginView.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/loginfragment/LoginView.kt b/app/src/main/java/com/example/juniorgallery/loginfragment/LoginView.kt
+deleted file mode 100644
+--- a/app/src/main/java/com/example/juniorgallery/loginfragment/LoginView.kt	
++++ /dev/null	
+@@ -1,7 +0,0 @@
+-package com.example.juniorgallery.loginfragment
+-
+-import com.example.juniorgallery.base.base_mvp.BaseView
+-
+-
+-interface LoginView: BaseView {
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/example/juniorgallery/loginfragment/LoginPresenter.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/loginfragment/LoginPresenter.kt b/app/src/main/java/com/example/juniorgallery/loginfragment/LoginPresenter.kt
+deleted file mode 100644
+--- a/app/src/main/java/com/example/juniorgallery/loginfragment/LoginPresenter.kt	
++++ /dev/null	
+@@ -1,10 +0,0 @@
+-package com.example.juniorgallery.loginfragment
+-
+-import com.example.juniorgallery.base.base_mvp.BasePresenter
+-import moxy.InjectViewState
+-import javax.inject.Inject
+-
+-
+-@InjectViewState
+-class LoginPresenter @Inject constructor() : BasePresenter<LoginView>() {
+-}
+\ No newline at end of file

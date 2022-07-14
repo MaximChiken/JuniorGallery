@@ -1,8 +1,10 @@
-package com.example.juniorgallery.registrationfragmnet
+package com.example.juniorgallery.fragments.registrationfragmnet
 
 import com.example.domain.UserGateway
-import com.example.domain.entities.UserRequest
+import com.example.domain.core.Mapper
+import com.example.domain.entities.UserFullInfoEntity
 import com.example.juniorgallery.base.base_mvp.BasePresenter
+import com.example.juniorgallery.fragments.registrationfragmnet.models.UiRegistration
 import com.example.juniorgallery.validation.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -11,7 +13,11 @@ import javax.inject.Inject
 
 
 @InjectViewState
-class RegistrationPresenter @Inject constructor(var usergateway: UserGateway) : BasePresenter<RegistrationView>() {
+class RegistrationPresenter @Inject constructor(
+    private var usergateway: UserGateway<UiRegistration>,
+    private val userDomainToRegistrationRequest: Mapper<UiRegistration, UserFullInfoEntity>,
+) :
+    BasePresenter<RegistrationView>() {
 
 
     private fun validationCheck(username: String, email: String, password: String, confirmPassword: String): Boolean {
@@ -40,7 +46,7 @@ class RegistrationPresenter @Inject constructor(var usergateway: UserGateway) : 
     ) {
 
         if (validationCheck(username, email, password, confirmPassword)) {
-            usergateway.postUser(UserRequest(email, date, username, password))
+            usergateway.postUser(userDomainToRegistrationRequest.map(UiRegistration(email, date, username, password)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

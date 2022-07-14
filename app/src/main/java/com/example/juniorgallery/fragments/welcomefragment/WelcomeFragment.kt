@@ -1,4 +1,4 @@
-package com.example.juniorgallery.welcomefragment
+package com.example.juniorgallery.fragments.welcomefragment
 
 import android.os.Bundle
 import android.view.View

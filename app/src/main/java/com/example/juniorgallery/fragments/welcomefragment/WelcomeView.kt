@@ -1,4 +1,4 @@
-package com.example.juniorgallery.welcomefragment
+package com.example.juniorgallery.fragments.welcomefragment
 
 import com.example.juniorgallery.base.base_mvp.BaseView
 

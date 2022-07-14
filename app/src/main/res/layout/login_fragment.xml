@@ -58,7 +58,7 @@
         app:layout_constraintStart_toStartOf="@+id/signInTextView" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/EmailLoginInputLayout"
+        android:id="@+id/usernameLoginInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -75,12 +75,12 @@
         app:layout_constraintTop_toBottomOf="@id/signInTextView">
 
         <EditText
-            android:id="@+id/emailSignInEditText"
+            android:id="@+id/usernameSignInEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_email_24"
             android:foregroundTint="@color/black"
-            android:hint="@string/email_sign_in"
+            android:hint="@string/username_sign_in"
             android:inputType="textEmailAddress"
             android:paddingStart="5dp"
             android:paddingTop="10dp"
@@ -104,7 +104,7 @@
         app:boxCornerRadiusTopEnd="10dp"
         android:hint="@string/password_sign_in"
         app:boxCornerRadiusTopStart="10dp"
-        app:layout_constraintTop_toBottomOf="@id/EmailLoginInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/usernameLoginInputLayout"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/gray">
 
@@ -121,7 +121,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailSignInEditText" />
+            app:layout_constraintTop_toBottomOf="@id/usernameSignInEditText" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
