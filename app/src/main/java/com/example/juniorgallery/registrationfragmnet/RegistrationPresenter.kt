@@ -1,7 +1,7 @@
 package com.example.juniorgallery.registrationfragmnet
 
 import com.example.domain.UserGateway
-import com.example.domain.entities.UserRequest
+import com.example.domain.entities.RegistrationRequest
 import com.example.juniorgallery.base.base_mvp.BasePresenter
 import com.example.juniorgallery.validation.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -40,10 +40,11 @@ class RegistrationPresenter @Inject constructor(var usergateway: UserGateway) : 
     ) {
 
         if (validationCheck(username, email, password, confirmPassword)) {
-            usergateway.postUser(UserRequest(email, date, username, password))
+            usergateway.postUser(RegistrationRequest(email, date, username, password))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
+                    usergateway.loginUser(username, password)
                     viewState.toastsucc() //метод логина
                 }, {
                     viewState.toasterr()

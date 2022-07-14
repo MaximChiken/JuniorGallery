@@ -1,7 +1,8 @@
 package com.example.data.api
 
 import com.example.domain.entities.LoginResponse
-import com.example.domain.entities.UserRequest
+import com.example.domain.entities.RegistrationRequest
+import com.example.domain.entities.RegistrationResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -11,7 +12,7 @@ import retrofit2.http.Query
 interface UserApi {
 
     @POST("/api/users")
-    fun createUser(@Body user: UserRequest): Single<UserRequest>
+    fun createUser(@Body user: RegistrationRequest): Single<RegistrationResponse>
 
     @GET("/oauth/v2/token")
     fun loginUser(
