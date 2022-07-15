@@ -1,6 +1,7 @@
 package com.example.data.gateway
 
 import com.example.data.api.UserApi
+import com.example.data.models.LoginResponse
 import com.example.data.models.RegistrationRequest
 import com.example.data.models.RegistrationResponse
 import com.example.domain.UserGateway
@@ -12,11 +13,12 @@ import com.example.domain.entities.UserInfoEntity
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
-class UserGatewayImpl<R : Any> @Inject constructor(
+class UserGatewayImpl @Inject constructor(
     private val userApi: UserApi,
-    private val toRegistrationDomainMapper: Mapper<RegistrationResponse, UserIdEntity>,
     private val toRegistrationRequestMapper: Mapper<UserFullInfoEntity, RegistrationRequest>,
-) : UserGateway<R> {
+    private val toRegistrationDomainMapper: Mapper<RegistrationResponse, UserIdEntity>,
+    private val toTokenDomainMapper: Mapper<LoginResponse, TokenEntity>,
+) : UserGateway {
 
 
     override fun postUser(registrationRequest: UserFullInfoEntity): Single<UserIdEntity> =
@@ -26,6 +28,7 @@ class UserGatewayImpl<R : Any> @Inject constructor(
 
     override fun loginUser(loginRequest: UserInfoEntity): Single<TokenEntity> =
         userApi.loginUser(CLIENT_ID, CLIENT_SECRET, loginRequest.username, loginRequest.password)
+            .map { it.let(toTokenDomainMapper::map) }
 
 
     companion object {

@@ -5,7 +5,7 @@ import com.example.domain.entities.*
 import io.reactivex.rxjava3.core.Single
 
 
-interface UserGateway<R: Any>: BaseGateway<R> {
+interface UserGateway: BaseGateway {
 
     fun postUser(registrationRequest: UserFullInfoEntity): Single<UserIdEntity>
 

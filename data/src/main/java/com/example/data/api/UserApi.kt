@@ -1,8 +1,8 @@
 package com.example.data.api
 
+import com.example.data.models.LoginResponse
 import com.example.data.models.RegistrationRequest
 import com.example.data.models.RegistrationResponse
-import com.example.domain.entities.TokenEntity
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -21,5 +21,5 @@ interface UserApi {
         @Query("username") username: String,
         @Query("password") password: String,
         @Query("grant_type") grant_type: String = "password",
-    ): Single<TokenEntity>
+    ): Single<LoginResponse>
 }

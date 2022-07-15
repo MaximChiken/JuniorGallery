@@ -1,4 +1,4 @@
-package com.example.juniorgallery.fragments.loginfragment.models
+package com.example.juniorgallery.models
 
 data class UiLogin(
     val username: String,

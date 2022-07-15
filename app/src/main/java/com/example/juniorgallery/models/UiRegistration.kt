@@ -1,4 +1,4 @@
-package com.example.juniorgallery.fragments.registrationfragmnet.models
+package com.example.juniorgallery.models
 
 data class UiRegistration(
     val email: String,

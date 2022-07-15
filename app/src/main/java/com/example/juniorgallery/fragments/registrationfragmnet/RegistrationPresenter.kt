@@ -1,10 +1,11 @@
 package com.example.juniorgallery.fragments.registrationfragmnet
 
+import android.util.Log
 import com.example.domain.UserGateway
 import com.example.domain.core.Mapper
 import com.example.domain.entities.UserFullInfoEntity
 import com.example.juniorgallery.base.base_mvp.BasePresenter
-import com.example.juniorgallery.fragments.registrationfragmnet.models.UiRegistration
+import com.example.juniorgallery.models.UiRegistration
 import com.example.juniorgallery.validation.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -14,8 +15,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class RegistrationPresenter @Inject constructor(
-    private var usergateway: UserGateway<UiRegistration>,
-    private val userDomainToRegistrationRequest: Mapper<UiRegistration, UserFullInfoEntity>,
+    private var usergateway: UserGateway,
+    private val UiRegistrationToUserDomain: Mapper<UiRegistration, UserFullInfoEntity>,
 ) :
     BasePresenter<RegistrationView>() {
 
@@ -46,10 +47,11 @@ class RegistrationPresenter @Inject constructor(
     ) {
 
         if (validationCheck(username, email, password, confirmPassword)) {
-            usergateway.postUser(userDomainToRegistrationRequest.map(UiRegistration(email, date, username, password)))
+            usergateway.postUser(UiRegistrationToUserDomain.map(UiRegistration(email, date, username, password)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
+                    Log.w("TAG", it.id.toString())
                     viewState.toastsucc() //метод логина
                 }, {
                     viewState.toasterr()
