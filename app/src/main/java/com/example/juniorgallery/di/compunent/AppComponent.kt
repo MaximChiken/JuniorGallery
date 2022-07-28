@@ -12,7 +12,8 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = [AppModule::class, RetrofitModule::class, ApiModule::class, GatewayModule::class, MapperModule::class])
+@Component(modules = [AppModule::class, RetrofitModule::class, ApiModule::class, GatewayModule::class,
+    MapperModule::class, SharedPreferencesModule::class, ManagerModule::class])
 interface AppComponent {
 
     fun inject(target: MyApp)

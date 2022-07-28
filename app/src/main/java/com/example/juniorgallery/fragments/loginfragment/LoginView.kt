@@ -5,11 +5,8 @@ import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 
-interface LoginView: BaseView {
+interface LoginView: BaseView{
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun toastsucc()
-
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun toasterr()
+    fun setError()
 }

@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.juniorgallery.masks.DateMask
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
 import com.example.juniorgallery.databinding.RegistrationFragmentBinding
+import com.example.juniorgallery.masks.DateMask
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
@@ -23,30 +23,27 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
 
     override fun initializeBinding() = RegistrationFragmentBinding.inflate(layoutInflater)
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         with(binding) {
-            signInButton.setOnClickListener {
+            tvToSignIn.setOnClickListener {
                 findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
             }
 
-            cancelButton.setOnClickListener {
+            toolbarLayout.tvCancel.setOnClickListener {
                 findNavController().navigate(R.id.action_registrationFragment_to_welcomeFragment)
             }
 
-            DateMask(birthdayEditText).listen()
+            DateMask(etBirthday).listen()
 
-            signUpButton.setOnClickListener {
-                val usernameToText = userNameEditText.text.toString()
-                var dateOfBirth = birthdayEditText.text.toString()
+            btnSignUp.setOnClickListener {
+                val usernameToText = etUserName.text.toString()
+                var dateOfBirth = etBirthday.text.toString()
                 if (dateOfBirth == "") dateOfBirth = "00/00/0001"
-                val emailToText = emailSignUpEditText.text.toString()
-                val passwordToText = passwordSignUpEditText.text.toString()
-                val confirmPasswordToText = confirmPasswordSignUpEditText.text.toString()
+                val emailToText = etEmailSignUp.text.toString()
+                val passwordToText = etPasswordSignUp.text.toString()
+                val confirmPasswordToText = etConfirmPassword.text.toString()
                 presenter.proceedRegistration(
                     usernameToText,
                     dateOfBirth,
@@ -58,31 +55,20 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
     }
 
 
-
-    override fun checkUserName(errorText: Int?) = with(binding.userNameInputLayout) {
-        error = errorText?.let { getString(it).ifEmpty { null } }
-
-    }
-
-    override fun checkEmail(errorText: Int?) = with(binding.emailRegistrationInputLayout) {
+    override fun checkUserName(errorText: Int?) = with(binding.tilUserName) {
         error = errorText?.let { getString(it).ifEmpty { null } }
     }
 
-    override fun checkPassword(errorText: Int?) = with(binding.passwordInputLayout) {
-        error = errorText?.let { getString(it).ifEmpty { null } }
-
-    }
-
-    override fun checkConfirmPassword(errorText: Int?) = with(binding.confirmInputLayout) {
+    override fun checkEmail(errorText: Int?) = with(binding.tilEmailRegistration) {
         error = errorText?.let { getString(it).ifEmpty { null } }
     }
 
-    override fun toastsucc() {
-        Toast.makeText(context, "Все отлично", Toast.LENGTH_SHORT).show()
+    override fun checkPassword(errorText: Int?) = with(binding.tilPasswordSignUp) {
+        error = errorText?.let { getString(it).ifEmpty { null } }
     }
 
-    override fun toasterr() {
-        Toast.makeText(context, "Хуйнябля", Toast.LENGTH_SHORT).show()
+    override fun checkConfirmPassword(errorText: Int?) = with(binding.tilConfirmPassword) {
+        error = errorText?.let { getString(it).ifEmpty { null } }
     }
 }
 

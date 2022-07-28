@@ -18,11 +18,4 @@ interface RegistrationView : BaseView {
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
     fun checkConfirmPassword(errorText: Int?)
-
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun toastsucc()
-
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun toasterr()
-
 }

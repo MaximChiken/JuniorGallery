@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.viewbinding.ViewBinding
 import moxy.MvpAppCompatFragment
 
-abstract class BaseFragment<VB : ViewBinding, P : BasePresenter<*>> : MvpAppCompatFragment() {
+abstract class BaseFragment<VB : ViewBinding, P : BasePresenter<*>> : MvpAppCompatFragment(), BaseView {
 
 
     abstract var presenter: P
@@ -27,5 +28,17 @@ abstract class BaseFragment<VB : ViewBinding, P : BasePresenter<*>> : MvpAppComp
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+
+    override fun toastSuccess() {
+        Toast.makeText(context, "Все отлично", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun toastError() {
+        Toast.makeText(context, "Хуйнябля", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setToken(token: String) {
+        Toast.makeText(context, token, Toast.LENGTH_SHORT).show()
     }
 }

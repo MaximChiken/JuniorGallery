@@ -12,7 +12,8 @@
     <string name="username_sign_in"><font color='#C4C4C4'>Username</font></string>
     <string name="password_sign_in"><font color='#C4C4C4'>Password</font></string>
 
-    <string name="wrong_email_or_password"><font color='#FF0000'>Incorrect Email or Password</font></string>
+    <string name="incorrect_username">Incorrect Username</string>
+    <string name="incorrect_password">Incorrect Password</string>
 
     <string name="username"><font color='#C4C4C4'>User Name</font><font color='#FF0000'>*</font></string>
     <string name="birthday"><font color='#C4C4C4'>Birthday</font></string>

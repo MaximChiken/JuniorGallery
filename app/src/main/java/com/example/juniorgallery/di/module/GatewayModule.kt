@@ -1,17 +1,15 @@
 package com.example.juniorgallery.di.module
 
 import com.example.data.api.UserApi
-import com.example.data.gateway.UserGatewayImpl
+import com.example.data.base.BaseMapper
+import com.example.data.gateway_impl.UserGatewayImpl
 import com.example.data.models.LoginResponse
-import com.example.data.models.RegistrationRequest
-import com.example.data.models.RegistrationResponse
-import com.example.domain.UserGateway
-import com.example.domain.core.Mapper
-import com.example.domain.entities.TokenEntity
-import com.example.domain.entities.UserFullInfoEntity
-import com.example.domain.entities.UserIdEntity
-import com.example.juniorgallery.models.UiLogin
-import com.example.juniorgallery.models.UiRegistration
+import com.example.data.models.RegistrationModel
+import com.example.data.models.RegistrationRequestModel
+import com.example.domain.entities.LoginEntity
+import com.example.domain.entities.RegistrationRequestEntity
+import com.example.domain.entities.RegistrationResponseEntity
+import com.example.domain.gateways.UserGateway
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -24,9 +22,9 @@ class GatewayModule {
     @Singleton
     fun provideGateway(
         userApi: UserApi,
-        toRegistrationRequestMapper: Mapper<UserFullInfoEntity, RegistrationRequest>,
-        toDomainMapper: Mapper<RegistrationResponse, UserIdEntity>,
-        toTokenDomainMapper: Mapper<LoginResponse, TokenEntity>,
-    ): UserGateway = UserGatewayImpl(userApi,  toRegistrationRequestMapper, toDomainMapper, toTokenDomainMapper)
+        registrationRequestMapper: BaseMapper<RegistrationRequestModel, RegistrationRequestEntity>,
+        registrationResponseMapper: BaseMapper<RegistrationModel, RegistrationResponseEntity>,
+        loginMapper: BaseMapper<LoginResponse, LoginEntity>,
+    ): UserGateway = UserGatewayImpl(userApi, registrationRequestMapper, registrationResponseMapper, loginMapper)
 
 }
