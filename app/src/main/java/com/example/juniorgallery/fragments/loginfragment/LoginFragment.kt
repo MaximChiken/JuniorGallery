@@ -46,4 +46,8 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginPresenter>(), Logi
         tilUserNameLogin.error = getString(R.string.incorrect_username)
         tilPasswordLogin.error = getString(R.string.incorrect_password)
     }
+
+    override fun successLogin() {
+        findNavController().navigate(R.id.action_global_HomeGraph)
+    }
 }

@@ -2,6 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registration_graph">
+    app:startDestination="@id/photo_graph">
     <include app:graph="@navigation/registration_graph" />
+    <include app:graph="@navigation/add_photo_graph" />
+    <include app:graph="@navigation/user_graph" />
+    <include app:graph="@navigation/home_graph" />
+
+    <action
+        android:id="@+id/action_global_registrationGraph"
+        app:destination="@id/registration_graph" />
+
+    <action
+        android:id="@+id/action_global_HomeGraph"
+        app:destination="@id/photo_graph" />
 </navigation>

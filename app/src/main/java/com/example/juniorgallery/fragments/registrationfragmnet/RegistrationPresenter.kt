@@ -1,6 +1,5 @@
 package com.example.juniorgallery.fragments.registrationfragmnet
 
-import android.util.Log
 import com.example.data.managers.TokenManager
 import com.example.domain.entities.RegistrationRequestEntity
 import com.example.domain.gateways.UserGateway

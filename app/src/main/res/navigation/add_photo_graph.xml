@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_photo_graph"
+    app:startDestination="@id/addPhotoFragment">
+
+    <fragment
+        android:id="@+id/addPhotoFragment"
+        android:name="com.example.juniorgallery.fragments.addphotofragments.AddPhotoFragment"
+        android:label="AddPhotoFragment"
+        tools:layout="@layout/add_photo_fragment"/>
+</navigation>

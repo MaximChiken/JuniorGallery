@@ -20,4 +20,8 @@ class TokenManagerImpl @Inject constructor(private val tokenPreferences: TokenPr
     override fun login(response: LoginEntity) {
         tokens = response
     }
+
+    override fun logout() {
+        tokenPreferences.clearData()
+    }
 }

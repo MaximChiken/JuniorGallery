@@ -3,6 +3,7 @@ package com.example.juniorgallery.di.compunent
 import android.content.Context
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.di.module.*
+import com.example.juniorgallery.fragments.homefragments.HomePresenter
 import com.example.juniorgallery.fragments.loginfragment.LoginPresenter
 import com.example.juniorgallery.fragments.registrationfragmnet.RegistrationPresenter
 import com.example.juniorgallery.fragments.welcomefragment.WelcomePresenter
@@ -23,6 +24,8 @@ interface AppComponent {
     fun provideLoginPresenter(): LoginPresenter
 
     fun provideRegistrationPresenter(): RegistrationPresenter
+
+    fun provideHomePresenter(): HomePresenter
 
     @Component.Builder
     interface Builder {

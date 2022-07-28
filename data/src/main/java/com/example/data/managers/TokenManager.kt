@@ -8,4 +8,5 @@ interface TokenManager {
     val refreshToken: String
 
     fun login(response: LoginEntity)
+    fun logout()
 }
