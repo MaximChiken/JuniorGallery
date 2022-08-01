@@ -1,8 +1,6 @@
 package com.example.juniorgallery.fragments.registrationfragmnet
 
-import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
@@ -13,7 +11,8 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
 
-class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, RegistrationPresenter>(), RegistrationView {
+class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, RegistrationPresenter>(),
+    RegistrationView {
 
     @InjectPresenter
     override lateinit var presenter: RegistrationPresenter
@@ -23,15 +22,13 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
 
     override fun initializeBinding() = RegistrationFragmentBinding.inflate(layoutInflater)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun setUpListeners() {
         with(binding) {
             tvToSignIn.setOnClickListener {
                 findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
             }
 
-            toolbarLayout.tvCancel.setOnClickListener {
+            abRegistration.tvCancel.setOnClickListener {
                 findNavController().navigate(R.id.action_registrationFragment_to_welcomeFragment)
             }
 
@@ -54,6 +51,13 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
         }
     }
 
+    override fun setLoader(isLoading: Boolean) {
+        binding.pbRegistration.isVisible = isLoading
+    }
+
+    override fun successRegistration() {
+        findNavController().navigate(R.id.action_global_HomeGraph)
+    }
 
     override fun checkUserName(errorText: Int?) = with(binding.tilUserName) {
         error = errorText?.let { getString(it).ifEmpty { null } }
@@ -71,7 +75,3 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
         error = errorText?.let { getString(it).ifEmpty { null } }
     }
 }
-
-
-
-

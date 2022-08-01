@@ -11,4 +11,6 @@ interface UserGateway {
     fun postUser(registrationRequestEntity: RegistrationRequestEntity): Single<RegistrationResponseEntity>
 
     fun loginUser(username: String, password: String): Single<LoginEntity>
+
+    fun refreshToken(refreshToken: String): Single<LoginEntity>
 }

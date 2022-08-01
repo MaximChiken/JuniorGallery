@@ -10,9 +10,12 @@
 
     <action
         android:id="@+id/action_global_registrationGraph"
-        app:destination="@id/registration_graph" />
+        app:destination="@id/registration_graph"
+        app:popUpToInclusive="false" />
 
     <action
         android:id="@+id/action_global_HomeGraph"
-        app:destination="@id/photo_graph" />
+        app:destination="@id/photo_graph"
+        app:popUpTo="@id/registration_graph"
+        app:popUpToInclusive="true" />
 </navigation>

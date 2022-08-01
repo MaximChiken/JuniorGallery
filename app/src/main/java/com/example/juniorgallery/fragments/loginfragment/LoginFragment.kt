@@ -1,9 +1,6 @@
 package com.example.juniorgallery.fragments.loginfragment
 
-import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
@@ -22,15 +19,13 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginPresenter>(), Logi
 
     override fun initializeBinding() = LoginFragmentBinding.inflate(layoutInflater)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun setUpListeners() {
         with(binding) {
             tvToSignUp.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
             }
 
-            toolbarLayout.tvCancel.setOnClickListener {
+            abLogin.tvCancel.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
             }
 
@@ -42,7 +37,7 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginPresenter>(), Logi
         }
     }
 
-    override fun setError() = with(binding){
+    override fun setError() = with(binding) {
         tilUserNameLogin.error = getString(R.string.incorrect_username)
         tilPasswordLogin.error = getString(R.string.incorrect_password)
     }
@@ -50,4 +45,9 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginPresenter>(), Logi
     override fun successLogin() {
         findNavController().navigate(R.id.action_global_HomeGraph)
     }
+
+    override fun setLoader(isLoading: Boolean) {
+        binding.pbLogin.isVisible = isLoading
+    }
+
 }

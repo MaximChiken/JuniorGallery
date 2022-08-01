@@ -14,9 +14,8 @@ import javax.inject.Inject
 @InjectViewState
 class RegistrationPresenter @Inject constructor(
     private var usergateway: UserGateway,
-    private var tokenManager: TokenManager
+    private var tokenManager: TokenManager,
 ) : BasePresenter<RegistrationView>() {
-
 
     private fun validationCheck(username: String, email: String, password: String, confirmPassword: String): Boolean {
         val validationList: List<Validation> = listOf(
@@ -39,17 +38,21 @@ class RegistrationPresenter @Inject constructor(
         email: String,
         password: String,
         confirmPassword: String,
-    ) {
+    ) = with(usergateway) {
 
         if (validationCheck(username, email, password, confirmPassword)) {
-            usergateway.postUser(RegistrationRequestEntity(email, date, username, password))
+            postUser(RegistrationRequestEntity(email, date, username, password))
+                .flatMap { loginUser(username, password) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { viewState.setLoader(true) }
+                .doFinally { viewState.setLoader(false) }
                 .subscribe({
-                    val token = tokenManager.accessToken
-                    viewState.setToken(token)//метод логина
+                    tokenManager.login(it)
+                    viewState.setToken(tokenManager.accessToken)
+                    viewState.successRegistration()
                 }, {
-                    viewState.toastError()
+                    viewState.setError()
                 })
         }
     }

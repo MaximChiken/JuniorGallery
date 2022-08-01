@@ -1,7 +1,5 @@
 package com.example.juniorgallery.fragments.welcomefragment
 
-import android.os.Bundle
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
@@ -20,9 +18,7 @@ class WelcomeFragment : BaseFragment<WelcomeFragmentBinding, WelcomePresenter>()
 
     override fun initializeBinding() = WelcomeFragmentBinding.inflate(layoutInflater)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun setUpListeners() {
         with(binding) {
             createAccount.setOnClickListener {
                 findNavController().navigate(R.id.action_welcomeFragment_to_registrationFragment)

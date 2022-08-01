@@ -20,9 +20,16 @@ abstract class BaseFragment<VB : ViewBinding, P : BasePresenter<*>> : MvpAppComp
 
     abstract fun initializeBinding(): VB
 
+    open fun setUpListeners() = Unit
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = initializeBinding()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpListeners()
     }
 
     override fun onDestroy() {
@@ -30,11 +37,13 @@ abstract class BaseFragment<VB : ViewBinding, P : BasePresenter<*>> : MvpAppComp
         super.onDestroy()
     }
 
+    override fun setLoader(isLoading: Boolean) = Unit
+
     override fun toastSuccess() {
         Toast.makeText(context, "Все отлично", Toast.LENGTH_SHORT).show()
     }
 
-    override fun toastError() {
+    override fun setError() {
         Toast.makeText(context, "Хуйнябля", Toast.LENGTH_SHORT).show()
     }
 

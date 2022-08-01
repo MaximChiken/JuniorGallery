@@ -16,11 +16,11 @@ class SharedPreferencesModule {
     @Provides
     @Singleton
     @Named("tokens_shared_preferences")
-    fun provideAccountPreferences(context: Context): SharedPreferences =
+    fun provideUserPreferences(context: Context): SharedPreferences =
         context.getSharedPreferences("tokens_shared_preferences", Context.MODE_PRIVATE)
 
     @Provides
     @Singleton
-    fun provideAccountPreferencesGateway(@Named("tokens_shared_preferences") sharedPreferences: SharedPreferences):
+    fun provideUserPreferencesGateway(@Named("tokens_shared_preferences") sharedPreferences: SharedPreferences):
             TokenPreferences = TokenPreferencesImpl(sharedPreferences)
 }

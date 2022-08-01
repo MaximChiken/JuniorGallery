@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <include
-                android:id="@+id/toolbarLayout"
+                android:id="@+id/abRegistration"
                 layout="@layout/toolbar_base" />
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -233,5 +233,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnSignUp" />
+
+        <ProgressBar
+            android:id="@+id/pbRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/tvToSignIn"
+            app:layout_constraintStart_toStartOf="@id/tvToSignIn"
+            app:layout_constraintEnd_toEndOf="@id/tvToSignIn"
+            android:layout_marginTop="10dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

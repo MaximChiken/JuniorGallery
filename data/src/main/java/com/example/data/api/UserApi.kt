@@ -22,4 +22,12 @@ interface UserApi {
         @Query("password") password: String,
         @Query("client_secret") client_secret: String = "4tf1qez2dc4ksg8w4og4co4w40s0gokwwkwkss8gc400owkokc",
     ): Single<LoginResponse>
+
+    @GET("/oauth/v2/token")
+    fun refreshTokens(
+        @Query("client_id") client_id: String = "1_3fxvjh2ky7s44cskwcgo0k8cwwogkocs8k4cwcwsg0skcsw4ok",
+        @Query("grant_type") grant_type: String = "refresh_token",
+        @Query("refresh_token") refresh_token: String,
+        @Query("client_secret") client_secret: String = "4tf1qez2dc4ksg8w4og4co4w40s0gokwwkwkss8gc400owkokc"
+    ): Single<LoginResponse>
 }

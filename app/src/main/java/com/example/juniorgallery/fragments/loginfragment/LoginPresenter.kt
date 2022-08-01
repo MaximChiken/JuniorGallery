@@ -15,15 +15,15 @@ class LoginPresenter @Inject constructor(
     private var tokenManager: TokenManager,
 ) : BasePresenter<LoginView>() {
 
-
     fun proceedLogin(username: String, password: String) {
         usergateway.loginUser(username, password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { viewState.setLoader(true) }
+            .doFinally { viewState.setLoader(false) }
             .subscribe({
                 tokenManager.login(it)
-                val token = tokenManager.accessToken
-                viewState.setToken(token)
+                viewState.setToken(tokenManager.accessToken)
                 viewState.successLogin()
             }, {
                 viewState.setError()

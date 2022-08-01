@@ -10,8 +10,11 @@ interface BaseView:MvpView {
     fun toastSuccess()
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun toastError()
+    fun setError()
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
     fun setToken(token: String)
+
+    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    fun setLoader(isLoading: Boolean)
 }

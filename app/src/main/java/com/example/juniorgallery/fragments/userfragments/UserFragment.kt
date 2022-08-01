@@ -5,11 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.example.data.managers.TokenManager
-import com.example.juniorgallery.R
 import com.example.juniorgallery.databinding.UserFragmentBinding
-import javax.inject.Inject
 
 class UserFragment : Fragment() {
     private lateinit var binding: UserFragmentBinding
