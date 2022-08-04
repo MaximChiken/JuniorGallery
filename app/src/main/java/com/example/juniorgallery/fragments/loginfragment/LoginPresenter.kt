@@ -11,19 +11,19 @@ import javax.inject.Inject
 
 @InjectViewState
 class LoginPresenter @Inject constructor(
-    private var usergateway: UserGateway,
+    private var userGateway: UserGateway,
     private var tokenManager: TokenManager,
 ) : BasePresenter<LoginView>() {
 
     fun proceedLogin(username: String, password: String) {
-        usergateway.loginUser(username, password)
+        userGateway.loginUser(username, password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.setLoader(true) }
             .doFinally { viewState.setLoader(false) }
             .subscribe({
                 tokenManager.login(it)
-                viewState.setToken(tokenManager.accessToken)
+                viewState.setToken(tokenManager.refreshToken)
                 viewState.successLogin()
             }, {
                 viewState.setError()

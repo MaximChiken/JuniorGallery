@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/photo_graph">
+    app:startDestination="@id/registration_graph">
     <include app:graph="@navigation/registration_graph" />
     <include app:graph="@navigation/add_photo_graph" />
     <include app:graph="@navigation/user_graph" />
@@ -11,11 +11,12 @@
     <action
         android:id="@+id/action_global_registrationGraph"
         app:destination="@id/registration_graph"
-        app:popUpToInclusive="false" />
+        app:popUpTo="@id/home_graph"
+        app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/action_global_HomeGraph"
-        app:destination="@id/photo_graph"
+        app:destination="@id/home_graph"
         app:popUpTo="@id/registration_graph"
         app:popUpToInclusive="true" />
 </navigation>

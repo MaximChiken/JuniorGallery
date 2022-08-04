@@ -10,6 +10,7 @@ import com.example.domain.entities.LoginEntity
 import com.example.domain.entities.RegistrationRequestEntity
 import com.example.domain.entities.RegistrationResponseEntity
 import com.example.domain.gateways.UserGateway
+import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class UserGatewayImpl @Inject constructor(
@@ -28,6 +29,9 @@ class UserGatewayImpl @Inject constructor(
     override fun loginUser(username: String, password: String) =
         withMapper(loginMapper) { userApi.loginUser(username = username, password = password) }
 
-    override fun refreshToken(refreshToken: String) =
+    override fun refreshAccessToken(refreshToken: String) =
         withMapper(loginMapper) { userApi.refreshTokens(refresh_token = refreshToken) }
+
+    override fun getUser(): Single<RegistrationResponseEntity> = withMapper(registrationResponseMapper)
+    { userApi.getUser() }
 }

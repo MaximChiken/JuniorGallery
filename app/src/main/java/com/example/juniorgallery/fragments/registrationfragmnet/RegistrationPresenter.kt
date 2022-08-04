@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @InjectViewState
 class RegistrationPresenter @Inject constructor(
-    private var usergateway: UserGateway,
+    private var userGateway: UserGateway,
     private var tokenManager: TokenManager,
 ) : BasePresenter<RegistrationView>() {
 
@@ -38,7 +38,7 @@ class RegistrationPresenter @Inject constructor(
         email: String,
         password: String,
         confirmPassword: String,
-    ) = with(usergateway) {
+    ) = with(userGateway) {
 
         if (validationCheck(username, email, password, confirmPassword)) {
             postUser(RegistrationRequestEntity(email, date, username, password))

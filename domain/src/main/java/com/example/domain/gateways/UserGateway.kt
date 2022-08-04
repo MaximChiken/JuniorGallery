@@ -12,5 +12,7 @@ interface UserGateway {
 
     fun loginUser(username: String, password: String): Single<LoginEntity>
 
-    fun refreshToken(refreshToken: String): Single<LoginEntity>
+    fun refreshAccessToken(refreshToken: String): Single<LoginEntity>
+
+    fun getUser(): Single<RegistrationResponseEntity>
 }

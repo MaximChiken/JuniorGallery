@@ -4,10 +4,7 @@ import com.example.data.models.LoginResponse
 import com.example.data.models.RegistrationRequestModel
 import com.example.data.models.RegistrationModel
 import io.reactivex.rxjava3.core.Single
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface UserApi {
 
@@ -30,4 +27,7 @@ interface UserApi {
         @Query("refresh_token") refresh_token: String,
         @Query("client_secret") client_secret: String = "4tf1qez2dc4ksg8w4og4co4w40s0gokwwkwkss8gc400owkokc"
     ): Single<LoginResponse>
+
+    @GET("/api/users/current")
+    fun getUser(): Single<RegistrationModel>
 }
