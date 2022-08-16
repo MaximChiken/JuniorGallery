@@ -6,13 +6,4 @@ import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 interface HomeView : BaseView {
-
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun navigateBack()
-
-    @StateStrategyType(value = AddToEndSingleStrategy::class)
-    fun setId(id: Int)
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun setSmsTimer()
 }

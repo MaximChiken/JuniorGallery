@@ -1,18 +1,17 @@
-package com.example.juniorgallery.fragments.userfragments
+package com.example.juniorgallery.fragments.addphotofragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.juniorgallery.databinding.UserFragmentBinding
+import com.example.juniorgallery.databinding.AddPhotoFragmentBinding
 
-class UserFragment : Fragment() {
-    private lateinit var binding: UserFragmentBinding
+class AddPhotoFragment: Fragment() {
+    private lateinit var binding: AddPhotoFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = UserFragmentBinding.inflate(layoutInflater)
-
+        binding = AddPhotoFragmentBinding.inflate(layoutInflater)
         return binding.root
     }
 }

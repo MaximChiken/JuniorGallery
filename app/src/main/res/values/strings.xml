@@ -15,6 +15,8 @@
     <string name="incorrect_username">Incorrect Username</string>
     <string name="incorrect_password">Incorrect Password</string>
 
+    <string name="birthdayd"><font color='#C4C4C4'>Birthday (%d)</font></string>
+
     <string name="username"><font color='#C4C4C4'>User Name</font><font color='#FF0000'>*</font></string>
     <string name="birthday"><font color='#C4C4C4'>Birthday</font></string>
     <string name="email_sign_up"><font color='#C4C4C4'>Email</font><font color='#FF0000'>*</font></string>
@@ -26,4 +28,5 @@
     <string name="no_password"><font color='#FF0000'>Invalid or empty password</font></string>
     <string name="no_confirm_password"><font color='#FF0000'>Password does not match</font></string>
 
+    <string name="loader">Loading…</string>
 </resources>

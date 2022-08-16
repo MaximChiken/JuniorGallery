@@ -8,5 +8,40 @@
         android:id="@+id/homeFragment"
         android:name="com.example.juniorgallery.fragments.homefragments.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/home_fragment"/>
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_homeFragment_to_detailViewFragment"
+            app:destination="@id/detailViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPhotoFragment"
+        android:name="com.example.juniorgallery.fragments.newphotofragment.NewPhotoFragment"
+        android:label="NewPhotoFragment"
+        tools:layout="@layout/photo_fragment"/>
+    <fragment
+        android:id="@+id/popularPhotoFragment"
+        android:name="com.example.juniorgallery.fragments.popularphotofragment.PopularPhotoFragment"
+        android:label="PopularPhotoFragment"
+        tools:layout="@layout/photo_fragment"/>
+    <fragment
+        android:id="@+id/detailViewFragment"
+        android:name="com.example.juniorgallery.fragments.detailviewfragment.DetailViewFragment"
+        android:label="DetailViewFragment"
+        tools:layout="@layout/detail_view_fragment">
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="user"
+            app:argType="string" />
+        <argument
+            android:name="photoName"
+            app:argType="string" />
+    </fragment>
 </navigation>
