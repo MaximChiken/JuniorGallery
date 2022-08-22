@@ -53,7 +53,7 @@ abstract class BasePagingFragment<VB : ViewBinding, P : BasePagingPresenter<*>> 
                     val lastVisibleItemPosition = it.findLastVisibleItemPosition()
                     val totalItemsCount = it.itemCount
                     if (lastVisibleItemPosition >= kotlin.math.abs(totalItemsCount - 4)) {
-                        presenter.getPage()
+                        presenter.loadNextPage()
                     }
                 }
             }
@@ -72,9 +72,8 @@ abstract class BasePagingFragment<VB : ViewBinding, P : BasePagingPresenter<*>> 
         viewFlipper.displayedChild = 2
     }
 
-    override fun clearList(picture: List<PhotoInfoEntity>) = adapter.submitList(picture)
-
-    override fun addAllPicture(picture: List<PhotoInfoEntity>) {
+    override fun updateList(picture: List<PhotoInfoEntity>) {
         adapter.submitList(picture)
+        adapter.notifyDataSetChanged()
     }
 }

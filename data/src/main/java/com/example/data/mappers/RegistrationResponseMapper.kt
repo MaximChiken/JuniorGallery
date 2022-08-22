@@ -13,6 +13,6 @@ class RegistrationResponseMapper @Inject constructor(): BaseMapper<RegistrationM
 
     override fun map(model: RegistrationModel): RegistrationResponseEntity =
         RegistrationResponseEntity(
-            id = model.id
-        )
+            id = model.id,
+            username = model.username ?: " ")
 }

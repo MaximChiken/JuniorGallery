@@ -17,7 +17,7 @@ class UserProfilePresenter @Inject constructor(
     }
 
     fun getCurrentUser() {
-        userGateway.getUser()
+        userGateway.getCurrentUser()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

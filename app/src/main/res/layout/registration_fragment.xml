@@ -10,18 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <com.example.juniorgallery.customview.CustomAppBar
             android:id="@+id/ablRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <include
-                android:id="@+id/abRegistration"
-                layout="@layout/toolbar_base" />
-        </com.google.android.material.appbar.AppBarLayout>
+            app:app_bar_type="type_cancel"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/tvSignUp"

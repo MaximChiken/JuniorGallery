@@ -14,4 +14,11 @@ interface PhotoApi {
         @Query("page") page: Int,
         @Query("limit") limit: Int
     ): Single<PhotoModel>
+
+    @GET("/api/photos")
+    fun searchPhoto(
+        @Query("name") name: String,
+        @Query("new") new: Boolean,
+        @Query("popular") popular: Boolean,
+    ): Single<PhotoModel>
 }

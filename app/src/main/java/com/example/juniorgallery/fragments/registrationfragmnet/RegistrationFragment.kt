@@ -5,6 +5,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
+import com.example.juniorgallery.customview.CustomAppBar
 import com.example.juniorgallery.databinding.RegistrationFragmentBinding
 import com.example.juniorgallery.masks.DateMask
 import moxy.presenter.InjectPresenter
@@ -28,8 +29,12 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
                 findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
             }
 
-            abRegistration.tvCancel.setOnClickListener {
-                findNavController().navigate(R.id.action_registrationFragment_to_welcomeFragment)
+            ablRegistration.callback = {
+                when (it) {
+                    CustomAppBar.AppBarButtons.BUTTON_CANCEL ->
+                        findNavController().navigate(R.id.action_registrationFragment_to_welcomeFragment)
+                    else -> Unit
+                }
             }
 
             DateMask(etBirthday).listen()

@@ -1,10 +1,13 @@
 package com.example.juniorgallery.fragments.loginfragment
 
+import android.os.Bundle
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
+import com.example.juniorgallery.customview.CustomAppBar
 import com.example.juniorgallery.databinding.LoginFragmentBinding
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -25,8 +28,12 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginPresenter>(), Logi
                 findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
             }
 
-            abLogin.tvCancel.setOnClickListener {
-                findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
+            ablLogin.callback = {
+                when (it) {
+                    CustomAppBar.AppBarButtons.BUTTON_CANCEL ->
+                        findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
+                    else -> Unit
+                }
             }
 
             btnSignIn.setOnClickListener {

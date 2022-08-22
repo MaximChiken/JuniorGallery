@@ -14,5 +14,7 @@ interface UserGateway {
 
     fun refreshAccessToken(refreshToken: String): Single<LoginEntity>
 
-    fun getUser(): Single<RegistrationResponseEntity>
+    fun getCurrentUser(): Single<RegistrationResponseEntity>
+
+    fun getUser(id: String): Single<RegistrationResponseEntity>
 }

@@ -29,4 +29,5 @@
     <string name="no_confirm_password"><font color='#FF0000'>Password does not match</font></string>
 
     <string name="loader">Loading…</string>
+    <string name="search">Search</string>
 </resources>

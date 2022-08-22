@@ -10,9 +10,12 @@ import javax.inject.Inject
 
 class PhotoGatewayImpl @Inject constructor(
     private val photoApi: PhotoApi,
-    private val photoMapper: BaseMapper<PhotoModel, PhotoEntity>
+    private val photoMapper: BaseMapper<PhotoModel, PhotoEntity>,
 ) : PhotoGateway, BaseGateway {
 
-    override fun getPhoto(new: Boolean, popular: Boolean, page:Int) =
-        withMapper(photoMapper) {photoApi.getPhoto(new, popular, page,20)}
+    override fun getPhoto(new: Boolean, popular: Boolean, page: Int) =
+        withMapper(photoMapper) { photoApi.getPhoto(new, popular, page, 20) }
+
+    override fun searchPhoto(name: String, new: Boolean, popular: Boolean) =
+        withMapper(photoMapper) { photoApi.searchPhoto(name, new, popular) }
 }

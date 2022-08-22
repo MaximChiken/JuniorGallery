@@ -5,16 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <com.example.juniorgallery.customview.CustomAppBar
         android:id="@+id/ablHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include
-            android:id="@+id/abRegistration"
-            layout="@layout/toolbar_base" />
-    </com.google.android.material.appbar.AppBarLayout>
+        app:app_bar_type="type_search"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tlPhoto"

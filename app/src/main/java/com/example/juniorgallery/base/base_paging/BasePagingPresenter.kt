@@ -15,6 +15,7 @@ abstract class BasePagingPresenter<T : BasePagingView> : BasePresenter<T>() {
     private val compositeDisposable = CompositeDisposable()
     private val newPhotoList: MutableList<PhotoInfoEntity> = mutableListOf()
     private var pageNumber: Int = 1
+    private var totalItemCount: Int = 0
     private var isLoading: Boolean = false
         set(value) {
             field = value
@@ -32,14 +33,21 @@ abstract class BasePagingPresenter<T : BasePagingView> : BasePresenter<T>() {
             .doOnSuccess { viewState.setLoader(false) }
             .subscribe({ it ->
                 it.data.forEach { newPhotoList.add(it) }
-                viewState.addAllPicture(newPhotoList)
-                pageNumber++
+                viewState.updateList(newPhotoList)
+                totalItemCount = it.data.count()
             }, {
                 viewState.setError()
             }).let(compositeDisposable::add)
     }
 
-    fun getPage() {
+    fun loadNextPage(){
+        if(isHavingMore() && !isLoading){
+            pageNumber++
+            getPage()
+        }
+    }
+
+    private fun getPage() {
         if (!isLoading) {
             getPhoto(pageNumber)
                 .subscribeOn(Schedulers.io())
@@ -48,18 +56,24 @@ abstract class BasePagingPresenter<T : BasePagingView> : BasePresenter<T>() {
                 .doOnSuccess { isLoading = false }
                 .subscribe({ it ->
                     it.data.forEach { newPhotoList.add(it) }
-                    viewState.addAllPicture(newPhotoList)
-                    pageNumber++
+                    viewState.updateList(newPhotoList)
+                    totalItemCount = it.data.count()
                 }, {
                     viewState.setError()
                 }).let(compositeDisposable::add)
         }
     }
 
+    private fun isHavingMore() = totalItemCount.toFloat() / ITEMS_PER_PAGE.toFloat() >= pageNumber
+
     fun swipeRefresh() {
         newPhotoList.clear()
-        viewState.clearList(newPhotoList)
+        viewState.updateList(newPhotoList)
         pageNumber = 1
         getPage()
+    }
+
+    companion object{
+        const val ITEMS_PER_PAGE = 20
     }
 }

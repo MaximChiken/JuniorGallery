@@ -9,10 +9,7 @@ import moxy.viewstate.strategy.StateStrategyType
 interface BasePagingView : BaseView {
 
     @StateStrategyType(value = AddToEndSingleStrategy::class)
-    fun addAllPicture(picture: List<PhotoInfoEntity>)
-
-    @StateStrategyType(value = AddToEndSingleStrategy::class)
-    fun clearList(picture: List<PhotoInfoEntity>)
+    fun updateList(picture: List<PhotoInfoEntity>)
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
     fun isLoadingMore(bool: Boolean)

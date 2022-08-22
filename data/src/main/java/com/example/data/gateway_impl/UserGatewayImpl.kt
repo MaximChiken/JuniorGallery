@@ -32,6 +32,9 @@ class UserGatewayImpl @Inject constructor(
     override fun refreshAccessToken(refreshToken: String) =
         withMapper(loginMapper) { userApi.refreshTokens(refresh_token = refreshToken) }
 
-    override fun getUser(): Single<RegistrationResponseEntity> = withMapper(registrationResponseMapper)
-    { userApi.getUser() }
+    override fun getCurrentUser(): Single<RegistrationResponseEntity> =
+        withMapper(registrationResponseMapper) { userApi.getCurrentUser() }
+
+    override fun getUser(id: String): Single<RegistrationResponseEntity> =
+        withMapper(registrationResponseMapper) { userApi.getUser(id) }
 }

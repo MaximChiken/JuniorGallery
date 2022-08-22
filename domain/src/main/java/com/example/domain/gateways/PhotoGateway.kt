@@ -6,4 +6,6 @@ import io.reactivex.rxjava3.core.Single
 interface PhotoGateway {
 
     fun getPhoto(new: Boolean, popular: Boolean, page: Int): Single<PhotoEntity>
+
+    fun searchPhoto(name: String, new: Boolean, popular: Boolean): Single<PhotoEntity>
 }
