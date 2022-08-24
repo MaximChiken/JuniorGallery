@@ -13,9 +13,9 @@ class PhotoGatewayImpl @Inject constructor(
     private val photoMapper: BaseMapper<PhotoModel, PhotoEntity>,
 ) : PhotoGateway, BaseGateway {
 
-    override fun getPhoto(new: Boolean, popular: Boolean, page: Int) =
+    override fun getPhoto(new: String, popular: String, page: Int) =
         withMapper(photoMapper) { photoApi.getPhoto(new, popular, page, 20) }
 
-    override fun searchPhoto(name: String, new: Boolean, popular: Boolean) =
+    override fun searchPhoto(name: String, new: String, popular: String) =
         withMapper(photoMapper) { photoApi.searchPhoto(name, new, popular) }
 }

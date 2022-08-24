@@ -2,7 +2,7 @@ package com.example.juniorgallery.fragments.popularphotofragment
 
 import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp
-import com.example.juniorgallery.adapters.photo.PhotoAdapter
+import com.example.juniorgallery.adapters.photo.photohome.PhotoHomeAdapter
 import com.example.juniorgallery.base.base_paging.BasePagingFragment
 import com.example.juniorgallery.databinding.PhotoFragmentBinding
 import com.example.juniorgallery.fragments.homefragments.HomeFragmentDirections
@@ -20,7 +20,7 @@ class PopularPhotoFragment : BasePagingFragment<PhotoFragmentBinding, PopularPho
 
     override fun initializeBinding() = PhotoFragmentBinding.inflate(layoutInflater)
 
-    override fun initializeAdapterAndRecyclerView() = PhotoAdapter {
+    override fun initializeAdapterAndRecyclerView() = PhotoHomeAdapter {
         val action = HomeFragmentDirections.actionHomeFragmentToDetailViewFragment(
             it.name,
             it.date,

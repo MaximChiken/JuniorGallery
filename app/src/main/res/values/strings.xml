@@ -30,4 +30,15 @@
 
     <string name="loader">Loading…</string>
     <string name="search">Search</string>
+    
+    <string name="personal_data">Personal data</string>
+    <string name="username_settings">User Name</string>
+    <string name="email_settings">E-mail address</string>
+    <string name="email_change_settings">Email</string>
+    <string name="password_settings">Password</string>
+    <string name="old_password_settings"><font color='#C4C4C4'>Old password</font></string>
+    <string name="new_password_settings"><font color='#C4C4C4'>New password</font></string>
+    <string name="confirm_new_password"><font color='#C4C4C4'>Confirm password</font></string>
+    <string name="delete_account">You can delete your account</string>
+    <string name="sign_out">Sign out</string>
 </resources>

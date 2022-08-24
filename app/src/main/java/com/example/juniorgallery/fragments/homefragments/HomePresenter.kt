@@ -15,7 +15,7 @@ class HomePresenter @Inject constructor(
 
     private val foundPhotoList: MutableList<PhotoInfoEntity> = mutableListOf()
 
-    fun searchPhoto(photoName: String, isNew: Boolean, isPopular: Boolean) {
+    fun searchPhoto(photoName: String, isNew: String = "", isPopular: String = "") {
         foundPhotoList.clear()
         photoGateway.searchPhoto(photoName, isNew, isPopular)
             .subscribeOn(Schedulers.io())

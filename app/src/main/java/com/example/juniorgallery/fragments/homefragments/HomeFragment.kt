@@ -55,10 +55,10 @@ class HomeFragment : BaseFragment<HomeFragmentBinding, HomePresenter>(), HomeVie
 
     override fun defineFragment(photoName: String) {
         if (viewPager.currentItem == 0) {
-            presenter.searchPhoto(photoName, isNew = true, isPopular = false)
+            presenter.searchPhoto(photoName, isNew = "true")
         }
         else{
-            presenter.searchPhoto(photoName, isNew = false, isPopular = true)
+            presenter.searchPhoto(photoName, isNew = "false")
         }
     }
 

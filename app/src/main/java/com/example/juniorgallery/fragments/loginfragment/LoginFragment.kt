@@ -1,7 +1,5 @@
 package com.example.juniorgallery.fragments.loginfragment
 
-import android.os.Bundle
-import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp

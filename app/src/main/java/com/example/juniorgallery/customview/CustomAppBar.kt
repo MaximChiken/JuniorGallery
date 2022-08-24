@@ -1,9 +1,12 @@
 package com.example.juniorgallery.customview
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.extentions.onTextChanged
 import com.example.juniorgallery.databinding.CustomAppbarBinding
@@ -32,6 +35,12 @@ class CustomAppBar @JvmOverloads constructor(
             updateType()
         }
 
+    var appBarEndIcon: Drawable? = null
+        set(value) {
+            field = value
+            updateEndIcon(value)
+        }
+
     private val binding = CustomAppbarBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
@@ -43,6 +52,7 @@ class CustomAppBar @JvmOverloads constructor(
         ).apply {
             try {
                 appBarType = getInt(R.styleable.CustomAppBar_app_bar_type, 0)
+                appBarEndIcon = getDrawable(R.styleable.CustomAppBar_app_bar_end_icon)
             } finally {
                 recycle()
             }
@@ -69,6 +79,14 @@ class CustomAppBar @JvmOverloads constructor(
         }
     }
 
+    private fun updateEndIcon(icon: Drawable?) {
+        with(binding) {
+            ivEndIcon.isVisible = icon != null
+            ivEndIcon.setImageDrawable(icon)
+        }
+    }
+
+
     private fun setSearchType() {
         with(binding) {
             etSearch.onTextChanged {
@@ -80,7 +98,19 @@ class CustomAppBar @JvmOverloads constructor(
             }
             tilSearch.setStartIconOnClickListener {
                 if (searchText.isNotEmpty()) {
+                    clearFocus()
                     callback?.invoke(AppBarButtons.BUTTON_SEARCH)
+                }
+            }
+            etSearch.setOnKeyListener { _, keyCode, _ ->
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    if (searchText.isNotEmpty()) {
+                        clearFocus()
+                        callback?.invoke(AppBarButtons.BUTTON_SEARCH)
+                    }
+                    true
+                } else {
+                    false
                 }
             }
         }
@@ -90,6 +120,9 @@ class CustomAppBar @JvmOverloads constructor(
         with(binding) {
             ivBack.setOnClickListener {
                 callback?.invoke(AppBarButtons.BUTTON_BACK)
+            }
+            ivEndIcon.setOnClickListener {
+                callback?.invoke(AppBarButtons.BUTTON_ACTION)
             }
         }
     }
@@ -109,6 +142,7 @@ class CustomAppBar @JvmOverloads constructor(
     }
 
     enum class AppBarButtons {
+        BUTTON_ACTION,
         BUTTON_SEARCH,
         BUTTON_CROSS,
         BUTTON_CANCEL,

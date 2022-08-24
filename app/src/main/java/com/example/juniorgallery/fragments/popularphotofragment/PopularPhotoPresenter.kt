@@ -11,5 +11,5 @@ class PopularPhotoPresenter @Inject constructor(
 ) : BasePagingPresenter<PopularPhotoView>() {
 
     override fun getPhoto(pageNumber: Int) =
-        photoGateway.getPhoto(new = false, popular = true, page = pageNumber)
+        photoGateway.getPhoto(popular = "true", page = pageNumber)
 }

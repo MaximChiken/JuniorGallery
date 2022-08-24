@@ -10,6 +10,7 @@ import com.example.juniorgallery.fragments.newphotofragment.NewPhotoPresenter
 import com.example.juniorgallery.fragments.popularphotofragment.PopularPhotoPresenter
 import com.example.juniorgallery.fragments.registrationfragmnet.RegistrationPresenter
 import com.example.juniorgallery.fragments.userfragment.UserProfilePresenter
+import com.example.juniorgallery.fragments.usersettings.UserSettingsPresenter
 import com.example.juniorgallery.fragments.welcomefragment.WelcomePresenter
 import dagger.BindsInstance
 import dagger.Component
@@ -38,6 +39,8 @@ interface AppComponent {
     fun provideUserProfilePresenter(): UserProfilePresenter
 
     fun provideDetailViewPresenter(): DetailViewPresenter
+
+    fun provideUserSettingsPresenter(): UserSettingsPresenter
 
     @Component.Builder
     interface Builder {

@@ -9,8 +9,8 @@ interface PhotoApi {
 
     @GET("/api/photos")
     fun getPhoto(
-        @Query("new") new: Boolean,
-        @Query("popular") popular: Boolean,
+        @Query("new") new: String,
+        @Query("popular") popular: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int
     ): Single<PhotoModel>
@@ -18,7 +18,7 @@ interface PhotoApi {
     @GET("/api/photos")
     fun searchPhoto(
         @Query("name") name: String,
-        @Query("new") new: Boolean,
-        @Query("popular") popular: Boolean,
+        @Query("new") new: String,
+        @Query("popular") popular: String,
     ): Single<PhotoModel>
 }

@@ -4,5 +4,7 @@ import com.example.domain.base.BaseEntity
 
 data class RegistrationResponseEntity(
     val id: Int,
-    val username: String
+    val email: String,
+    val birthday: String,
+    val username: String,
     ): BaseEntity

@@ -8,5 +8,6 @@
             <enum name="type_cancel" value="2" />
         </attr>
         <attr name="app_bar_text" format="string" />
+        <attr name="app_bar_end_icon" format="reference"/>
     </declare-styleable>
 </resources>

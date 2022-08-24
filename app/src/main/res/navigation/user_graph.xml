@@ -9,5 +9,49 @@
         android:id="@+id/userFragment"
         android:name="com.example.juniorgallery.fragments.userfragment.UserProfileFragment"
         android:label="UserFragment"
-        tools:layout="@layout/user_profile_fragment"/>
+        tools:layout="@layout/user_profile_fragment">
+        <action
+            android:id="@+id/action_userFragment_to_detailViewFragment2"
+            app:destination="@id/detailViewFragment2" />
+        <action
+            android:id="@+id/action_userFragment_to_userSettingsFragment"
+            app:destination="@id/userSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailViewFragment2"
+        android:name="com.example.juniorgallery.fragments.detailviewfragment.DetailViewFragment"
+        android:label="DetailViewFragment"
+        tools:layout="@layout/detail_view_fragment">
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="user"
+            app:argType="string" />
+        <argument
+            android:name="photoName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/userSettingsFragment"
+        android:name="com.example.juniorgallery.fragments.usersettings.UserSettingsFragment"
+        android:label="UserSettingsFragment" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+    </fragment>
 </navigation>

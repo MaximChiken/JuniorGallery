@@ -10,21 +10,23 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewbinding.ViewBinding
 import com.example.domain.entities.PhotoInfoEntity
-import com.example.juniorgallery.adapters.photo.PhotoAdapter
+import com.example.juniorgallery.adapters.photo.photohome.PhotoHomeAdapter
+import com.example.juniorgallery.base.BasePhotoAdapter
+import com.example.juniorgallery.base.BasePhotoViewHolder
 import com.example.juniorgallery.base.base_mvp.BaseFragment
 
 abstract class BasePagingFragment<VB : ViewBinding, P : BasePagingPresenter<*>> : BaseFragment<VB, P>(),
     BasePagingView {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: PhotoAdapter
+    private lateinit var adapter: BasePhotoAdapter<*>
     private lateinit var viewFlipper: ViewFlipper
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var progressBar: ProgressBar
 
     private val allPhotoList: MutableList<PhotoInfoEntity> = mutableListOf()
 
-    abstract fun initializeAdapterAndRecyclerView(): Pair<PhotoAdapter, RecyclerView>
+    abstract fun initializeAdapterAndRecyclerView(): Pair<BasePhotoAdapter<*>, RecyclerView>
     abstract fun initializeViewFliper(): ViewFlipper
     abstract fun initializeSwipeRefreshLayout(): SwipeRefreshLayout
     abstract fun initializeProgressBar(): ProgressBar
@@ -72,8 +74,8 @@ abstract class BasePagingFragment<VB : ViewBinding, P : BasePagingPresenter<*>> 
         viewFlipper.displayedChild = 2
     }
 
-    override fun updateList(picture: List<PhotoInfoEntity>) {
-        adapter.submitList(picture)
-        adapter.notifyDataSetChanged()
+    override fun updateList(picture: List<PhotoInfoEntity>) = with(adapter) {
+        submitList(picture)
+        notifyDataSetChanged()
     }
 }
