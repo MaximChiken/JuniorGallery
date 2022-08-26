@@ -4,12 +4,15 @@ import com.example.data.api.UserApi
 import com.example.data.base.BaseGateway
 import com.example.data.base.BaseMapper
 import com.example.data.models.LoginResponse
+import com.example.data.models.PasswordsModel
 import com.example.data.models.RegistrationModel
 import com.example.data.models.RegistrationRequestModel
 import com.example.domain.entities.LoginEntity
+import com.example.domain.entities.PasswordsEntity
 import com.example.domain.entities.RegistrationRequestEntity
 import com.example.domain.entities.RegistrationResponseEntity
 import com.example.domain.gateways.UserGateway
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
@@ -18,6 +21,7 @@ class UserGatewayImpl @Inject constructor(
     private val registrationRequestMapper: BaseMapper<RegistrationRequestModel, RegistrationRequestEntity>,
     private val registrationResponseMapper: BaseMapper<RegistrationModel, RegistrationResponseEntity>,
     private val loginMapper: BaseMapper<LoginResponse, LoginEntity>,
+    private val passwordsMapper: BaseMapper<PasswordsModel, PasswordsEntity>,
 ) : UserGateway, BaseGateway {
 
 
@@ -37,4 +41,12 @@ class UserGatewayImpl @Inject constructor(
 
     override fun getUser(id: String): Single<RegistrationResponseEntity> =
         withMapper(registrationResponseMapper) { userApi.getUser(id) }
+
+    override fun deleteUser(id: String) = userApi.deleteUser(id)
+
+    override fun updateUser(newUser: RegistrationResponseEntity) =
+        userApi.updateUser(newUser.id.toString(), registrationResponseMapper.map(newUser))
+
+    override fun updatePassword(id: String, passwords: PasswordsEntity) =
+        userApi.updatePassword(id, passwordsMapper.map(passwords))
 }

@@ -41,7 +41,8 @@
     <fragment
         android:id="@+id/userSettingsFragment"
         android:name="com.example.juniorgallery.fragments.usersettings.UserSettingsFragment"
-        android:label="UserSettingsFragment" >
+        android:label="UserSettingsFragment"
+        tools:layout="@layout/user_settings_fragment">
         <argument
             android:name="username"
             app:argType="string" />
@@ -51,7 +52,7 @@
             android:name="email"
             app:argType="string" />
         <argument
-            android:name="password"
-            app:argType="string" />
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 </navigation>

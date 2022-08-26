@@ -11,7 +11,6 @@ abstract class BasePhotoAdapter<VH : BasePhotoViewHolder> : ListAdapter<PhotoInf
     abstract fun createItemViewHolder(layoutInflater: LayoutInflater, parent: ViewGroup): VH
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH =
-//        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         createItemViewHolder(LayoutInflater.from(parent.context), parent)
 
 

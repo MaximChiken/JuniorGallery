@@ -7,9 +7,13 @@ import javax.inject.Inject
 
 class RegistrationResponseMapper @Inject constructor() : BaseMapper<RegistrationModel, RegistrationResponseEntity> {
 
-    override fun map(entity: RegistrationResponseEntity): RegistrationModel {
-        TODO("Not yet implemented")
-    }
+    override fun map(entity: RegistrationResponseEntity): RegistrationModel  = RegistrationModel(
+        email = entity.email,
+        birthday = entity.birthday,
+        username = entity.username,
+        id = entity.id
+    )
+
 
     override fun map(model: RegistrationModel): RegistrationResponseEntity =
         RegistrationResponseEntity(

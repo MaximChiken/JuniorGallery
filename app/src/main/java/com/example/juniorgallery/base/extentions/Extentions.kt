@@ -1,8 +1,10 @@
 package com.example.juniorgallery.base.extentions
 
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import androidx.core.content.ContextCompat
 
 fun EditText.onTextChanged(onTextChanged: (String) -> Unit) =
     addTextChangedListener(object : TextWatcher {
@@ -13,3 +15,5 @@ fun EditText.onTextChanged(onTextChanged: (String) -> Unit) =
 
         override fun afterTextChanged(editable: Editable?) {}
     })
+
+fun Int.getColor(context: Context): Int = ContextCompat.getColor(context, this)

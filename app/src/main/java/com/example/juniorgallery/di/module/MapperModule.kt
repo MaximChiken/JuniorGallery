@@ -1,15 +1,9 @@
 package com.example.juniorgallery.di.module
 
 import com.example.data.base.BaseMapper
-import com.example.data.mappers.LoginMapper
-import com.example.data.mappers.PhotoMapper
-import com.example.data.mappers.RegistrationRequestMapper
-import com.example.data.mappers.RegistrationResponseMapper
+import com.example.data.mappers.*
 import com.example.data.models.*
-import com.example.domain.entities.LoginEntity
-import com.example.domain.entities.PhotoEntity
-import com.example.domain.entities.RegistrationRequestEntity
-import com.example.domain.entities.RegistrationResponseEntity
+import com.example.domain.entities.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -37,4 +31,9 @@ class MapperModule {
     @Singleton
     fun providePhotoMapper(): BaseMapper<PhotoModel, PhotoEntity> =
         PhotoMapper()
+
+    @Provides
+    @Singleton
+    fun providePasswordsMapper(): BaseMapper<PasswordsModel, PasswordsEntity> =
+        PasswordsMapper()
 }

@@ -1,9 +1,12 @@
 package com.example.data.api
 
 import com.example.data.models.LoginResponse
+import com.example.data.models.PasswordsModel
 import com.example.data.models.RegistrationModel
 import com.example.data.models.RegistrationRequestModel
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import okhttp3.Response
 import retrofit2.http.*
 
 interface UserApi {
@@ -35,6 +38,23 @@ interface UserApi {
     fun getUser(
         @Path("id") id: String
     ): Single<RegistrationModel>
+
+    @DELETE("/api/users/{id}")
+    fun deleteUser(
+        @Path("id") id: String
+    ): Completable
+
+    @PUT("/api/users/{id}")
+    fun updateUser(
+        @Path("id") id: String,
+        @Body newUserData: RegistrationModel
+    ): Completable
+
+    @PUT("/api/users/update_password/{id}")
+    fun updatePassword(
+        @Path("id") id: String,
+        @Body asd: PasswordsModel
+    ): Completable
 
     companion object{
         const val CLIENT_ID = "1_3fxvjh2ky7s44cskwcgo0k8cwwogkocs8k4cwcwsg0skcsw4ok"

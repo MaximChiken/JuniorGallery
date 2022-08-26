@@ -41,4 +41,7 @@
     <string name="confirm_new_password"><font color='#C4C4C4'>Confirm password</font></string>
     <string name="delete_account">You can delete your account</string>
     <string name="sign_out">Sign out</string>
+    <string name="same_username">Username can not be the same</string>
+    <string name="same_email">E-mail can not be the same</string>
+    <string name="same_password">Password can not be the same</string>
 </resources>

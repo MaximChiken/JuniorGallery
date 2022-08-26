@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:app_bar_type="type_cancel"
+        app:app_bar_end_icon="@drawable/icon_save"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
@@ -110,7 +111,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tilBirthday" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilEmailRegistration"
+                android:id="@+id/tilEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -125,7 +126,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tvEmailSettings">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmailSignUp"
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_email_24"
@@ -147,7 +148,7 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilEmailRegistration" />
+                app:layout_constraintTop_toBottomOf="@id/tilEmail" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilOldPasswordSettings"

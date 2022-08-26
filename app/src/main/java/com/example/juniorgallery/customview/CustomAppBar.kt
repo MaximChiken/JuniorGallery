@@ -132,6 +132,9 @@ class CustomAppBar @JvmOverloads constructor(
             tvCencel.setOnClickListener {
                 callback?.invoke(AppBarButtons.BUTTON_CANCEL)
             }
+            ivEndIcon.setOnClickListener {
+                callback?.invoke(AppBarButtons.BUTTON_ACTION)
+            }
         }
     }
 

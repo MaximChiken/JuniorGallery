@@ -12,10 +12,13 @@ import com.example.juniorgallery.base.base_paging.BasePagingFragment
 import com.example.juniorgallery.customview.CustomAppBar
 import com.example.juniorgallery.databinding.UserProfileFragmentBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.juniorgallery.fragments.userfragment.UserProfileFragmentDirections.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
 class UserProfileFragment : BasePagingFragment<UserProfileFragmentBinding, UserProfilePresenter>(), UserProfileView {
+
+    private lateinit var userFullInfo: RegistrationResponseEntity
 
     @InjectPresenter
     override lateinit var presenter: UserProfilePresenter
@@ -33,12 +36,13 @@ class UserProfileFragment : BasePagingFragment<UserProfileFragmentBinding, UserP
     }
 
     override fun initUserInfo(userInfo: RegistrationResponseEntity) = with(binding) {
+        userFullInfo = userInfo
         tvUserName.text = userInfo.username
         tvDateOfBirth.text = userInfo.birthday
     }
 
     override fun initializeAdapterAndRecyclerView() = PhotoUserAdapter {
-        val action = UserProfileFragmentDirections.actionUserFragmentToDetailViewFragment2(
+        val action = actionUserFragmentToDetailViewFragment2(
             it.name,
             it.date,
             it.description,
@@ -59,11 +63,14 @@ class UserProfileFragment : BasePagingFragment<UserProfileFragmentBinding, UserP
             when (it) {
                 CustomAppBar.AppBarButtons.BUTTON_BACK ->
                     findNavController().navigate(R.id.action_global_HomeGraph)
-                CustomAppBar.AppBarButtons.BUTTON_ACTION ->
-                    findNavController().navigate(R.id.action_userFragment_to_userSettingsFragment)
+                CustomAppBar.AppBarButtons.BUTTON_ACTION -> navigateToSettings()
                 else -> Unit
-
             }
         }
+    }
+
+    private fun navigateToSettings() = with(userFullInfo){
+        val action = actionUserFragmentToUserSettingsFragment(username, birthday, email, id)
+        findNavController().navigate(action)
     }
 }
