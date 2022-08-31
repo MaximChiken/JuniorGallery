@@ -1,12 +1,12 @@
 package com.example.data.managers
 
-import com.example.domain.entities.LoginEntity
+import com.example.domain.entities.TokenEntity
 
 interface TokenManager {
-    val tokens: LoginEntity
+    val tokens: TokenEntity
     val accessToken: String
     val refreshToken: String
 
-    fun login(response: LoginEntity)
+    fun login(response: TokenEntity)
     fun logout()
 }

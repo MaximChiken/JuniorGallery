@@ -1,8 +1,9 @@
 package com.example.juniorgallery.base.base_paging
 
-import com.example.domain.entities.PhotoEntity
-import com.example.domain.entities.PhotoInfoEntity
+import com.example.domain.entities.PhotoListEntity
 import com.example.juniorgallery.base.base_mvp.BasePresenter
+import com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel
+import com.example.juniorgallery.screenviewmodels.uimappers.UiPhotoMapper
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -13,7 +14,7 @@ import moxy.InjectViewState
 abstract class BasePagingPresenter<T : BasePagingView> : BasePresenter<T>() {
 
     private val compositeDisposable = CompositeDisposable()
-    private val newPhotoList: MutableList<PhotoInfoEntity> = mutableListOf()
+    private val newPhotoList: MutableList<PhotoInfoScreenModel> = mutableListOf()
     private var pageNumber: Int = 1
     private var totalItemCount: Int = 0
     private var isLoading: Boolean = false
@@ -22,7 +23,7 @@ abstract class BasePagingPresenter<T : BasePagingView> : BasePresenter<T>() {
             viewState.isLoadingMore(value)
         }
 
-    abstract fun getPhoto(pageNumber: Int): Single<PhotoEntity>
+    abstract fun getPhoto(pageNumber: Int): Single<PhotoListEntity>
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -32,7 +33,7 @@ abstract class BasePagingPresenter<T : BasePagingView> : BasePresenter<T>() {
             .doOnSubscribe { viewState.setLoader(true) }
             .doOnSuccess { viewState.setLoader(false) }
             .subscribe({ it ->
-                it.data.forEach { newPhotoList.add(it) }
+                UiPhotoMapper().map(it).data.forEach { newPhotoList.add(it) }
                 viewState.updateList(newPhotoList)
                 totalItemCount = it.data.count()
             }, {
@@ -55,7 +56,7 @@ abstract class BasePagingPresenter<T : BasePagingView> : BasePresenter<T>() {
                 .doOnSubscribe { isLoading = true }
                 .doOnSuccess { isLoading = false }
                 .subscribe({ it ->
-                    it.data.forEach { newPhotoList.add(it) }
+                    UiPhotoMapper().map(it).data.forEach { newPhotoList.add(it) }
                     viewState.updateList(newPhotoList)
                     totalItemCount = it.data.count()
                 }, {

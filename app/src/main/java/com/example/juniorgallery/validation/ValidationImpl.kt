@@ -6,58 +6,36 @@ import javax.inject.Inject
 
 class ValidationImpl @Inject constructor() : Validation {
 
-    override fun usernameValidate(username: String, callback: (Int?) -> Unit): Int? {
+    override fun usernameValidate(username: String, callback: (Int?) -> Unit): Boolean {
         if (username.isNotEmpty() && username.matches("[A-Za-z1-9]+".toRegex())) {
             callback(null)
-            return null
+            return true
         }
         callback(R.string.no_user_name)
-        return R.string.no_user_name
+        return false
     }
 
-    override fun emailValidate(email: String, callback: (Int?) -> Unit): Int? {
+    override fun emailValidate(email: String, callback: (Int?) -> Unit): Boolean {
         if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             callback(null)
-            return null
+            return true
         }
         callback(R.string.no_email)
-        return R.string.no_email
+        return false
     }
 
-    override fun passwordValidate(password: String, confirmPassword: String, callback: (Int?) -> Unit): Int? {
+    override fun passwordValidate(password: String, confirmPassword: String, callback: (Int?) -> Unit): Boolean {
         if (password.isNotEmpty() &&
             password.matches("[A-Za-z1-9]+".toRegex()) &&
             password.length >= 5 &&
             confirmPassword == password
         ) {
             callback(null)
-            return null
+            return true
         }
         callback(R.string.no_password)
-        return R.string.no_password
+        return false
     }
-
-//    override fun settingsUsernameValidation(newUsername: String, oldUsername: String, callback: (Int?) -> Unit): Unit? {
-//        return when {
-//            usernameValidate(newUsername, callback) != null -> callback(R.string.no_user_name)
-//            oldUsername == newUsername -> callback(R.string.same_username)
-//            else -> {
-//                callback(null)
-//                null
-//            }
-//        }
-//    }
-//
-//    override fun settingsEmailValidation(newEmail: String, oldEmail: String, callback: (Int?) -> Unit): Unit? {
-//        return when {
-//            emailValidate(newEmail, callback) != null -> callback(R.string.no_email)
-//            oldEmail == newEmail -> callback(R.string.same_email)
-//            else -> {
-//                callback(null)
-//                null
-//            }
-//        }
-//    }
 
     override fun settingsPasswordValidation(
         newPassword: String,
@@ -70,7 +48,7 @@ class ValidationImpl @Inject constructor() : Validation {
                 callback(R.string.same_password)
                 false
             }
-            passwordValidate(newPassword, confirmNewPassword, callback) != null -> {
+            passwordValidate(newPassword, confirmNewPassword, callback) -> {
                 callback(R.string.no_password)
                 false
             }

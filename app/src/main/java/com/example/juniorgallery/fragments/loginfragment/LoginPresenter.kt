@@ -2,6 +2,7 @@ package com.example.juniorgallery.fragments.loginfragment
 
 import com.example.data.managers.TokenManager
 import com.example.domain.gateways.UserGateway
+import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BasePresenter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -23,10 +24,9 @@ class LoginPresenter @Inject constructor(
             .doFinally { viewState.setLoader(false) }
             .subscribe({
                 tokenManager.login(it)
-                viewState.setToken(tokenManager.refreshToken)
                 viewState.successLogin()
             }, {
-                viewState.setError()
+                viewState.showToast(R.string.connection_error)
             })
     }
 }

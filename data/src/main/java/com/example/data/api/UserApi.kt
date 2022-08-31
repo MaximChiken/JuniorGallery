@@ -1,18 +1,17 @@
 package com.example.data.api
 
-import com.example.data.models.LoginResponse
+import com.example.data.models.TokenResponse
 import com.example.data.models.PasswordsModel
+import com.example.data.models.UserModel
 import com.example.data.models.RegistrationModel
-import com.example.data.models.RegistrationRequestModel
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
-import okhttp3.Response
 import retrofit2.http.*
 
 interface UserApi {
 
     @POST("/api/users")
-    fun createUser(@Body user: RegistrationRequestModel): Single<RegistrationModel>
+    fun createUser(@Body user: RegistrationModel): Single<RegistrationModel>
 
     @GET("/oauth/v2/token")
     fun loginUser(
@@ -21,7 +20,7 @@ interface UserApi {
         @Query("username") username: String,
         @Query("password") password: String,
         @Query("client_secret") client_secret: String = CLIENT_SECRET,
-    ): Single<LoginResponse>
+    ): Single<TokenResponse>
 
     @GET("/oauth/v2/token")
     fun refreshTokens(
@@ -29,15 +28,15 @@ interface UserApi {
         @Query("grant_type") grant_type: String = GRANT_REFRESH,
         @Query("refresh_token") refresh_token: String,
         @Query("client_secret") client_secret: String = CLIENT_SECRET,
-    ): Single<LoginResponse>
+    ): Single<TokenResponse>
 
     @GET("/api/users/current")
-    fun getCurrentUser(): Single<RegistrationModel>
+    fun getCurrentUser(): Single<UserModel>
 
     @GET("/api/users/{id}")
     fun getUser(
         @Path("id") id: String
-    ): Single<RegistrationModel>
+    ): Single<UserModel>
 
     @DELETE("/api/users/{id}")
     fun deleteUser(
@@ -47,7 +46,7 @@ interface UserApi {
     @PUT("/api/users/{id}")
     fun updateUser(
         @Path("id") id: String,
-        @Body newUserData: RegistrationModel
+        @Body newUserData: UserModel
     ): Completable
 
     @PUT("/api/users/update_password/{id}")

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_graph"
+    app:startDestination="@id/userFragment">
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.juniorgallery.fragments.userfragment.UserProfileFragment"
+        android:label="UserFragment"
+        tools:layout="@layout/fragment_user_profile">
+        <action
+            android:id="@+id/action_userFragment_to_detailViewFragment2"
+            app:destination="@id/detailViewFragment2" />
+        <action
+            android:id="@+id/action_userFragment_to_userSettingsFragment"
+            app:destination="@id/userSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailViewFragment2"
+        android:name="com.example.juniorgallery.fragments.detailviewfragment.DetailViewFragment"
+        android:label="DetailViewFragment"
+        tools:layout="@layout/fragment_detail_view">
+        <argument
+            android:name="photoScreenModel"
+            app:argType="com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/userSettingsFragment"
+        android:name="com.example.juniorgallery.fragments.usersettingsfragment.UserSettingsFragment"
+        android:label="UserSettingsFragment"
+        tools:layout="@layout/fragment_user_settings">
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument android:name="date"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+</navigation>

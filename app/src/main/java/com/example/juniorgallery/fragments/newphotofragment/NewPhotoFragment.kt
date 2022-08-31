@@ -4,12 +4,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.adapters.photo.photohome.PhotoHomeAdapter
 import com.example.juniorgallery.base.base_paging.BasePagingFragment
-import com.example.juniorgallery.databinding.PhotoFragmentBinding
+import com.example.juniorgallery.databinding.FragmentPhotoBinding
 import com.example.juniorgallery.fragments.homefragments.HomeFragmentDirections
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class NewPhotoFragment : BasePagingFragment<PhotoFragmentBinding, NewPhotoPresenter>(),
+class NewPhotoFragment : BasePagingFragment<FragmentPhotoBinding, NewPhotoPresenter>(),
     NewPhotoView {
 
     @InjectPresenter
@@ -18,15 +18,10 @@ class NewPhotoFragment : BasePagingFragment<PhotoFragmentBinding, NewPhotoPresen
     @ProvidePresenter
     fun provideNewPresenter() = MyApp.appComponent.provideNewPhotoPresenter()
 
-    override fun initializeBinding() = PhotoFragmentBinding.inflate(layoutInflater)
+    override fun initializeBinding() = FragmentPhotoBinding.inflate(layoutInflater)
 
     override fun initializeAdapterAndRecyclerView() = PhotoHomeAdapter {
-        val action = HomeFragmentDirections.actionHomeFragmentToDetailViewFragment(
-            it.name,
-            it.date,
-            it.description,
-            it.user,
-            it.image.name)
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailViewFragment(it)
         findNavController().navigate(action)
     } to binding.rcView
 

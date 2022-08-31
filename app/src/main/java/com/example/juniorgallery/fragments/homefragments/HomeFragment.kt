@@ -11,13 +11,14 @@ import com.example.juniorgallery.adapters.PhotoFragmentAdapter
 import com.example.juniorgallery.base.base_mvp.BaseFragment
 import com.example.juniorgallery.base.base_paging.BasePagingFragment
 import com.example.juniorgallery.customview.CustomAppBar
-import com.example.juniorgallery.databinding.HomeFragmentBinding
+import com.example.juniorgallery.databinding.FragmentHomeBinding
+import com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class HomeFragment : BaseFragment<HomeFragmentBinding, HomePresenter>(), HomeView {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeView {
 
     @InjectPresenter
     override lateinit var presenter: HomePresenter
@@ -27,18 +28,18 @@ class HomeFragment : BaseFragment<HomeFragmentBinding, HomePresenter>(), HomeVie
 
     private lateinit var viewPager: ViewPager2
 
-    override fun initializeBinding() = HomeFragmentBinding.inflate(layoutInflater)
+    override fun initializeBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
         val bottomNav: BottomNavigationView? = activity?.findViewById(R.id.bnView)
         bottomNav?.isVisible = true
 
-        viewPager = binding.vpPlaceHolder
-        val adapter = PhotoFragmentAdapter(this)
+        viewPager = vpPlaceHolder
+        val adapter = PhotoFragmentAdapter(this@HomeFragment)
         viewPager.adapter = adapter
 
-        TabLayoutMediator(binding.tlPhoto, binding.vpPlaceHolder) { tab, position ->
+        TabLayoutMediator(tlPhoto, vpPlaceHolder) { tab, position ->
             tab.text = if (position == 0) "New" else "Popular"
         }.attach()
     }
@@ -56,13 +57,12 @@ class HomeFragment : BaseFragment<HomeFragmentBinding, HomePresenter>(), HomeVie
     override fun defineFragment(photoName: String) {
         if (viewPager.currentItem == 0) {
             presenter.searchPhoto(photoName, isNew = "true")
-        }
-        else{
-            presenter.searchPhoto(photoName, isNew = "false")
+        } else {
+            presenter.searchPhoto(photoName, isPopular = "true")
         }
     }
 
-    override fun updateFragment(photo: List<PhotoInfoEntity>) {
+    override fun updateFragment(photo: List<PhotoInfoScreenModel>) {
         (childFragmentManager.findFragmentByTag("f${viewPager.currentItem}") as BasePagingFragment<*, *>)
             .updateList(photo)
     }

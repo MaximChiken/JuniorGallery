@@ -4,21 +4,22 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import com.example.domain.entities.RegistrationResponseEntity
+import com.example.domain.entities.UserEntity
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.adapters.photo.photouser.PhotoUserAdapter
 import com.example.juniorgallery.base.base_paging.BasePagingFragment
 import com.example.juniorgallery.customview.CustomAppBar
-import com.example.juniorgallery.databinding.UserProfileFragmentBinding
+import com.example.juniorgallery.databinding.FragmentUserProfileBinding
+import com.example.juniorgallery.fragments.userfragment.UserProfileFragmentDirections.actionUserFragmentToDetailViewFragment2
+import com.example.juniorgallery.fragments.userfragment.UserProfileFragmentDirections.actionUserFragmentToUserSettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.example.juniorgallery.fragments.userfragment.UserProfileFragmentDirections.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class UserProfileFragment : BasePagingFragment<UserProfileFragmentBinding, UserProfilePresenter>(), UserProfileView {
+class UserProfileFragment : BasePagingFragment<FragmentUserProfileBinding, UserProfilePresenter>(), UserProfileView {
 
-    private lateinit var userFullInfo: RegistrationResponseEntity
+    private lateinit var userFullInfo: UserEntity
 
     @InjectPresenter
     override lateinit var presenter: UserProfilePresenter
@@ -26,7 +27,7 @@ class UserProfileFragment : BasePagingFragment<UserProfileFragmentBinding, UserP
     @ProvidePresenter
     fun provideUserProfile() = MyApp.appComponent.provideUserProfilePresenter()
 
-    override fun initializeBinding() = UserProfileFragmentBinding.inflate(layoutInflater)
+    override fun initializeBinding() = FragmentUserProfileBinding.inflate(layoutInflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,19 +36,14 @@ class UserProfileFragment : BasePagingFragment<UserProfileFragmentBinding, UserP
         presenter.getCurrentUser()
     }
 
-    override fun initUserInfo(userInfo: RegistrationResponseEntity) = with(binding) {
+    override fun initUserInfo(userInfo: UserEntity) = with(binding) {
         userFullInfo = userInfo
         tvUserName.text = userInfo.username
         tvDateOfBirth.text = userInfo.birthday
     }
 
     override fun initializeAdapterAndRecyclerView() = PhotoUserAdapter {
-        val action = actionUserFragmentToDetailViewFragment2(
-            it.name,
-            it.date,
-            it.description,
-            it.user,
-            it.image.name)
+        val action = actionUserFragmentToDetailViewFragment2(it)
         findNavController().navigate(action)
     } to binding.rvUserPhoto
 
@@ -69,7 +65,9 @@ class UserProfileFragment : BasePagingFragment<UserProfileFragmentBinding, UserP
         }
     }
 
-    private fun navigateToSettings() = with(userFullInfo){
+    override fun enableSetting(enable: Boolean) = binding.ablUserProfile.enableEndIcon(enable)
+
+    private fun navigateToSettings() = with(userFullInfo) {
         val action = actionUserFragmentToUserSettingsFragment(username, birthday, email, id)
         findNavController().navigate(action)
     }

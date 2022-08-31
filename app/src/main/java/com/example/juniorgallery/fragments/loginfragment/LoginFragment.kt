@@ -5,12 +5,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
+import com.example.juniorgallery.base.extentions.getString
 import com.example.juniorgallery.customview.CustomAppBar
-import com.example.juniorgallery.databinding.LoginFragmentBinding
+import com.example.juniorgallery.databinding.FragmentLoginBinding
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class LoginFragment : BaseFragment<LoginFragmentBinding, LoginPresenter>(), LoginView {
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginPresenter>(), LoginView {
 
     @InjectPresenter
     override lateinit var presenter: LoginPresenter
@@ -18,7 +19,7 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginPresenter>(), Logi
     @ProvidePresenter
     fun provideLoginPresenter() = MyApp.appComponent.provideLoginPresenter()
 
-    override fun initializeBinding() = LoginFragmentBinding.inflate(layoutInflater)
+    override fun initializeBinding() = FragmentLoginBinding.inflate(layoutInflater)
 
     override fun setUpListeners() {
         with(binding) {
@@ -35,8 +36,8 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginPresenter>(), Logi
             }
 
             btnSignIn.setOnClickListener {
-                val usernameToText = etUsernameSignIn.text.toString()
-                val password = etPasswordSignIn.text.toString()
+                val usernameToText = etUsernameSignIn.getString()
+                val password = etPasswordSignIn.getString()
                 presenter.proceedLogin(usernameToText, password)
             }
         }

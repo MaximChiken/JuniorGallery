@@ -1,8 +1,9 @@
 package com.example.juniorgallery.fragments.registrationfragmnet
 
 import com.example.data.managers.TokenManager
-import com.example.domain.entities.RegistrationRequestEntity
+import com.example.domain.entities.RegistrationEntity
 import com.example.domain.gateways.UserGateway
+import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BasePresenter
 import com.example.juniorgallery.validation.Validation
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -18,35 +19,33 @@ class RegistrationPresenter @Inject constructor(
     private var validation: Validation,
 ) : BasePresenter<RegistrationView>() {
 
-    fun proceedRegistration(username: String, date: String, email: String, password: String, confirmPassword: String) =
-        with(userGateway) {
-        if (validationCheck(username, email, password, confirmPassword)) {
-            postUser(RegistrationRequestEntity(email, date, username, password))
-                .flatMap { loginUser(username, password) }
+    fun proceedRegistration(userInfo: RegistrationEntity, confirmPassword: String) = with(userInfo) {
+        if (validationCheck(userName, email, password, confirmPassword)) {
+            userGateway.postUser(userInfo)
+                .flatMap { userGateway.loginUser(userName, password) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { viewState.setLoader(true) }
                 .doFinally { viewState.setLoader(false) }
                 .subscribe({
                     tokenManager.login(it)
-                    viewState.setToken(tokenManager.accessToken)
                     viewState.successRegistration()
                 }, {
-                    viewState.setError()
+                    viewState.showToast(R.string.connection_error)
                 })
         }
     }
 
     private fun validationCheck(username: String, email: String, password: String, confirmPassword: String): Boolean {
         with(validation) {
-            val validationList: List<Int?> = listOf(
+            val validationList: List<Boolean> = listOf(
                 usernameValidate(username, viewState::checkUserName),
                 emailValidate(email, viewState::checkEmail),
                 passwordValidate(password, confirmPassword, viewState::checkPassword)
             )
             var isValid = true
             validationList.forEach {
-                if (it != null) isValid = false
+                if (it) isValid = false
             }
             return isValid
         }

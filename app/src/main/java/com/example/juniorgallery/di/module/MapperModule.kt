@@ -14,26 +14,31 @@ class MapperModule {
 
     @Provides
     @Singleton
-    fun provideRegistrationRequestMapper(): BaseMapper<RegistrationRequestModel, RegistrationRequestEntity> =
-        RegistrationRequestMapper()
+    fun provideUserMapper(): BaseMapper<RegistrationModel, RegistrationEntity> =
+        RegistrationMapper()
 
     @Provides
     @Singleton
-    fun provideRegistrationResponseMapper(): BaseMapper<RegistrationModel, RegistrationResponseEntity> =
-        RegistrationResponseMapper()
+    fun provideRegistrationMapper(): BaseMapper<UserModel, UserEntity> =
+        UserMapper()
 
     @Provides
     @Singleton
-    fun provideLoginMapper(): BaseMapper<LoginResponse, LoginEntity> =
-        LoginMapper()
+    fun provideTokenMapper(): BaseMapper<TokenResponse, TokenEntity> =
+        TokenMapper()
 
     @Provides
     @Singleton
-    fun providePhotoMapper(): BaseMapper<PhotoModel, PhotoEntity> =
+    fun providePhotoMapper(): BaseMapper<PhotoListModel, PhotoListEntity> =
         PhotoMapper()
 
     @Provides
     @Singleton
     fun providePasswordsMapper(): BaseMapper<PasswordsModel, PasswordsEntity> =
         PasswordsMapper()
+
+    @Provides
+    @Singleton
+    fun provideMediaObjectMapper(): BaseMapper<MediaObjectModel, MediaObjectEntity> =
+        MediaObjectMapper()
 }

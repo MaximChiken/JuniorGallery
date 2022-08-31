@@ -7,12 +7,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
-import com.example.juniorgallery.databinding.WelcomeFragmentBinding
+import com.example.juniorgallery.databinding.FragmentWelcomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class WelcomeFragment : BaseFragment<WelcomeFragmentBinding, WelcomePresenter>(), WelcomeView {
+class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomePresenter>(), WelcomeView {
 
     @InjectPresenter
     override lateinit var presenter: WelcomePresenter
@@ -20,13 +20,13 @@ class WelcomeFragment : BaseFragment<WelcomeFragmentBinding, WelcomePresenter>()
     @ProvidePresenter
     fun provideWelcomePresenter() = MyApp.appComponent.provideWelcomePresenter()
 
-    override fun initializeBinding() = WelcomeFragmentBinding.inflate(layoutInflater)
+    override fun initializeBinding() = FragmentWelcomeBinding.inflate(layoutInflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         presenter.checkAuth()
         val bottomNav: BottomNavigationView? = activity?.findViewById(R.id.bnView)
         bottomNav?.isVisible = false
-        setUpListeners()
     }
 
     override fun setUpListeners() {

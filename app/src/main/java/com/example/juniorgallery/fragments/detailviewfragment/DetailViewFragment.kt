@@ -8,12 +8,12 @@ import com.bumptech.glide.Glide
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.base.base_mvp.BaseFragment
 import com.example.juniorgallery.customview.CustomAppBar
-import com.example.juniorgallery.databinding.DetailViewFragmentBinding
+import com.example.juniorgallery.databinding.FragmentDetailViewBinding
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
 
-class DetailViewFragment : BaseFragment<DetailViewFragmentBinding, DetailViewPresenter>(), DetailViewView {
+class DetailViewFragment : BaseFragment<FragmentDetailViewBinding, DetailViewPresenter>(), DetailViewView {
 
     private val args: DetailViewFragmentArgs by navArgs()
 
@@ -23,17 +23,17 @@ class DetailViewFragment : BaseFragment<DetailViewFragmentBinding, DetailViewPre
     @ProvidePresenter
     fun provideDetailViewPresenter() = MyApp.appComponent.provideDetailViewPresenter()
 
-    override fun initializeBinding() = DetailViewFragmentBinding.inflate(layoutInflater)
+    override fun initializeBinding() = FragmentDetailViewBinding.inflate(layoutInflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            Glide.with(requireContext()).load(photoBaseUrl + args.photoName).into(ivDetailPhoto)
-            tvPhotoDate.text = args.date.substring(0, 10)
-            tvPhotoDescription.text = args.description
-            tvPhotoName.text = args.name
-            if (args.user != " ") {
-                val id = args.user.substring(11)
+            Glide.with(requireContext()).load(photoBaseUrl + args.photoScreenModel.image).into(ivDetailPhoto)
+            tvPhotoDate.text = args.photoScreenModel.date.substring(0, 10)
+            tvPhotoDescription.text = args.photoScreenModel.description
+            tvPhotoName.text = args.photoScreenModel.name
+            if (args.photoScreenModel.user != " ") {
+                val id = args.photoScreenModel.user.substring(11)
                 presenter.getUser(id)
             }
         }

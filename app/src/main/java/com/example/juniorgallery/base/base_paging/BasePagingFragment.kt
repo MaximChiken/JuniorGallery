@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewbinding.ViewBinding
 import com.example.domain.entities.PhotoInfoEntity
-import com.example.juniorgallery.adapters.photo.photohome.PhotoHomeAdapter
-import com.example.juniorgallery.base.BasePhotoAdapter
-import com.example.juniorgallery.base.BasePhotoViewHolder
+import com.example.juniorgallery.R
+import com.example.juniorgallery.base.base_rcview.BasePhotoAdapter
 import com.example.juniorgallery.base.base_mvp.BaseFragment
+import com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel
 
 abstract class BasePagingFragment<VB : ViewBinding, P : BasePagingPresenter<*>> : BaseFragment<VB, P>(),
     BasePagingView {
@@ -72,9 +72,10 @@ abstract class BasePagingFragment<VB : ViewBinding, P : BasePagingPresenter<*>> 
 
     override fun setError() {
         viewFlipper.displayedChild = 2
+        showToast(R.string.connection_error)
     }
 
-    override fun updateList(picture: List<PhotoInfoEntity>) = with(adapter) {
+    override fun updateList(picture: List<PhotoInfoScreenModel>) = with(adapter) {
         submitList(picture)
         notifyDataSetChanged()
     }

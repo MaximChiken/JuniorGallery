@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.example.juniorgallery.R
+import com.example.juniorgallery.base.extentions.getString
 import com.example.juniorgallery.base.extentions.onTextChanged
 import com.example.juniorgallery.databinding.CustomAppbarBinding
 import com.google.android.material.textfield.TextInputLayout.END_ICON_CUSTOM
@@ -22,7 +23,7 @@ class CustomAppBar @JvmOverloads constructor(
 
     var callback: ((AppBarButtons) -> Unit)? = null
     var searchText: String
-        get() = binding.etSearch.text.toString()
+        get() = binding.etSearch.getString()
         set(value) {
             with(binding) {
                 etSearch.setText(value)
@@ -136,6 +137,10 @@ class CustomAppBar @JvmOverloads constructor(
                 callback?.invoke(AppBarButtons.BUTTON_ACTION)
             }
         }
+    }
+
+    fun enableEndIcon(enable: Boolean){
+        binding.ivEndIcon.isClickable = enable
     }
 
     enum class AppBarTypes {

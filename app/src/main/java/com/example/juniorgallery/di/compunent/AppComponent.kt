@@ -3,6 +3,7 @@ package com.example.juniorgallery.di.compunent
 import android.content.Context
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.di.module.*
+import com.example.juniorgallery.fragments.addphotofragment.AddPhotoPresenter
 import com.example.juniorgallery.fragments.detailviewfragment.DetailViewPresenter
 import com.example.juniorgallery.fragments.homefragments.HomePresenter
 import com.example.juniorgallery.fragments.loginfragment.LoginPresenter
@@ -10,7 +11,7 @@ import com.example.juniorgallery.fragments.newphotofragment.NewPhotoPresenter
 import com.example.juniorgallery.fragments.popularphotofragment.PopularPhotoPresenter
 import com.example.juniorgallery.fragments.registrationfragmnet.RegistrationPresenter
 import com.example.juniorgallery.fragments.userfragment.UserProfilePresenter
-import com.example.juniorgallery.fragments.usersettings.UserSettingsPresenter
+import com.example.juniorgallery.fragments.usersettingsfragment.UserSettingsPresenter
 import com.example.juniorgallery.fragments.welcomefragment.WelcomePresenter
 import dagger.BindsInstance
 import dagger.Component
@@ -41,6 +42,8 @@ interface AppComponent {
     fun provideDetailViewPresenter(): DetailViewPresenter
 
     fun provideUserSettingsPresenter(): UserSettingsPresenter
+
+    fun provideAddPhotoPresenter(): AddPhotoPresenter
 
     @Component.Builder
     interface Builder {

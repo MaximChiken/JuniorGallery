@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.viewbinding.ViewBinding
 import moxy.MvpAppCompatFragment
 
@@ -39,15 +40,9 @@ abstract class BaseFragment<VB : ViewBinding, P : BasePresenter<*>> : MvpAppComp
 
     override fun setLoader(isLoading: Boolean) = Unit
 
-    override fun toastSuccess() {
-        Toast.makeText(context, "Все отлично", Toast.LENGTH_SHORT).show()
-    }
+    override fun showToast(message: String) = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 
-    override fun setError() {
-        Toast.makeText(context, "Хуйнябля", Toast.LENGTH_SHORT).show()
-    }
+    override fun showToast(@StringRes id: Int) = showToast(getString(id))
 
-    override fun setToken(token: String) {
-        Toast.makeText(context, token, Toast.LENGTH_SHORT).show()
-    }
+    override fun setError() = Unit
 }

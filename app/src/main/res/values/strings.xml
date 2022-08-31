@@ -44,4 +44,13 @@
     <string name="same_username">Username can not be the same</string>
     <string name="same_email">E-mail can not be the same</string>
     <string name="same_password">Password can not be the same</string>
+    <string name="password_changed">Password changed successfully</string>
+
+    <string name="connection_error">Connection error</string>
+
+    <string name="take_photo">Take photo</string>
+    <string name="choose_from_gallery">Choose from gallery</string>
+    <string name="choose_method">Choose method</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
 </resources>

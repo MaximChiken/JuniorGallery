@@ -1,10 +1,12 @@
 package com.example.juniorgallery.di.module
 
+import com.example.data.api.MediaObjectApi
 import com.example.data.api.PhotoApi
 import com.example.data.api.UserApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import retrofit2.create
 import javax.inject.Singleton
 
 
@@ -18,4 +20,8 @@ class ApiModule {
     @Provides
     @Singleton
     fun providePhotoApi(retrofit: Retrofit): PhotoApi = retrofit.create(PhotoApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideMediaObject(retrofit: Retrofit): MediaObjectApi = retrofit.create(MediaObjectApi::class.java)
 }

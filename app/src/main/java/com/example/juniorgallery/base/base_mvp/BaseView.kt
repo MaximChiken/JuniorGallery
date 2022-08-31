@@ -1,20 +1,22 @@
 package com.example.juniorgallery.base.base_mvp
 
+import androidx.annotation.StringRes
 import moxy.MvpView
+import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 interface BaseView:MvpView {
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun toastSuccess()
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun showToast(@StringRes id: Int)
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun showToast(message:String)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun setError()
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun setToken(token: String)
-
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun setLoader(isLoading: Boolean)
 }

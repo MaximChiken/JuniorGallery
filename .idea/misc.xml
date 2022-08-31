@@ -13,6 +13,8 @@
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_person_24.xml" value="0.1675" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_visibility_24.xml" value="0.1675" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_visibility_off_24.xml" value="0.1675" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/icon_add.xml" value="0.1675" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/icon_add_photo.xml" value="0.1675" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/activity_registration.xml" value="0.25" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/add_photo_fragment.xml" value="0.24895833333333334" />
@@ -20,6 +22,10 @@
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/custom_progress_dialog.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/detail_view_fragment.xml" value="0.264" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/error_internet_layout.xml" value="0.25" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/fragment_add_photo.xml" value="0.25" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/fragment_registration.xml" value="0.25" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/fragment_user_profile.xml" value="0.25" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/fragment_user_settings.xml" value="0.25" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/home_fragment.xml" value="0.264" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/layout_cistom_appbar_back_state.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/layout_cistom_appbar_search_state.xml" value="0.24895833333333334" />
@@ -42,6 +48,7 @@
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/menu/bottom_nav_manu.xml" value="0.25" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/xml/custom_appbar_state.xml" value="0.24259259259259258" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/xml/provider_paths.xml" value="0.25" />
       </map>
     </option>
   </component>

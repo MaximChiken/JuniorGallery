@@ -2,17 +2,19 @@ package com.example.juniorgallery.fragments.registrationfragmnet
 
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.example.domain.entities.RegistrationEntity
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
+import com.example.juniorgallery.base.extentions.getString
 import com.example.juniorgallery.customview.CustomAppBar
-import com.example.juniorgallery.databinding.RegistrationFragmentBinding
-import com.example.juniorgallery.masks.DateMask
+import com.example.juniorgallery.databinding.FragmentRegistrationBinding
+import com.example.juniorgallery.utils.DateMask
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
 
-class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, RegistrationPresenter>(),
+class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, RegistrationPresenter>(),
     RegistrationView {
 
     @InjectPresenter
@@ -21,7 +23,7 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
     @ProvidePresenter
     fun provideRegistrationPresenter() = MyApp.appComponent.provideRegistrationPresenter()
 
-    override fun initializeBinding() = RegistrationFragmentBinding.inflate(layoutInflater)
+    override fun initializeBinding() = FragmentRegistrationBinding.inflate(layoutInflater)
 
     override fun setUpListeners() {
         with(binding) {
@@ -40,18 +42,14 @@ class RegistrationFragment : BaseFragment<RegistrationFragmentBinding, Registrat
             DateMask(etBirthday).listen()
 
             btnSignUp.setOnClickListener {
-                val usernameToText = etUserName.text.toString()
-                var dateOfBirth = etBirthday.text.toString()
-                if (dateOfBirth == "") dateOfBirth = "00/00/0001"
-                val emailToText = etEmailSignUp.text.toString()
-                val passwordToText = etPasswordSignUp.text.toString()
-                val confirmPasswordToText = etConfirmPassword.text.toString()
+                val username = etUserName.getString()
+                val dateOfBirth = etBirthday.getString()
+                val email = etEmailSignUp.getString()
+                val password = etPasswordSignUp.getString()
+                val confirmPassword = etConfirmPassword.getString()
                 presenter.proceedRegistration(
-                    usernameToText,
-                    dateOfBirth,
-                    emailToText,
-                    passwordToText,
-                    confirmPasswordToText)
+                    RegistrationEntity(username, dateOfBirth, email, password),
+                    confirmPassword)
             }
         }
     }
