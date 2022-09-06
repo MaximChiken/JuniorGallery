@@ -55,14 +55,14 @@ class AddPhotoFragment : BaseFragment<FragmentAddPhotoBinding, AddPhotoPresenter
         findNavController().navigate(action)
     }
 
-    private fun checkImageData() = with(binding) {
+    override fun checkImageData() = with(binding) {
         tilName.error = null
         when {
             etName.getString().isEmpty() -> tilName.error = getString(R.string.empty_name)
             (!scNew.isChecked && !scPopular.isChecked) -> showToast(R.string.not_new_or_popular)
             else -> presenter.sendImage(
                 etName.getString(),
-                etDescription.getString().trim(' '),
+                etDescription.getString(),
                 scNew.isChecked,
                 scPopular.isChecked)
         }

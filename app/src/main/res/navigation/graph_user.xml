@@ -44,9 +44,9 @@
             android:name="id"
             app:argType="string" />
         <action
-            android:id="@+id/action_userSettingsFragment_to_registration_graph"
-            app:destination="@id/registration_graph"
+            android:id="@+id/action_userSettingsFragment_to_auth_graph"
+            app:destination="@id/auth_graph"
             app:popUpTo="@id/user_graph" />
     </fragment>
-    <include app:graph="@navigation/graph_registration" />
+    <include app:graph="@navigation/graph_auth" />
 </navigation>

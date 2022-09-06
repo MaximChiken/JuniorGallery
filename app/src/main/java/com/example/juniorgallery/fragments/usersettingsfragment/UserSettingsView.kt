@@ -21,4 +21,7 @@ interface UserSettingsView : BaseView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun checkPassword(errorText: Int?)
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun updateUser()
 }

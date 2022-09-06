@@ -13,4 +13,7 @@ interface AddPhotoView : BaseView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun navigateToNewPhoto(photoInfoScreenModel: PhotoInfoScreenModel)
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun checkImageData()
 }

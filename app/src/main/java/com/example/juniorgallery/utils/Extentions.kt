@@ -18,4 +18,4 @@ fun EditText.onTextChanged(onTextChanged: (String) -> Unit) =
 
 fun Int.getColor(context: Context): Int = ContextCompat.getColor(context, this)
 
-fun EditText.getString(): String = text.toString()
+fun EditText.getString(): String = text.toString().trim(' ')

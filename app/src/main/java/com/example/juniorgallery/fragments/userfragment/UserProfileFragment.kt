@@ -65,7 +65,7 @@ class UserProfileFragment : BasePagingFragment<FragmentUserProfileBinding, UserP
 
     override fun enableSetting(enable: Boolean) = binding.ablUserProfile.enableEndIcon(enable)
 
-    private fun navigateToSettings() = with(userFullInfo) {
+    override fun navigateToSettings() = with(userFullInfo) {
         val action = actionUserFragmentToUserSettingsFragment(username, birthday, email, id)
         findNavController().navigate(action)
     }

@@ -17,7 +17,7 @@ import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
 import com.example.juniorgallery.customview.CustomAppBar
 import com.example.juniorgallery.databinding.FragmentUserSettingsBinding
-import com.example.juniorgallery.fragments.usersettingsfragment.UserSettingsFragmentDirections.actionUserSettingsFragmentToRegistrationGraph
+import com.example.juniorgallery.fragments.usersettingsfragment.UserSettingsFragmentDirections.actionUserSettingsFragmentToAuthGraph
 import com.example.juniorgallery.utils.getColor
 import com.example.juniorgallery.utils.getString
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -64,7 +64,7 @@ class UserSettingsFragment : BaseFragment<FragmentUserSettingsBinding, UserSetti
     }
 
     override fun navigateToRegistration() {
-        findNavController().navigate(actionUserSettingsFragmentToRegistrationGraph())
+        findNavController().navigate(actionUserSettingsFragmentToAuthGraph())
     }
 
     override fun checkUserName(errorText: Int?) = with(binding.tilUserName) {
@@ -77,6 +77,28 @@ class UserSettingsFragment : BaseFragment<FragmentUserSettingsBinding, UserSetti
 
     override fun checkPassword(errorText: Int?) = with(binding.tilNewPassword) {
         error = errorText?.let { getString(it).ifEmpty { null } }
+    }
+
+    override fun updateUser() = with(binding) {
+        if (etNewPassword.text?.isNotBlank() == true) {
+            presenter.updatePassword(
+                args.id,
+                etOldPassword.getString(),
+                etNewPassword.getString(),
+                etConfirmNewPassword.getString()
+            )
+        }
+        if (etUserName.getString() != args.username ||
+            etBirthday.getString() != args.date ||
+            etEmail.getString() != args.email
+        ) {
+            presenter.updateUserInfo(UserEntity(
+                args.id,
+                etEmail.getString(),
+                etBirthday.getString(),
+                etUserName.getString())
+            )
+        }
     }
 
     private fun initUserDeleteView() = with(binding) {
@@ -116,27 +138,5 @@ class UserSettingsFragment : BaseFragment<FragmentUserSettingsBinding, UserSetti
             }
         val alert = builder.create()
         alert.show()
-    }
-
-    private fun updateUser() = with(binding) {
-        if (etNewPassword.text?.isNotBlank() == true) {
-            presenter.updatePassword(
-                args.id,
-                etOldPassword.getString(),
-                etNewPassword.getString(),
-                etConfirmNewPassword.getString()
-            )
-        }
-        if (etUserName.getString() != args.username ||
-            etBirthday.getString() != args.date ||
-            etEmail.getString() != args.email
-        ) {
-            presenter.updateUserInfo(UserEntity(
-                args.id,
-                etEmail.getString(),
-                etBirthday.getString(),
-                etUserName.getString())
-            )
-        }
     }
 }
