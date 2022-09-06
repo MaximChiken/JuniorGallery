@@ -2,7 +2,6 @@ package com.example.juniorgallery.adapters.photo.photouser
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.domain.entities.PhotoInfoEntity
 import com.example.juniorgallery.base.base_rcview.BasePhotoAdapter
 import com.example.juniorgallery.databinding.ItemUserPhotoBinding
 import com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel

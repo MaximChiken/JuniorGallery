@@ -11,7 +11,6 @@ class MyApp : Application() {
         appComponent = DaggerAppComponent.builder().application(this).context(applicationContext).build()
     }
 
-
     companion object {
         lateinit var appComponent: AppComponent
     }

@@ -1,4 +1,4 @@
-package com.example.data.managers
+package com.example.data.managers.tokenmanager
 
 import com.example.data.shared_preferences.TokenPreferences
 import com.example.domain.entities.TokenEntity

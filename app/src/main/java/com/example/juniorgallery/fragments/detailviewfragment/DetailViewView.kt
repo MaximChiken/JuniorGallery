@@ -6,6 +6,6 @@ import moxy.viewstate.strategy.StateStrategyType
 
 interface DetailViewView : BaseView {
 
-    @StateStrategyType(value = AddToEndSingleStrategy::class)
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun setUserName(username: String)
 }

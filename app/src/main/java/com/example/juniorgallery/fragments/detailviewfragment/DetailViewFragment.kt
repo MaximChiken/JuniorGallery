@@ -2,7 +2,6 @@ package com.example.juniorgallery.fragments.detailviewfragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.juniorgallery.MyApp
@@ -25,15 +24,15 @@ class DetailViewFragment : BaseFragment<FragmentDetailViewBinding, DetailViewPre
 
     override fun initializeBinding() = FragmentDetailViewBinding.inflate(layoutInflater)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding) {
-            Glide.with(requireContext()).load(photoBaseUrl + args.photoScreenModel.image).into(ivDetailPhoto)
-            tvPhotoDate.text = args.photoScreenModel.date.substring(0, 10)
-            tvPhotoDescription.text = args.photoScreenModel.description
-            tvPhotoName.text = args.photoScreenModel.name
-            if (args.photoScreenModel.user != " ") {
-                val id = args.photoScreenModel.user.substring(11)
+        with(args.photoScreenModel) {
+            Glide.with(requireContext()).load(photoBaseUrl + image).into(ivDetailPhoto)
+            tvPhotoDate.text = date.substring(0, 10)
+            tvPhotoDescription.text = description
+            tvPhotoName.text = name
+            if (user != " ") {
+                val id = user.substring(11)
                 presenter.getUser(id)
             }
         }
@@ -46,7 +45,7 @@ class DetailViewFragment : BaseFragment<FragmentDetailViewBinding, DetailViewPre
     override fun setUpListeners() = with(binding) {
         ablDetailView.callback = {
             when (it) {
-                CustomAppBar.AppBarButtons.BUTTON_BACK -> findNavController().popBackStack()
+                CustomAppBar.AppBarButtons.BUTTON_BACK -> navigateBack()
                 else -> Unit
             }
         }

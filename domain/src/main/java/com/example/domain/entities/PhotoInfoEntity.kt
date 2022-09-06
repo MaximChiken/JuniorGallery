@@ -8,5 +8,5 @@ data class PhotoInfoEntity(
     var date: String,
     var description: String,
     var image: String,
-    var user: String
+    var user: String,
 ) : BaseEntity

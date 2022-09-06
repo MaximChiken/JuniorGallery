@@ -7,18 +7,18 @@ import moxy.viewstate.strategy.StateStrategyType
 interface RegistrationView : BaseView {
 
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun checkUserName(errorText: Int?)
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun checkEmail(errorText: Int?)
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun checkPassword(errorText: Int?)
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun checkConfirmPassword(errorText: Int?)
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun successRegistration()
 }

@@ -48,14 +48,8 @@ class ValidationImpl @Inject constructor() : Validation {
                 callback(R.string.same_password)
                 false
             }
-            passwordValidate(newPassword, confirmNewPassword, callback) -> {
-                callback(R.string.no_password)
-                false
-            }
-            else -> {
-                callback(null)
-                true
-            }
+            passwordValidate(newPassword, confirmNewPassword, callback) -> true
+            else -> false
         }
     }
 }

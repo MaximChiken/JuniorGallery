@@ -68,7 +68,6 @@
                     android:background="@color/gray"
                     app:layout_constraintTop_toBottomOf="@id/tvDateOfBirth" />
 
-
                 <LinearLayout
                     android:id="@+id/llUserPhoto"
                     android:layout_width="match_parent"
@@ -94,7 +93,6 @@
                         android:layout_gravity="center"
                         android:indeterminateTint="@color/gray"
                         android:visibility="gone" />
-
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

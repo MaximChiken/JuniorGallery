@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewbinding.ViewBinding
-import com.example.domain.entities.PhotoInfoEntity
 import com.example.juniorgallery.R
-import com.example.juniorgallery.base.base_rcview.BasePhotoAdapter
 import com.example.juniorgallery.base.base_mvp.BaseFragment
+import com.example.juniorgallery.base.base_rcview.BasePhotoAdapter
 import com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel
 
 abstract class BasePagingFragment<VB : ViewBinding, P : BasePagingPresenter<*>> : BaseFragment<VB, P>(),
@@ -24,7 +23,6 @@ abstract class BasePagingFragment<VB : ViewBinding, P : BasePagingPresenter<*>> 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var progressBar: ProgressBar
 
-    private val allPhotoList: MutableList<PhotoInfoEntity> = mutableListOf()
 
     abstract fun initializeAdapterAndRecyclerView(): Pair<BasePhotoAdapter<*>, RecyclerView>
     abstract fun initializeViewFliper(): ViewFlipper

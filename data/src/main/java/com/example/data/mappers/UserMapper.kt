@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class UserMapper @Inject constructor() : BaseMapper<UserModel, UserEntity> {
 
-    override fun map(entity: UserEntity): UserModel  = UserModel(
+    override fun map(entity: UserEntity): UserModel = UserModel(
         email = entity.email,
         birthday = entity.birthday ?: "00/00/0001",
         username = entity.username,

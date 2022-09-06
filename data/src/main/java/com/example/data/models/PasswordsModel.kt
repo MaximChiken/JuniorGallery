@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 
 data class PasswordsModel(
     @SerializedName("newPassword") var newPassword: String,
-    @SerializedName("oldPassword") var oldPassword: String
-):BaseModel
+    @SerializedName("oldPassword") var oldPassword: String,
+) : BaseModel

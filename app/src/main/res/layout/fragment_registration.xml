@@ -41,10 +41,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilUserName"
-            style="@style/StyledTextInput"
+            style="@style/StyledTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="50dp"
             android:hint="@string/username"
             app:layout_constraintTop_toBottomOf="@id/tvSignUp">
@@ -61,10 +61,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBirthday"
-            style="@style/StyledTextInput"
+            style="@style/StyledTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="30dp"
             app:layout_constraintTop_toBottomOf="@id/tilUserName">
 
@@ -81,10 +81,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilEmailRegistration"
-            style="@style/StyledTextInput"
+            style="@style/StyledTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="30dp"
             app:layout_constraintTop_toBottomOf="@id/tilBirthday">
 
@@ -101,10 +101,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPasswordSignUp"
-            style="@style/StyledTextInput"
+            style="@style/StyledTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="30dp"
             app:layout_constraintTop_toBottomOf="@id/tilEmailRegistration"
             app:passwordToggleEnabled="true"
@@ -122,10 +122,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilConfirmPassword"
-            style="@style/StyledTextInput"
+            style="@style/StyledTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="30dp"
             app:layout_constraintTop_toBottomOf="@id/tilPasswordSignUp"
             app:passwordToggleEnabled="true"
@@ -166,16 +166,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnSignUp" />
-
-        <ProgressBar
-            android:id="@+id/pbRegistration"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@id/tvToSignIn"
-            app:layout_constraintStart_toStartOf="@id/tvToSignIn"
-            app:layout_constraintEnd_toEndOf="@id/tvToSignIn"
-            android:layout_marginTop="10dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

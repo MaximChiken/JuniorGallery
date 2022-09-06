@@ -16,7 +16,12 @@
         <action
             android:id="@+id/action_welcomeFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_home_graph"
+            app:destination="@id/home_graph"
+            app:popUpTo="@id/registration_graph" />
     </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.juniorgallery.fragments.loginfragment.LoginFragment"
@@ -28,7 +33,12 @@
         <action
             android:id="@+id/action_loginFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_home_graph"
+            app:destination="@id/home_graph"
+            app:popUpTo="@id/registration_graph" />
     </fragment>
+
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.juniorgallery.fragments.registrationfragmnet.RegistrationFragment"
@@ -40,5 +50,10 @@
         <action
             android:id="@+id/action_registrationFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_home_graph"
+            app:destination="@id/home_graph"
+            app:popUpTo="@id/registration_graph" />
     </fragment>
+    <include app:graph="@navigation/graph_home" />
 </navigation>

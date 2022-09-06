@@ -1,30 +1,25 @@
 package com.example.juniorgallery.fragments.addphotofragment
 
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.FileProvider
-import androidx.core.graphics.drawable.toBitmap
-import androidx.lifecycle.lifecycleScope
+import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
-import com.example.juniorgallery.BuildConfig
+import androidx.navigation.fragment.navArgs
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
 import com.example.juniorgallery.customview.CustomAppBar
 import com.example.juniorgallery.databinding.FragmentAddPhotoBinding
-import com.example.juniorgallery.utils.TakePictureWithUriReturnContract
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.example.juniorgallery.fragments.addphotofragment.AddPhotoFragmentDirections.actionAddPhotoFragmentToDetailViewFragment3
+import com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel
+import com.example.juniorgallery.utils.getString
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-import java.io.File
 
 
 class AddPhotoFragment : BaseFragment<FragmentAddPhotoBinding, AddPhotoPresenter>(), AddPhotoView {
+
+    private val args: AddPhotoFragmentArgs by navArgs()
 
     @InjectPresenter
     override lateinit var presenter: AddPhotoPresenter
@@ -34,52 +29,42 @@ class AddPhotoFragment : BaseFragment<FragmentAddPhotoBinding, AddPhotoPresenter
 
     override fun initializeBinding() = FragmentAddPhotoBinding.inflate(layoutInflater)
 
-    private val selectImageFromGallery = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        binding.ivImage.setImageURI(it)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initScreen()
     }
 
-    private val takeImageWithCamera =
-        registerForActivityResult(TakePictureWithUriReturnContract()) { (isSuccess, imageUri) ->
-            if (isSuccess) {
-                binding.ivImage.setImageURI(imageUri)
-            }
-        }
-
-    //gallery code = 1000
     override fun setUpListeners() = with(binding) {
-        ivImage.setOnClickListener {
-            onAddAttachmentClick()
-        }
         ablAddPhoto.callback = {
             when (it) {
-                CustomAppBar.AppBarButtons.BUTTON_ACTION -> presenter.sendImage(ivImage.drawable.toBitmap())
+                CustomAppBar.AppBarButtons.BUTTON_ACTION -> checkImageData()
+                CustomAppBar.AppBarButtons.BUTTON_BACK -> navigateBack()
                 else -> Unit
             }
         }
     }
 
-    private fun onAddAttachmentClick() {
-        MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
-            .setTitle(R.string.choose_method)
-            .setPositiveButton(R.string.take_photo) { _, _ ->
-                takeImage()
-            }.setNegativeButton(R.string.choose_from_gallery) { _, _ ->
-                selectImageFromGallery.launch("image/*")
-            }.show()
+    override fun initScreen() {
+        binding.ivImage.setImageURI(args.photoUri.toUri())
+        presenter.onImageTaken(args.photoFile.takenPhoto)
     }
 
-    private fun takeImage() {
-        lifecycleScope.launchWhenStarted {
-            getTmpFileUri().let { uri -> takeImageWithCamera.launch(uri) }
-        }
+
+    override fun navigateToNewPhoto(photoInfoScreenModel: PhotoInfoScreenModel) {
+        val action = actionAddPhotoFragmentToDetailViewFragment3(photoInfoScreenModel)
+        findNavController().navigate(action)
     }
 
-    private fun getTmpFileUri(): Uri {
-        val tmpFile = File.createTempFile("tmp_image_file", ".png",
-            context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)).apply {
-            createNewFile()
-            deleteOnExit()
+    private fun checkImageData() = with(binding) {
+        tilName.error = null
+        when {
+            etName.getString().isEmpty() -> tilName.error = getString(R.string.empty_name)
+            (!scNew.isChecked && !scPopular.isChecked) -> showToast(R.string.not_new_or_popular)
+            else -> presenter.sendImage(
+                etName.getString(),
+                etDescription.getString().trim(' '),
+                scNew.isChecked,
+                scPopular.isChecked)
         }
-        return FileProvider.getUriForFile(requireContext(), "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
     }
 }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2
-import com.example.domain.entities.PhotoInfoEntity
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.adapters.PhotoFragmentAdapter

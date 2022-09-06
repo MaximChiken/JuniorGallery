@@ -2,15 +2,15 @@ package com.example.juniorgallery.di.module
 
 import com.example.juniorgallery.validation.Validation
 import com.example.juniorgallery.validation.ValidationImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import javax.inject.Singleton
 
 
 @Module
-class ValidationModule {
+abstract class ValidationModule {
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideValidation(): Validation = ValidationImpl()
+    abstract fun provideValidation(validation: ValidationImpl): Validation
 }

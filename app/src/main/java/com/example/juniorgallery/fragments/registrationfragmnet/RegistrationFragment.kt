@@ -1,15 +1,14 @@
 package com.example.juniorgallery.fragments.registrationfragmnet
 
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.domain.entities.RegistrationEntity
 import com.example.juniorgallery.MyApp
-import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
-import com.example.juniorgallery.base.extentions.getString
 import com.example.juniorgallery.customview.CustomAppBar
 import com.example.juniorgallery.databinding.FragmentRegistrationBinding
+import com.example.juniorgallery.fragments.registrationfragmnet.RegistrationFragmentDirections.*
 import com.example.juniorgallery.utils.DateMask
+import com.example.juniorgallery.utils.getString
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
@@ -28,13 +27,13 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
     override fun setUpListeners() {
         with(binding) {
             tvToSignIn.setOnClickListener {
-                findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
+                findNavController().navigate(actionRegistrationFragmentToLoginFragment())
             }
 
             ablRegistration.callback = {
                 when (it) {
                     CustomAppBar.AppBarButtons.BUTTON_CANCEL ->
-                        findNavController().navigate(R.id.action_registrationFragment_to_welcomeFragment)
+                        findNavController().navigate(actionRegistrationFragmentToWelcomeFragment())
                     else -> Unit
                 }
             }
@@ -48,18 +47,15 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
                 val password = etPasswordSignUp.getString()
                 val confirmPassword = etConfirmPassword.getString()
                 presenter.proceedRegistration(
-                    RegistrationEntity(username, dateOfBirth, email, password),
-                    confirmPassword)
+                    RegistrationEntity(email, dateOfBirth, username, password),
+                    confirmPassword
+                )
             }
         }
     }
 
-    override fun setLoader(isLoading: Boolean) {
-        binding.pbRegistration.isVisible = isLoading
-    }
-
     override fun successRegistration() {
-        findNavController().navigate(R.id.action_global_HomeGraph)
+        findNavController().navigate(actionRegistrationFragmentToHomeGraph())
     }
 
     override fun checkUserName(errorText: Int?) = with(binding.tilUserName) {

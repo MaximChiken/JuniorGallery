@@ -5,7 +5,6 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
-import com.example.domain.entities.PhotoInfoEntity
 import com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel
 
 abstract class BasePhotoViewHolder(

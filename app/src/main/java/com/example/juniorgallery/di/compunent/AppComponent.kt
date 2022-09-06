@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.di.module.*
 import com.example.juniorgallery.fragments.addphotofragment.AddPhotoPresenter
+import com.example.juniorgallery.fragments.choosemethoddialog.ChooseMethodPresenter
 import com.example.juniorgallery.fragments.detailviewfragment.DetailViewPresenter
 import com.example.juniorgallery.fragments.homefragments.HomePresenter
 import com.example.juniorgallery.fragments.loginfragment.LoginPresenter
@@ -44,6 +45,8 @@ interface AppComponent {
     fun provideUserSettingsPresenter(): UserSettingsPresenter
 
     fun provideAddPhotoPresenter(): AddPhotoPresenter
+
+    fun provideChooseMethodPresenter(): ChooseMethodPresenter
 
     @Component.Builder
     interface Builder {

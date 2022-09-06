@@ -5,7 +5,7 @@ import com.example.data.models.TokenResponse
 import com.example.domain.entities.TokenEntity
 import javax.inject.Inject
 
-class TokenMapper @Inject constructor(): BaseMapper<TokenResponse, TokenEntity> {
+class TokenMapper @Inject constructor() : BaseMapper<TokenResponse, TokenEntity> {
     override fun map(entity: TokenEntity): TokenResponse {
         TODO("Not yet implemented")
     }

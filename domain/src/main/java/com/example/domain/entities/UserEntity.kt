@@ -7,4 +7,4 @@ data class UserEntity(
     val email: String,
     val birthday: String?,
     val username: String,
-    ): BaseEntity
+) : BaseEntity

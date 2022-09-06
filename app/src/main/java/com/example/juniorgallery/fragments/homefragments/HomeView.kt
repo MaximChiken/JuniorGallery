@@ -8,9 +8,9 @@ import moxy.viewstate.strategy.StateStrategyType
 
 interface HomeView : BaseView {
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun updateFragment(photo: List<PhotoInfoScreenModel>)
 
-    @StateStrategyType(value = AddToEndSingleStrategy::class)
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun defineFragment(photoName: String)
 }

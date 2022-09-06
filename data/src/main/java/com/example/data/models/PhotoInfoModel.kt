@@ -9,5 +9,5 @@ data class PhotoInfoModel(
     @SerializedName("dateCreate") var date: String?,
     @SerializedName("description") var description: String?,
     @SerializedName("image") var image: ImageNameModel,
-    @SerializedName("user") var user: String?
-): BaseModel
+    @SerializedName("user") var user: String?,
+) : BaseModel

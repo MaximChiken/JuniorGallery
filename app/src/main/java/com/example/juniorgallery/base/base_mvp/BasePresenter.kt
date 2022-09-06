@@ -4,5 +4,4 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 
 @InjectViewState
-abstract class BasePresenter<T:BaseView>: MvpPresenter<T>() {
-}
+abstract class BasePresenter<T : BaseView> : MvpPresenter<T>()

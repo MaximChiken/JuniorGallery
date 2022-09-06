@@ -8,9 +8,9 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.example.juniorgallery.R
-import com.example.juniorgallery.base.extentions.getString
-import com.example.juniorgallery.base.extentions.onTextChanged
 import com.example.juniorgallery.databinding.CustomAppbarBinding
+import com.example.juniorgallery.utils.getString
+import com.example.juniorgallery.utils.onTextChanged
 import com.google.android.material.textfield.TextInputLayout.END_ICON_CUSTOM
 import com.google.android.material.textfield.TextInputLayout.END_ICON_NONE
 
@@ -130,7 +130,7 @@ class CustomAppBar @JvmOverloads constructor(
 
     private fun setCancelType() {
         with(binding) {
-            tvCencel.setOnClickListener {
+            tvCancel.setOnClickListener {
                 callback?.invoke(AppBarButtons.BUTTON_CANCEL)
             }
             ivEndIcon.setOnClickListener {
@@ -139,7 +139,7 @@ class CustomAppBar @JvmOverloads constructor(
         }
     }
 
-    fun enableEndIcon(enable: Boolean){
+    fun enableEndIcon(enable: Boolean) {
         binding.ivEndIcon.isClickable = enable
     }
 

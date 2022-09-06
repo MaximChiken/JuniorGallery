@@ -1,6 +1,6 @@
 package com.example.juniorgallery.fragments.usersettingsfragment
 
-import com.example.data.managers.TokenManager
+import com.example.data.managers.tokenmanager.TokenManager
 import com.example.domain.entities.PasswordsEntity
 import com.example.domain.entities.UserEntity
 import com.example.domain.gateways.UserGateway
@@ -28,11 +28,15 @@ class UserSettingsPresenter @Inject constructor(
     }
 
     fun updateUserInfo(newUserInfo: UserEntity) {
-        if (validationCheck(newUserInfo.username, newUserInfo.email)) {
+        if (checkUserValidation(newUserInfo.username, newUserInfo.email)) {
             userGateway.updateUser(newUserInfo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { viewState.navigateToUserProfile() }
+                .subscribe({
+                    viewState.navigateBack()
+                }, {
+                    viewState.showToast(R.string.change_user_not_working)
+                })
         }
     }
 
@@ -45,6 +49,8 @@ class UserSettingsPresenter @Inject constructor(
                     if (it is HttpException) {
                         if (it.code() == 500) {
                             viewState.showToast(R.string.password_changed)
+                        } else {
+                            viewState.showToast(R.string.connection_error)
                         }
                     }
                 })
@@ -53,13 +59,13 @@ class UserSettingsPresenter @Inject constructor(
 
     fun clearData() {
         tokenManager.logout()
-        viewState.navigateBack()
+        viewState.navigateToRegistration()
     }
 
     private fun checkPasswordValidation(oldPassword: String, newPassword: String, confirmPassword: String) =
         (validation.settingsPasswordValidation(newPassword, oldPassword, confirmPassword, viewState::checkPassword))
 
-    private fun validationCheck(username: String, email: String): Boolean {
+    private fun checkUserValidation(username: String, email: String): Boolean {
         with(validation) {
             val validationList: List<Boolean> = listOf(
                 usernameValidate(username, viewState::checkUserName),
@@ -67,7 +73,7 @@ class UserSettingsPresenter @Inject constructor(
             )
             var isValid = true
             validationList.forEach {
-                if (it) isValid = false
+                if (!it) isValid = false
             }
             return isValid
         }

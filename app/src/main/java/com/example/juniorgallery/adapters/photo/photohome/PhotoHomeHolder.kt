@@ -1,6 +1,5 @@
 package com.example.juniorgallery.adapters.photo.photohome
 
-import com.example.domain.entities.PhotoInfoEntity
 import com.example.juniorgallery.base.base_rcview.BasePhotoViewHolder
 import com.example.juniorgallery.databinding.ItemPhotoBinding
 import com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel

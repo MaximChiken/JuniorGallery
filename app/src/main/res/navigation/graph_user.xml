@@ -43,5 +43,10 @@
         <argument
             android:name="id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_userSettingsFragment_to_registration_graph"
+            app:destination="@id/registration_graph"
+            app:popUpTo="@id/user_graph" />
     </fragment>
+    <include app:graph="@navigation/graph_registration" />
 </navigation>

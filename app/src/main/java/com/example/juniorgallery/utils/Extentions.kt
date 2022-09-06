@@ -1,4 +1,4 @@
-package com.example.juniorgallery.base.extentions
+package com.example.juniorgallery.utils
 
 import android.content.Context
 import android.text.Editable

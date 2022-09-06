@@ -5,23 +5,20 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface UserSettingsView:BaseView {
+interface UserSettingsView : BaseView {
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun navigateBack()
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun navigateToRegistration()
 
-    @StateStrategyType(value = AddToEndSingleStrategy::class)
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun initSettingsInfo()
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun navigateToUserProfile()
-
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun checkUserName(errorText: Int?)
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun checkEmail(errorText: Int?)
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun checkPassword(errorText: Int?)
 }

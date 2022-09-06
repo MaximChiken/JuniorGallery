@@ -14,5 +14,6 @@ class MediaObjectGatewayImpl @Inject constructor(
     private val mediaObjectMapper: BaseMapper<MediaObjectModel, MediaObjectEntity>,
 ) : MediaObjectGateway, BaseGateway {
 
-    override fun postMediaObject(image: MultipartBody.Part, name: String) = mediaObjectApi.postMediaObject(image, name)
+    override fun postMediaObject(image: MultipartBody.Part, name: String) =
+        withMapper(mediaObjectMapper) { mediaObjectApi.postMediaObject(image, name) }
 }

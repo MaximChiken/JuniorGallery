@@ -4,8 +4,8 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.data.interceptors.HeaderInterceptor
 import com.example.data.interceptors.RefreshTokenInterceptor
-import com.example.data.managers.TokenManager
-import com.example.domain.gateways.UserGateway
+import com.example.data.managers.tokenmanager.TokenManager
+import com.example.domain.gateways.AuthGateway
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
@@ -25,9 +25,9 @@ class RetrofitModule {
     fun provideOkHttpClient(
         chuckerInterceptor: ChuckerInterceptor,
         tokenManager: TokenManager,
-        userGateway: Lazy<UserGateway>
+        authGateway: Lazy<AuthGateway>,
     ) = OkHttpClient.Builder()
-        .authenticator(RefreshTokenInterceptor(userGateway, tokenManager))
+        .authenticator(RefreshTokenInterceptor(authGateway, tokenManager))
         .addInterceptor(chuckerInterceptor)
         .addInterceptor(HeaderInterceptor(tokenManager))
         .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })

@@ -8,4 +8,4 @@ data class RegistrationModel(
     @SerializedName("birthday") val birthday: String,
     @SerializedName("username") val userName: String,
     @SerializedName("password") val password: String,
-): BaseModel
+) : BaseModel

@@ -7,16 +7,4 @@
     <include app:graph="@navigation/graph_add_photo" />
     <include app:graph="@navigation/graph_user" />
     <include app:graph="@navigation/graph_home" />
-
-    <action
-        android:id="@+id/action_global_registrationGraph"
-        app:destination="@id/registration_graph"
-        app:popUpTo="@id/home_graph"
-        app:popUpToInclusive="true"/>
-
-    <action
-        android:id="@+id/action_global_HomeGraph"
-        app:destination="@id/home_graph"
-        app:popUpTo="@id/registration_graph"
-        app:popUpToInclusive="true" />
 </navigation>

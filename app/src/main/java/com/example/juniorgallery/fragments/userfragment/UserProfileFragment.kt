@@ -33,7 +33,6 @@ class UserProfileFragment : BasePagingFragment<FragmentUserProfileBinding, UserP
         super.onViewCreated(view, savedInstanceState)
         val bottomNav: BottomNavigationView? = activity?.findViewById(R.id.bnView)
         bottomNav?.isVisible = true
-        presenter.getCurrentUser()
     }
 
     override fun initUserInfo(userInfo: UserEntity) = with(binding) {
@@ -57,8 +56,7 @@ class UserProfileFragment : BasePagingFragment<FragmentUserProfileBinding, UserP
         super.setUpListeners()
         ablUserProfile.callback = {
             when (it) {
-                CustomAppBar.AppBarButtons.BUTTON_BACK ->
-                    findNavController().navigate(R.id.action_global_HomeGraph)
+                CustomAppBar.AppBarButtons.BUTTON_BACK -> navigateBack()
                 CustomAppBar.AppBarButtons.BUTTON_ACTION -> navigateToSettings()
                 else -> Unit
             }

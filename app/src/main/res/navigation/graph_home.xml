@@ -28,21 +28,6 @@
         android:name="com.example.juniorgallery.fragments.detailviewfragment.DetailViewFragment"
         android:label="DetailViewFragment"
         tools:layout="@layout/fragment_detail_view">
-<!--        <argument-->
-<!--            android:name="name"-->
-<!--            app:argType="string" />-->
-<!--        <argument-->
-<!--            android:name="date"-->
-<!--            app:argType="string" />-->
-<!--        <argument-->
-<!--            android:name="description"-->
-<!--            app:argType="string" />-->
-<!--        <argument-->
-<!--            android:name="user"-->
-<!--            app:argType="string" />-->
-<!--        <argument-->
-<!--            android:name="photoName"-->
-<!--            app:argType="string" />-->
         <argument
             android:name="photoScreenModel"
             app:argType="com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel" />

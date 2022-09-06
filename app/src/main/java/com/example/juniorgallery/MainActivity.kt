@@ -2,7 +2,6 @@ package com.example.juniorgallery
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.navigation.NavHost
 import androidx.navigation.ui.setupWithNavController
 import com.example.juniorgallery.databinding.ActivityMainBinding

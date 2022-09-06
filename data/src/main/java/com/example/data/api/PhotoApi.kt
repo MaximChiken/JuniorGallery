@@ -1,13 +1,19 @@
 package com.example.data.api
 
+import com.example.data.models.NewPhotoModel
+import com.example.data.models.PhotoInfoModel
 import com.example.data.models.PhotoListModel
 import io.reactivex.rxjava3.core.Single
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
+
 interface PhotoApi {
 
     @GET("/api/photos")
     fun getPhoto(
+        @Query("user.id") userId: String = "",
         @Query("new") new: String = "",
         @Query("popular") popular: String = "",
         @Query("name") name: String = "",
@@ -15,14 +21,7 @@ interface PhotoApi {
         @Query("limit") limit: Int = 20,
     ): Single<PhotoListModel>
 
-//    @POST("/api/photo")
-//    fun postPhoto(
-//        @Query("name") name: String,
-//        @Query("dateCreate") dateCreate: String,
-//        @Query("description") description: String,
-//        @Query("new") isNew: Boolean,
-//        @Query("popular") isPopular: Boolean,
-//        @Query("image") image: {}
-//    )
+    @POST("/api/photos")
+    fun postPhoto(@Body newPhotoModel: NewPhotoModel): Single<PhotoInfoModel>
 }
 

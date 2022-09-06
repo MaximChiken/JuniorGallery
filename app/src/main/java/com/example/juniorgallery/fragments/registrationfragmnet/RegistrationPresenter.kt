@@ -1,8 +1,8 @@
 package com.example.juniorgallery.fragments.registrationfragmnet
 
-import com.example.data.managers.TokenManager
+import com.example.data.managers.tokenmanager.TokenManager
 import com.example.domain.entities.RegistrationEntity
-import com.example.domain.gateways.UserGateway
+import com.example.domain.gateways.AuthGateway
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BasePresenter
 import com.example.juniorgallery.validation.Validation
@@ -14,19 +14,19 @@ import javax.inject.Inject
 
 @InjectViewState
 class RegistrationPresenter @Inject constructor(
-    private var userGateway: UserGateway,
+    private var authGateway: AuthGateway,
     private var tokenManager: TokenManager,
     private var validation: Validation,
 ) : BasePresenter<RegistrationView>() {
 
     fun proceedRegistration(userInfo: RegistrationEntity, confirmPassword: String) = with(userInfo) {
         if (validationCheck(userName, email, password, confirmPassword)) {
-            userGateway.postUser(userInfo)
-                .flatMap { userGateway.loginUser(userName, password) }
+            authGateway.postUser(userInfo)
+                .flatMap { authGateway.loginUser(userName, password) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { viewState.setLoader(true) }
-                .doFinally { viewState.setLoader(false) }
+                .doOnSubscribe { viewState.setProgressDialog() }
+                .doFinally { viewState.dismissProgressDialog() }
                 .subscribe({
                     tokenManager.login(it)
                     viewState.successRegistration()
@@ -35,6 +35,7 @@ class RegistrationPresenter @Inject constructor(
                 })
         }
     }
+
 
     private fun validationCheck(username: String, email: String, password: String, confirmPassword: String): Boolean {
         with(validation) {
@@ -45,7 +46,7 @@ class RegistrationPresenter @Inject constructor(
             )
             var isValid = true
             validationList.forEach {
-                if (it) isValid = false
+                if (!it) isValid = false
             }
             return isValid
         }

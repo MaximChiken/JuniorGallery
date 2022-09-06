@@ -3,7 +3,6 @@ package com.example.juniorgallery.base.base_rcview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.example.domain.entities.PhotoInfoEntity
 import com.example.juniorgallery.adapters.photo.PhotoDiffUtils
 import com.example.juniorgallery.screenviewmodels.PhotoInfoScreenModel
 

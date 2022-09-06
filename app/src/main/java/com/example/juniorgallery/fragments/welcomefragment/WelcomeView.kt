@@ -4,8 +4,8 @@ import com.example.juniorgallery.base.base_mvp.BaseView
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface WelcomeView: BaseView {
+interface WelcomeView : BaseView {
 
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun navigateToHome()
 }

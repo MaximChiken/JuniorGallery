@@ -8,6 +8,7 @@ import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
 import com.example.juniorgallery.databinding.FragmentWelcomeBinding
+import com.example.juniorgallery.fragments.welcomefragment.WelcomeFragmentDirections.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -32,17 +33,17 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomePresenter>()
     override fun setUpListeners() {
         with(binding) {
             btnCreateAccount.setOnClickListener {
-                findNavController().navigate(R.id.action_welcomeFragment_to_registrationFragment)
+                findNavController().navigate(actionWelcomeFragmentToRegistrationFragment())
             }
 
             btnHaveAccount.setOnClickListener {
-                findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
+                findNavController().navigate(actionWelcomeFragmentToLoginFragment())
             }
 
         }
     }
 
     override fun navigateToHome() {
-        findNavController().navigate(R.id.action_global_HomeGraph)
+        findNavController().navigate(actionWelcomeFragmentToHomeGraph())
     }
 }

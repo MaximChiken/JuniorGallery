@@ -7,4 +7,4 @@ data class RegistrationEntity(
     val birthday: String,
     val userName: String,
     val password: String,
-): BaseEntity
+) : BaseEntity

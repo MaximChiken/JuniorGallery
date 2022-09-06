@@ -15,10 +15,11 @@ import com.example.domain.entities.UserEntity
 import com.example.juniorgallery.MyApp
 import com.example.juniorgallery.R
 import com.example.juniorgallery.base.base_mvp.BaseFragment
-import com.example.juniorgallery.base.extentions.getColor
-import com.example.juniorgallery.base.extentions.getString
 import com.example.juniorgallery.customview.CustomAppBar
 import com.example.juniorgallery.databinding.FragmentUserSettingsBinding
+import com.example.juniorgallery.fragments.usersettingsfragment.UserSettingsFragmentDirections.actionUserSettingsFragmentToRegistrationGraph
+import com.example.juniorgallery.utils.getColor
+import com.example.juniorgallery.utils.getString
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -55,17 +56,27 @@ class UserSettingsFragment : BaseFragment<FragmentUserSettingsBinding, UserSetti
         }
         ablUserSettings.callback = {
             when (it) {
-                CustomAppBar.AppBarButtons.BUTTON_CANCEL -> findNavController().popBackStack()
+                CustomAppBar.AppBarButtons.BUTTON_CANCEL -> navigateBack()
                 CustomAppBar.AppBarButtons.BUTTON_ACTION -> updateUser()
                 else -> Unit
             }
         }
     }
 
-    override fun navigateBack() = findNavController().navigate(R.id.action_global_registrationGraph)
+    override fun navigateToRegistration() {
+        findNavController().navigate(actionUserSettingsFragmentToRegistrationGraph())
+    }
 
-    override fun navigateToUserProfile() {
-        findNavController().popBackStack()
+    override fun checkUserName(errorText: Int?) = with(binding.tilUserName) {
+        error = errorText?.let { getString(it).ifEmpty { null } }
+    }
+
+    override fun checkEmail(errorText: Int?) = with(binding.tilEmail) {
+        error = errorText?.let { getString(it).ifEmpty { null } }
+    }
+
+    override fun checkPassword(errorText: Int?) = with(binding.tilNewPassword) {
+        error = errorText?.let { getString(it).ifEmpty { null } }
     }
 
     private fun initUserDeleteView() = with(binding) {
@@ -74,7 +85,6 @@ class UserSettingsFragment : BaseFragment<FragmentUserSettingsBinding, UserSetti
                 confirmDeleteDialog(args.id)
             }
         }
-
         tvDeleteAccount.text = buildSpannedString {
             val resourceString = getString(R.string.delete_account)
             append(resourceString)
@@ -109,12 +119,13 @@ class UserSettingsFragment : BaseFragment<FragmentUserSettingsBinding, UserSetti
     }
 
     private fun updateUser() = with(binding) {
-        if (etNewPassword.text?.isNotBlank() == true && etOldPassword.text?.isNotBlank() == true) {
+        if (etNewPassword.text?.isNotBlank() == true) {
             presenter.updatePassword(
                 args.id,
                 etOldPassword.getString(),
                 etNewPassword.getString(),
-                etConfirmNewPassword.getString())
+                etConfirmNewPassword.getString()
+            )
         }
         if (etUserName.getString() != args.username ||
             etBirthday.getString() != args.date ||
@@ -124,19 +135,8 @@ class UserSettingsFragment : BaseFragment<FragmentUserSettingsBinding, UserSetti
                 args.id,
                 etEmail.getString(),
                 etBirthday.getString(),
-                etUserName.getString()))
+                etUserName.getString())
+            )
         }
-    }
-
-    override fun checkUserName(errorText: Int?) = with(binding.tilUserName) {
-        error = errorText?.let { getString(it).ifEmpty { null } }
-    }
-
-    override fun checkEmail(errorText: Int?) = with(binding.tilEmail) {
-        error = errorText?.let { getString(it).ifEmpty { null } }
-    }
-
-    override fun checkPassword(errorText: Int?) = with(binding.tilNewPassword) {
-        error = errorText?.let { getString(it).ifEmpty { null } }
     }
 }

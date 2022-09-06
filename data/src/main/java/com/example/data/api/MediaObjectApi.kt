@@ -1,6 +1,7 @@
 package com.example.data.api
 
-import io.reactivex.rxjava3.core.Completable
+import com.example.data.models.MediaObjectModel
+import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -13,6 +14,6 @@ interface MediaObjectApi {
     @POST("/api/media_objects")
     fun postMediaObject(
         @Part image: MultipartBody.Part,
-        @Query("name") name: String
-    ):Completable
+        @Query("name") name: String,
+    ): Single<MediaObjectModel>
 }
