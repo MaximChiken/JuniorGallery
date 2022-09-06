@@ -1,0 +1,724 @@
+Index: data/src/main/java/com/example/data/gateway/UserGatewayImpl.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.data.gateway\r\n\r\nimport com.example.data.api.UserApi\r\nimport com.example.domain.UserGateway\r\nimport com.example.domain.entities.LoginResponse\r\nimport com.example.domain.entities.UserRequest\r\nimport io.reactivex.rxjava3.core.Single\r\n\r\nclass UserGatewayImpl(private val userApi: UserApi) : UserGateway {\r\n\r\n\r\n    override fun postUser(userRequest: UserRequest): Single<UserRequest> = userApi.createUser(userRequest)\r\n\r\n    override fun loginUser(username: String, password: String): Single<LoginResponse> =\r\n        userApi.loginUser(CLIENT_ID, CLIENT_SECRET, username, password)\r\n\r\n    companion object {\r\n        const val CLIENT_ID = \"3_1v7ugoq694tcow0s0w8csw0k8koo0s44swgg0w8s0kkkosgw8w\"\r\n\r\n        const val CLIENT_SECRET = \"5efb9az2d1sss48sgkowsow0gowck0k0ko4kswccog440gcw8o\"\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/data/src/main/java/com/example/data/gateway/UserGatewayImpl.kt b/data/src/main/java/com/example/data/gateway/UserGatewayImpl.kt
+--- a/data/src/main/java/com/example/data/gateway/UserGatewayImpl.kt	
++++ b/data/src/main/java/com/example/data/gateway/UserGatewayImpl.kt	
+@@ -1,22 +1,24 @@
+ package com.example.data.gateway
+ 
+ import com.example.data.api.UserApi
+-import com.example.domain.UserGateway
+-import com.example.domain.entities.LoginResponse
+-import com.example.domain.entities.UserRequest
++import com.example.domain.gateways.UserGateway
++import com.example.domain.models.RequestUserModel
++import com.example.domain.responses.LoginResponse
++import com.example.domain.responses.RegistrationResponse
+ import io.reactivex.rxjava3.core.Single
+ 
+ class UserGatewayImpl(private val userApi: UserApi) : UserGateway {
+ 
+ 
+-    override fun postUser(userRequest: UserRequest): Single<UserRequest> = userApi.createUser(userRequest)
++    override fun postUser(requestUserModel: RequestUserModel): Single<RegistrationResponse> =
++        userApi.createUser(requestUserModel)
+ 
+     override fun loginUser(username: String, password: String): Single<LoginResponse> =
+         userApi.loginUser(CLIENT_ID, CLIENT_SECRET, username, password)
+ 
+     companion object {
+-        const val CLIENT_ID = "3_1v7ugoq694tcow0s0w8csw0k8koo0s44swgg0w8s0kkkosgw8w"
++        const val CLIENT_ID = "z66zdmg5s34s84gogs8oo04oc08k4kso0kwok0kwck8ggkooo"
+ 
+-        const val CLIENT_SECRET = "5efb9az2d1sss48sgkowsow0gowck0k0ko4kswccog440gcw8o"
++        const val CLIENT_SECRET = "23g0wdyp26n4gs8kow4o8cgc4c4c48ocww4gwo00s04c8kkswc"
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/juniorgallery/di/compunent/AppComponent.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.juniorgallery.di.compunent\r\n\r\nimport android.content.Context\r\nimport android.content.res.Resources\r\nimport com.example.juniorgallery.MyApp\r\nimport com.example.juniorgallery.di.module.ApiModule\r\nimport com.example.juniorgallery.di.module.AppModule\r\nimport com.example.juniorgallery.di.module.GatewayModule\r\nimport com.example.juniorgallery.di.module.RetrofitModule\r\nimport com.example.juniorgallery.loginfragment.LoginPresenter\r\nimport com.example.juniorgallery.registrationfragmnet.RegistrationPresenter\r\nimport com.example.juniorgallery.welcomefragment.WelcomePresenter\r\nimport dagger.Binds\r\nimport dagger.BindsInstance\r\nimport dagger.Component\r\nimport java.util.*\r\nimport javax.inject.Inject\r\nimport javax.inject.Singleton\r\n\r\n\r\n@Singleton\r\n@Component(modules = [AppModule::class, RetrofitModule::class, ApiModule::class, GatewayModule::class])\r\ninterface AppComponent {\r\n\r\n    fun inject(target: MyApp)\r\n\r\n    fun provideWelcomePresenter(): WelcomePresenter\r\n\r\n    fun provideLoginPresenter(): LoginPresenter\r\n\r\n    fun provideRegistrationPresenter(): RegistrationPresenter\r\n\r\n    @Component.Builder\r\n    interface Builder {\r\n        fun build(): AppComponent\r\n\r\n        @BindsInstance\r\n        fun application(application: MyApp): Builder\r\n\r\n        @BindsInstance\r\n        fun context(context: Context): Builder\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/di/compunent/AppComponent.kt b/app/src/main/java/com/example/juniorgallery/di/compunent/AppComponent.kt
+--- a/app/src/main/java/com/example/juniorgallery/di/compunent/AppComponent.kt	
++++ b/app/src/main/java/com/example/juniorgallery/di/compunent/AppComponent.kt	
+@@ -1,20 +1,16 @@
+ package com.example.juniorgallery.di.compunent
+ 
+ import android.content.Context
+-import android.content.res.Resources
+ import com.example.juniorgallery.MyApp
+ import com.example.juniorgallery.di.module.ApiModule
+ import com.example.juniorgallery.di.module.AppModule
+ import com.example.juniorgallery.di.module.GatewayModule
+ import com.example.juniorgallery.di.module.RetrofitModule
+-import com.example.juniorgallery.loginfragment.LoginPresenter
+-import com.example.juniorgallery.registrationfragmnet.RegistrationPresenter
+-import com.example.juniorgallery.welcomefragment.WelcomePresenter
+-import dagger.Binds
++import com.example.juniorgallery.fragments.loginfragment.LoginPresenter
++import com.example.juniorgallery.fragments.registrationfragmnet.RegistrationPresenter
++import com.example.juniorgallery.fragments.welcomefragment.WelcomePresenter
+ import dagger.BindsInstance
+ import dagger.Component
+-import java.util.*
+-import javax.inject.Inject
+ import javax.inject.Singleton
+ 
+ 
+Index: data/src/main/java/com/example/data/api/UserApi.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.data.api\r\n\r\nimport com.example.domain.entities.LoginResponse\r\nimport com.example.domain.entities.UserRequest\r\nimport io.reactivex.rxjava3.core.Single\r\nimport retrofit2.http.Body\r\nimport retrofit2.http.GET\r\nimport retrofit2.http.POST\r\nimport retrofit2.http.Query\r\n\r\ninterface UserApi {\r\n\r\n    @POST(\"/api/users\")\r\n    fun createUser(@Body user: UserRequest): Single<UserRequest>\r\n\r\n    @GET(\"/oauth/v2/token\")\r\n    fun loginUser(\r\n        @Query(\"client_id\") client_id: String,\r\n        @Query(\"client_secret\") client_secret: String,\r\n        @Query(\"username\") username: String,\r\n        @Query(\"password\") password: String,\r\n        @Query(\"grant_type\") grant_type: String = \"password\"\r\n    ): Single<LoginResponse>\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/data/src/main/java/com/example/data/api/UserApi.kt b/data/src/main/java/com/example/data/api/UserApi.kt
+--- a/data/src/main/java/com/example/data/api/UserApi.kt	
++++ b/data/src/main/java/com/example/data/api/UserApi.kt	
+@@ -1,7 +1,8 @@
+ package com.example.data.api
+ 
+-import com.example.domain.entities.LoginResponse
+-import com.example.domain.entities.UserRequest
++import com.example.domain.responses.LoginResponse
++import com.example.domain.responses.RegistrationResponse
++import com.example.domain.models.RequestUserModel
+ import io.reactivex.rxjava3.core.Single
+ import retrofit2.http.Body
+ import retrofit2.http.GET
+@@ -11,7 +12,7 @@
+ interface UserApi {
+ 
+     @POST("/api/users")
+-    fun createUser(@Body user: UserRequest): Single<UserRequest>
++    fun createUser(@Body user: RequestUserModel): Single<RegistrationResponse>
+ 
+     @GET("/oauth/v2/token")
+     fun loginUser(
+@@ -19,6 +20,6 @@
+         @Query("client_secret") client_secret: String,
+         @Query("username") username: String,
+         @Query("password") password: String,
+-        @Query("grant_type") grant_type: String = "password"
++        @Query("grant_type") grant_type: String = "password",
+     ): Single<LoginResponse>
+ }
+\ No newline at end of file
+Index: domain/src/main/java/com/example/domain/UserGateway.kt
+===================================================================
+diff --git a/domain/src/main/java/com/example/domain/UserGateway.kt b/domain/src/main/java/com/example/domain/gateways/UserGateway.kt
+rename from domain/src/main/java/com/example/domain/UserGateway.kt
+rename to domain/src/main/java/com/example/domain/gateways/UserGateway.kt
+--- a/domain/src/main/java/com/example/domain/UserGateway.kt	
++++ b/domain/src/main/java/com/example/domain/gateways/UserGateway.kt	
+@@ -1,13 +1,14 @@
+-package com.example.domain
++package com.example.domain.gateways
+ 
+-import com.example.domain.entities.LoginResponse
+-import com.example.domain.entities.UserRequest
++import com.example.domain.responses.LoginResponse
++import com.example.domain.models.RequestUserModel
++import com.example.domain.responses.RegistrationResponse
+ import io.reactivex.rxjava3.core.Single
+ 
+ 
+ interface UserGateway {
+ 
+-    fun postUser(userRequest: UserRequest): Single<UserRequest>
++    fun postUser(requestUserModel: RequestUserModel): Single<RegistrationResponse>
+ 
+     fun loginUser(username: String, password: String): Single<LoginResponse>
+ }
+\ No newline at end of file
+Index: app/src/main/res/drawable/custom_edit_text.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/custom_edit_text.xml b/app/src/main/res/drawable/custom_edit_text.xml
+deleted file mode 100644
+--- a/app/src/main/res/drawable/custom_edit_text.xml	
++++ /dev/null	
+@@ -1,19 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+-
+-    <item android:state_enabled="true" android:state_focused="true">
+-        <shape android:shape="rectangle">
+-            <solid android:color="@color/white"/>
+-            <corners android:radius="10dp"/>
+-            <stroke android:color="@color/purple_500" android:width="1dp"/>
+-        </shape>
+-    </item>
+-
+-    <item android:state_enabled="true">
+-        <shape android:shape="rectangle">
+-            <solid android:color="@color/white"/>
+-            <corners android:radius="10dp"/>
+-            <stroke android:color="@color/gray" android:width="1dp"/>
+-        </shape>
+-    </item>
+-</selector>
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n    id 'kotlin-android'\r\n    id 'kotlin-kapt'\r\n    id \"androidx.navigation.safeargs\"\r\n}\r\n\r\nandroid {\r\n    compileSdk 32\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.juniorgallery\"\r\n        minSdk 23\r\n        targetSdk 32\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    viewBinding {\r\n        enabled = true\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = JavaVersion.VERSION_1_8.toString()\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    //Data\r\n    implementation project(path: ':data')\r\n\r\n    //Domain\r\n    implementation project(path: \":domain\")\r\n\r\n    //Internet\r\n    implementation \"com.squareup.retrofit2:retrofit:2.9.0\"\r\n    implementation \"com.squareup.retrofit2:converter-gson:2.9.0\"\r\n    implementation \"com.squareup.retrofit2:adapter-rxjava3:2.9.0\"\r\n    implementation \"com.squareup.okhttp3:okhttp:4.8.0\"\r\n    implementation \"com.squareup.okhttp3:logging-interceptor:4.8.0\"\r\n\r\n    //Rx\r\n    implementation \"io.reactivex.rxjava3:rxjava:3.1.4\"\r\n    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'\r\n\r\n    //Glide\r\n    implementation \"com.github.bumptech.glide:glide:4.13.2\"\r\n    kapt \"com.github.bumptech.glide:compiler:4.13.2\"\r\n\r\n    //Moxy\r\n    implementation \"com.github.moxy-community:moxy:2.2.2\"\r\n    implementation \"com.github.moxy-community:moxy-app-compat:2.2.2\"\r\n    kapt \"com.github.moxy-community:moxy-compiler:2.2.2\"\r\n\r\n    //Dagger2\r\n    implementation \"com.google.dagger:dagger:2.42\"\r\n    kapt \"com.google.dagger:dagger-compiler:2.42\"\r\n\r\n    //Chuker\r\n    debugImplementation \"com.github.chuckerteam.chucker:library:3.5.2\"\r\n    releaseImplementation \"com.github.chuckerteam.chucker:library-no-op:3.5.2\"\r\n\r\n    //SwipeRefresh\r\n    implementation \"androidx.swiperefreshlayout:swiperefreshlayout:1.1.0\"\r\n\r\n\r\n    implementation 'androidx.core:core-ktx:1.8.0'\r\n    implementation 'androidx.appcompat:appcompat:1.4.2'\r\n    implementation 'com.google.android.material:material:1.6.1'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'\r\n    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	
++++ b/app/build.gradle	
+@@ -49,8 +49,8 @@
+     implementation "com.squareup.retrofit2:retrofit:2.9.0"
+     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+     implementation "com.squareup.retrofit2:adapter-rxjava3:2.9.0"
+-    implementation "com.squareup.okhttp3:okhttp:4.8.0"
+-    implementation "com.squareup.okhttp3:logging-interceptor:4.8.0"
++    implementation "com.squareup.okhttp3:okhttp:4.9.3"
++    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+ 
+     //Rx
+     implementation "io.reactivex.rxjava3:rxjava:3.1.4"
+Index: domain/src/main/java/com/example/domain/responses/RegistrationResponse.kt
+===================================================================
+diff --git a/domain/src/main/java/com/example/domain/responses/RegistrationResponse.kt b/domain/src/main/java/com/example/domain/responses/RegistrationResponse.kt
+new file mode 100644
+--- /dev/null	
++++ b/domain/src/main/java/com/example/domain/responses/RegistrationResponse.kt	
+@@ -0,0 +1,4 @@
++package com.example.domain.responses
++
++data class RegistrationResponse(val id: String) {
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginPresenter.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginPresenter.kt b/app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginPresenter.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginPresenter.kt	
+@@ -0,0 +1,24 @@
++package com.example.juniorgallery.fragments.loginfragment
++
++import com.example.domain.gateways.UserGateway
++import com.example.juniorgallery.base.base_mvp.BasePresenter
++import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
++import io.reactivex.rxjava3.schedulers.Schedulers
++import moxy.InjectViewState
++import javax.inject.Inject
++
++
++@InjectViewState
++class LoginPresenter @Inject constructor(private var usergateway: UserGateway) : BasePresenter<LoginView>() {
++
++    fun proceedLogin(email: String, password: String) {
++        usergateway.loginUser(email, password)
++            .subscribeOn(Schedulers.io())
++            .observeOn(AndroidSchedulers.mainThread())
++            .subscribe({
++                viewState.toastsucc() //метод логина
++            }, {
++                viewState.toasterr()
++            })
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/cancel_toolbar.xml
+===================================================================
+diff --git a/app/src/main/res/layout/cancel_toolbar.xml b/app/src/main/res/layout/cancel_toolbar.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/cancel_toolbar.xml	
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.appcompat.widget.Toolbar
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    android:orientation="vertical"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="@drawable/back_toolbar">
++
++    <TextView
++        android:id="@+id/cancelTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="match_parent"
++        android:layout_margin="16dp"
++        android:padding="9dp"
++        android:gravity="center"
++        android:text="@string/cancel"
++        />
++
++</androidx.appcompat.widget.Toolbar>
+\ No newline at end of file
+Index: app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginView.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginView.kt b/app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginView.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginView.kt	
+@@ -0,0 +1,15 @@
++package com.example.juniorgallery.fragments.loginfragment
++
++import com.example.juniorgallery.base.base_mvp.BaseView
++import moxy.viewstate.strategy.OneExecutionStateStrategy
++import moxy.viewstate.strategy.StateStrategyType
++
++
++interface LoginView: BaseView {
++
++    @StateStrategyType(value = OneExecutionStateStrategy::class)
++    fun toastsucc()
++
++    @StateStrategyType(value = OneExecutionStateStrategy::class)
++    fun toasterr()
++}
+\ No newline at end of file
+Index: app/src/main/res/navigation/registration_graph.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<navigation xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/registration_graph\"\r\n    app:startDestination=\"@id/welcomeFragment\">\r\n    <fragment\r\n        android:id=\"@+id/welcomeFragment\"\r\n        android:name=\"com.example.juniorgallery.welcomefragment.WelcomeFragment\"\r\n        android:label=\"WelcomeFragment\"\r\n        tools:layout=\"@layout/welcome_fragment\">\r\n        <action\r\n            android:id=\"@+id/action_welcomeFragment_to_loginFragment\"\r\n            app:destination=\"@id/loginFragment\" />\r\n        <action\r\n            android:id=\"@+id/action_welcomeFragment_to_registrationFragment\"\r\n            app:destination=\"@id/registrationFragment\" />\r\n    </fragment>\r\n    <fragment\r\n        android:id=\"@+id/loginFragment\"\r\n        android:name=\"com.example.juniorgallery.loginfragment.LoginFragment\"\r\n        android:label=\"LoginFragment\"\r\n        tools:layout=\"@layout/login_fragment\">\r\n        <action\r\n            android:id=\"@+id/action_loginFragment_to_registrationFragment\"\r\n            app:destination=\"@id/registrationFragment\" />\r\n        <action\r\n            android:id=\"@+id/action_loginFragment_to_welcomeFragment\"\r\n            app:destination=\"@id/welcomeFragment\" />\r\n    </fragment>\r\n    <fragment\r\n        android:id=\"@+id/registrationFragment\"\r\n        android:name=\"com.example.juniorgallery.registrationfragmnet.RegistrationFragment\"\r\n        android:label=\"RegistrationFragment\"\r\n        tools:layout=\"@layout/registration_fragment\">\r\n        <action\r\n            android:id=\"@+id/action_registrationFragment_to_loginFragment\"\r\n            app:destination=\"@id/loginFragment\" />\r\n        <action\r\n            android:id=\"@+id/action_registrationFragment_to_welcomeFragment\"\r\n            app:destination=\"@id/welcomeFragment\" />\r\n    </fragment>\r\n</navigation>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/navigation/registration_graph.xml b/app/src/main/res/navigation/registration_graph.xml
+--- a/app/src/main/res/navigation/registration_graph.xml	
++++ b/app/src/main/res/navigation/registration_graph.xml	
+@@ -6,7 +6,7 @@
+     app:startDestination="@id/welcomeFragment">
+     <fragment
+         android:id="@+id/welcomeFragment"
+-        android:name="com.example.juniorgallery.welcomefragment.WelcomeFragment"
++        android:name="com.example.juniorgallery.fragments.welcomefragment.WelcomeFragment"
+         android:label="WelcomeFragment"
+         tools:layout="@layout/welcome_fragment">
+         <action
+@@ -18,7 +18,7 @@
+     </fragment>
+     <fragment
+         android:id="@+id/loginFragment"
+-        android:name="com.example.juniorgallery.loginfragment.LoginFragment"
++        android:name="com.example.juniorgallery.fragments.loginfragment.LoginFragment"
+         android:label="LoginFragment"
+         tools:layout="@layout/login_fragment">
+         <action
+@@ -30,7 +30,7 @@
+     </fragment>
+     <fragment
+         android:id="@+id/registrationFragment"
+-        android:name="com.example.juniorgallery.registrationfragmnet.RegistrationFragment"
++        android:name="com.example.juniorgallery.fragments.registrationfragmnet.RegistrationFragment"
+         android:label="RegistrationFragment"
+         tools:layout="@layout/registration_fragment">
+         <action
+Index: app/src/main/java/com/example/juniorgallery/di/module/GatewayModule.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.juniorgallery.di.module\r\n\r\nimport com.example.data.api.UserApi\r\nimport com.example.data.gateway.UserGatewayImpl\r\nimport com.example.domain.UserGateway\r\nimport dagger.Module\r\nimport dagger.Provides\r\nimport javax.inject.Singleton\r\n\r\n\r\n@Module\r\nclass GatewayModule {\r\n\r\n    @Provides\r\n    @Singleton\r\n    fun provideUserGateway(userApi: UserApi): UserGateway = UserGatewayImpl(userApi)\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/di/module/GatewayModule.kt b/app/src/main/java/com/example/juniorgallery/di/module/GatewayModule.kt
+--- a/app/src/main/java/com/example/juniorgallery/di/module/GatewayModule.kt	
++++ b/app/src/main/java/com/example/juniorgallery/di/module/GatewayModule.kt	
+@@ -2,7 +2,7 @@
+ 
+ import com.example.data.api.UserApi
+ import com.example.data.gateway.UserGatewayImpl
+-import com.example.domain.UserGateway
++import com.example.domain.gateways.UserGateway
+ import dagger.Module
+ import dagger.Provides
+ import javax.inject.Singleton
+Index: app/src/main/res/drawable/back_toolbar.xml
+===================================================================
+diff --git a/app/src/main/res/drawable/back_toolbar.xml b/app/src/main/res/drawable/back_toolbar.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/drawable/back_toolbar.xml	
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item>
++        <shape>
++            <stroke android:width="0.5dp" android:color="@color/white"/>
++        </shape>
++    </item>
++</selector>
+\ No newline at end of file
+Index: app/src/main/res/layout/login_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\">\r\n\r\n    <androidx.appcompat.widget.Toolbar\r\n        android:id=\"@+id/loginToolbar\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"?attr/actionBarSize\"\r\n        android:background=\"@color/white\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/cancelButton\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"@string/cancel\"\r\n            android:textColor=\"@color/dark_gray\"\r\n            android:textSize=\"17sp\"\r\n            app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        </TextView>\r\n\r\n\r\n    </androidx.appcompat.widget.Toolbar>\r\n\r\n    <View\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/gray\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/loginToolbar\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/signInTextView\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"100dp\"\r\n        android:gravity=\"center\"\r\n        android:text=\"@string/sign_in\"\r\n        android:textColor=\"@color/black\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/loginToolbar\">\r\n\r\n    </TextView>\r\n\r\n    <View\r\n        android:id=\"@+id/view\"\r\n        android:layout_width=\"95dp\"\r\n        android:layout_height=\"2dp\"\r\n        android:background=\"@color/pink\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/signInTextView\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/signInTextView\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/signInTextView\" />\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/EmailLoginInputLayout\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_marginStart=\"15dp\"\r\n        android:layout_marginTop=\"50dp\"\r\n        android:layout_marginEnd=\"15dp\"\r\n        android:backgroundTint=\"@color/white\"\r\n        app:boxCornerRadiusBottomEnd=\"10dp\"\r\n        app:boxCornerRadiusBottomStart=\"10dp\"\r\n        app:boxCornerRadiusTopEnd=\"10dp\"\r\n        app:boxCornerRadiusTopStart=\"10dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signInTextView\">\r\n\r\n        <EditText\r\n            android:id=\"@+id/emailSignInEditText\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:drawableEnd=\"@drawable/ic_email_24\"\r\n            android:foregroundTint=\"@color/black\"\r\n            android:hint=\"@string/email_sign_in\"\r\n            android:inputType=\"textEmailAddress\"\r\n            android:paddingStart=\"5dp\"\r\n            android:paddingTop=\"10dp\"\r\n            android:paddingEnd=\"10dp\"\r\n            android:paddingBottom=\"10dp\"\r\n            android:textSize=\"20sp\" />\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n\r\n    <com.google.android.material.textfield.TextInputLayout\r\n        android:id=\"@+id/passwordLoginInputLayout\"\r\n        style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"15dp\"\r\n        android:backgroundTint=\"@color/white\"\r\n        app:boxCornerRadiusBottomEnd=\"10dp\"\r\n        app:boxCornerRadiusBottomStart=\"10dp\"\r\n        android:layout_marginStart=\"15dp\"\r\n        android:layout_marginEnd=\"15dp\"\r\n        app:boxCornerRadiusTopEnd=\"10dp\"\r\n        android:hint=\"@string/password_sign_in\"\r\n        app:boxCornerRadiusTopStart=\"10dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/EmailLoginInputLayout\"\r\n        app:passwordToggleEnabled=\"true\"\r\n        app:passwordToggleTint=\"@color/gray\">\r\n\r\n        <EditText\r\n            android:id=\"@+id/passwordSignInEditText\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:foregroundTint=\"@color/black\"\r\n            android:inputType=\"textPassword\"\r\n            android:paddingStart=\"5dp\"\r\n            android:paddingTop=\"10dp\"\r\n            android:paddingEnd=\"5dp\"\r\n            android:paddingBottom=\"10dp\"\r\n            android:textSize=\"20sp\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/emailSignInEditText\" />\r\n\r\n    </com.google.android.material.textfield.TextInputLayout>\r\n\r\n    <TextView\r\n        android:id=\"@+id/wrongLoginOrPassword\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:layout_constraintStart_toStartOf=\"@id/passwordLoginInputLayout\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/passwordLoginInputLayout\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/signInButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"30dp\"\r\n        android:backgroundTint=\"@color/black\"\r\n        android:text=\"@string/sign_in\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/wrongLoginOrPassword\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/signUpButton\"\r\n        android:layout_width=\"90dp\"\r\n        android:textAlignment=\"center\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"5dp\"\r\n        android:text=\"@string/sign_up\"\r\n        android:textAllCaps=\"true\"\r\n        android:textColor=\"@color/black\"\r\n        android:textSize=\"15sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/signInButton\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/login_fragment.xml b/app/src/main/res/layout/login_fragment.xml
+--- a/app/src/main/res/layout/login_fragment.xml	
++++ b/app/src/main/res/layout/login_fragment.xml	
+@@ -5,32 +5,21 @@
+     android:layout_height="match_parent"
+     android:orientation="vertical">
+ 
+-    <androidx.appcompat.widget.Toolbar
+-        android:id="@+id/loginToolbar"
++    <com.google.android.material.appbar.AppBarLayout
++        android:id="@+id/appbar"
+         android:layout_width="match_parent"
+-        android:layout_height="?attr/actionBarSize"
+-        android:background="@color/white"
+-        app:layout_constraintTop_toTopOf="parent">
+-
+-        <TextView
+-            android:id="@+id/cancelButton"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:text="@string/cancel"
+-            android:textColor="@color/dark_gray"
+-            android:textSize="17sp"
+-            app:layout_constraintTop_toTopOf="parent">
++        android:layout_height="wrap_content"
++        android:background="@color/white"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent">
+ 
+-        </TextView>
++        <include
++            android:id="@+id/toolbarLayout"
++            layout="@layout/cancel_toolbar"/>
++    </com.google.android.material.appbar.AppBarLayout>
+ 
+ 
+-    </androidx.appcompat.widget.Toolbar>
+-
+-    <View
+-        android:layout_width="match_parent"
+-        android:layout_height="1dp"
+-        android:background="@color/gray"
+-        app:layout_constraintBottom_toBottomOf="@+id/loginToolbar" />
+ 
+     <TextView
+         android:id="@+id/signInTextView"
+@@ -44,7 +33,7 @@
+         android:textStyle="bold"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/loginToolbar">
++        app:layout_constraintTop_toBottomOf="@+id/appbar">
+ 
+     </TextView>
+ 
+Index: app/src/main/res/layout/registration_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<ScrollView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\">\r\n\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\">\r\n\r\n        <androidx.appcompat.widget.Toolbar\r\n            android:id=\"@+id/registrationToolbar\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"?attr/actionBarSize\"\r\n            android:background=\"@color/white\"\r\n            app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/cancelButton\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:backgroundTint=\"@color/white\"\r\n                android:text=\"@string/cancel\"\r\n                android:textColor=\"@color/dark_gray\"\r\n                android:textSize=\"17sp\"\r\n                app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n        </androidx.appcompat.widget.Toolbar>\r\n\r\n        <View\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"1dp\"\r\n            android:background=\"@color/gray\"\r\n            app:layout_constraintBottom_toBottomOf=\"@+id/registrationToolbar\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/signUpTextView\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"100dp\"\r\n            android:gravity=\"center\"\r\n            android:text=\"@string/sign_up\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"30sp\"\r\n            android:textStyle=\"bold\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/registrationToolbar\" />\r\n\r\n\r\n        <View\r\n            android:id=\"@+id/view\"\r\n            android:layout_width=\"105dp\"\r\n            android:layout_height=\"2dp\"\r\n            android:background=\"@color/pink\"\r\n            app:layout_constraintBottom_toBottomOf=\"@+id/signUpTextView\"\r\n            app:layout_constraintEnd_toEndOf=\"@+id/signUpTextView\"\r\n            app:layout_constraintStart_toStartOf=\"@+id/signUpTextView\" />\r\n\r\n\r\n        <com.google.android.material.textfield.TextInputLayout\r\n            android:id=\"@+id/userNameInputLayout\"\r\n            style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"15dp\"\r\n            android:layout_marginTop=\"50dp\"\r\n            android:layout_marginEnd=\"15dp\"\r\n            android:backgroundTint=\"@color/white\"\r\n            app:boxCornerRadiusBottomEnd=\"10dp\"\r\n            app:boxCornerRadiusBottomStart=\"10dp\"\r\n            app:boxCornerRadiusTopEnd=\"10dp\"\r\n            app:boxCornerRadiusTopStart=\"10dp\"\r\n            android:hint=\"@string/username\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/signUpTextView\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/userNameEditText\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:drawableEnd=\"@drawable/ic_person_24\"\r\n                android:foregroundTint=\"@color/black\"\r\n                android:inputType=\"text\"\r\n                android:paddingStart=\"5dp\"\r\n                android:paddingTop=\"10dp\"\r\n                android:paddingEnd=\"10dp\"\r\n                android:paddingBottom=\"10dp\"\r\n                android:textSize=\"20sp\" />\r\n\r\n        </com.google.android.material.textfield.TextInputLayout>\r\n\r\n\r\n        <com.google.android.material.textfield.TextInputLayout\r\n            android:id=\"@+id/birthdayInputLayout\"\r\n            style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"15dp\"\r\n            android:layout_marginTop=\"30dp\"\r\n            android:layout_marginEnd=\"15dp\"\r\n            android:backgroundTint=\"@color/white\"\r\n            app:boxCornerRadiusBottomEnd=\"10dp\"\r\n            app:boxCornerRadiusBottomStart=\"10dp\"\r\n            app:boxCornerRadiusTopEnd=\"10dp\"\r\n            app:boxCornerRadiusTopStart=\"10dp\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/userNameInputLayout\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/birthdayEditText\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:drawableEnd=\"@drawable/ic_calendar_24\"\r\n                android:foregroundTint=\"@color/black\"\r\n                android:hint=\"@string/birthday\"\r\n                android:inputType=\"date\"\r\n                android:paddingStart=\"5dp\"\r\n                android:paddingTop=\"10dp\"\r\n                android:paddingEnd=\"10dp\"\r\n                android:paddingBottom=\"10dp\"\r\n                android:textSize=\"20sp\" />\r\n\r\n        </com.google.android.material.textfield.TextInputLayout>\r\n\r\n        <com.google.android.material.textfield.TextInputLayout\r\n            android:id=\"@+id/emailRegistrationInputLayout\"\r\n            style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"15dp\"\r\n            android:layout_marginTop=\"30dp\"\r\n            android:layout_marginEnd=\"15dp\"\r\n            android:backgroundTint=\"@color/white\"\r\n            app:boxCornerRadiusBottomEnd=\"10dp\"\r\n            app:boxCornerRadiusBottomStart=\"10dp\"\r\n            app:boxCornerRadiusTopEnd=\"10dp\"\r\n            app:boxCornerRadiusTopStart=\"10dp\"\r\n            android:focusable=\"true\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/birthdayInputLayout\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/emailSignUpEditText\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:drawableEnd=\"@drawable/ic_email_24\"\r\n                android:foregroundTint=\"@color/black\"\r\n                android:hint=\"@string/email_sign_up\"\r\n                android:inputType=\"textEmailAddress\"\r\n                android:paddingStart=\"5dp\"\r\n                android:paddingTop=\"10dp\"\r\n                android:paddingEnd=\"10dp\"\r\n                android:paddingBottom=\"10dp\"\r\n                android:textSize=\"20sp\" />\r\n        </com.google.android.material.textfield.TextInputLayout>\r\n\r\n\r\n        <com.google.android.material.textfield.TextInputLayout\r\n            android:id=\"@+id/passwordInputLayout\"\r\n            style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"15dp\"\r\n            android:layout_marginTop=\"30dp\"\r\n            android:layout_marginEnd=\"15dp\"\r\n            android:backgroundTint=\"@color/white\"\r\n            app:boxCornerRadiusBottomEnd=\"10dp\"\r\n            app:boxCornerRadiusBottomStart=\"10dp\"\r\n            app:boxCornerRadiusTopEnd=\"10dp\"\r\n            app:boxCornerRadiusTopStart=\"10dp\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/emailRegistrationInputLayout\"\r\n            app:passwordToggleEnabled=\"true\"\r\n            app:passwordToggleTint=\"@color/gray\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/passwordSignUpEditText\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:foregroundTint=\"@color/black\"\r\n                android:hint=\"@string/password_sign_up\"\r\n                android:inputType=\"textPassword\"\r\n                android:paddingStart=\"5dp\"\r\n                android:paddingTop=\"10dp\"\r\n                android:paddingEnd=\"5dp\"\r\n                android:paddingBottom=\"10dp\"\r\n                android:textSize=\"20sp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@id/emailSignUpEditText\" />\r\n\r\n\r\n        </com.google.android.material.textfield.TextInputLayout>\r\n\r\n\r\n        <com.google.android.material.textfield.TextInputLayout\r\n            android:id=\"@+id/confirmInputLayout\"\r\n            style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"15dp\"\r\n            android:layout_marginTop=\"30dp\"\r\n            android:layout_marginEnd=\"15dp\"\r\n            android:backgroundTint=\"@color/white\"\r\n            app:boxCornerRadiusBottomEnd=\"10dp\"\r\n            app:boxCornerRadiusBottomStart=\"10dp\"\r\n            app:boxCornerRadiusTopEnd=\"10dp\"\r\n            app:boxCornerRadiusTopStart=\"10dp\"\r\n\r\n            app:layout_constraintTop_toBottomOf=\"@id/passwordInputLayout\"\r\n            app:passwordToggleEnabled=\"true\"\r\n            app:passwordToggleTint=\"@color/gray\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/confirmPasswordSignUpEditText\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:foregroundTint=\"@color/black\"\r\n                android:hint=\"@string/password_confirm_sign_up\"\r\n                android:inputType=\"textPassword\"\r\n                android:paddingStart=\"5dp\"\r\n                android:paddingTop=\"10dp\"\r\n                android:paddingEnd=\"5dp\"\r\n                android:paddingBottom=\"10dp\"\r\n                android:textSize=\"20sp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@id/passwordSignUpEditText\" />\r\n\r\n        </com.google.android.material.textfield.TextInputLayout>\r\n\r\n\r\n        <Button\r\n            android:id=\"@+id/signUpButton\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"30dp\"\r\n            android:backgroundTint=\"@color/black\"\r\n            android:text=\"@string/sign_up\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/confirmInputLayout\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/signInButton\"\r\n            android:layout_width=\"90dp\"\r\n            android:textAlignment=\"center\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"5dp\"\r\n            android:text=\"@string/sign_in\"\r\n            android:textAllCaps=\"true\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"15sp\"\r\n            android:textStyle=\"bold\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/signUpButton\" />\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n</ScrollView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/registration_fragment.xml b/app/src/main/res/layout/registration_fragment.xml
+--- a/app/src/main/res/layout/registration_fragment.xml	
++++ b/app/src/main/res/layout/registration_fragment.xml	
+@@ -10,30 +10,20 @@
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+ 
+-        <androidx.appcompat.widget.Toolbar
+-            android:id="@+id/registrationToolbar"
++        <com.google.android.material.appbar.AppBarLayout
++            android:id="@+id/appbar"
+             android:layout_width="match_parent"
+-            android:layout_height="?attr/actionBarSize"
++            android:layout_height="wrap_content"
+             android:background="@color/white"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent">
+ 
+-            <TextView
+-                android:id="@+id/cancelButton"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:backgroundTint="@color/white"
+-                android:text="@string/cancel"
+-                android:textColor="@color/dark_gray"
+-                android:textSize="17sp"
+-                app:layout_constraintTop_toTopOf="parent" />
+-
+-        </androidx.appcompat.widget.Toolbar>
+-
+-        <View
+-            android:layout_width="match_parent"
+-            android:layout_height="1dp"
+-            android:background="@color/gray"
+-            app:layout_constraintBottom_toBottomOf="@+id/registrationToolbar" />
++            <include
++                android:id="@+id/toolbarLayout"
++                layout="@layout/cancel_toolbar"/>
++        </com.google.android.material.appbar.AppBarLayout>
++
+ 
+         <TextView
+             android:id="@+id/signUpTextView"
+@@ -47,7 +37,7 @@
+             android:textStyle="bold"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toBottomOf="@+id/registrationToolbar" />
++            app:layout_constraintTop_toBottomOf="@+id/appbar" />
+ 
+ 
+         <View
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable-v23/splash_screen.xml\" value=\"0.218\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable-v24/ic_launcher_foreground.xml\" value=\"0.1675\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/custom_edit_text.xml\" value=\"0.1675\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_calendar_24.xml\" value=\"0.1675\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_email_24.xml\" value=\"0.1675\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_person_24.xml\" value=\"0.1675\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_visibility_24.xml\" value=\"0.1675\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_visibility_off_24.xml\" value=\"0.1675\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/activity_main.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/login_fragment.xml\" value=\"0.264\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/registration_fragment.xml\" value=\"0.264\" />\r\n        <entry key=\"..\\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/welcome_fragment.xml\" value=\"0.25\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -5,6 +5,7 @@
+       <map>
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable-v23/splash_screen.xml" value="0.218" />
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1675" />
++        <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/back_toolbar.xml" value="0.175" />
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/custom_edit_text.xml" value="0.1675" />
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_calendar_24.xml" value="0.1675" />
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_email_24.xml" value="0.1675" />
+@@ -12,6 +13,7 @@
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_visibility_24.xml" value="0.1675" />
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/drawable/ic_visibility_off_24.xml" value="0.1675" />
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/activity_main.xml" value="0.25" />
++        <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/cancel_toolbar.xml" value="0.24895833333333334" />
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/login_fragment.xml" value="0.264" />
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/registration_fragment.xml" value="0.264" />
+         <entry key="..\:/Users/maxim/AndroidStudioProjects/JuniorGallery/app/src/main/res/layout/welcome_fragment.xml" value="0.25" />
+Index: domain/src/main/java/com/example/domain/entities/UserRequest.kt
+===================================================================
+diff --git a/domain/src/main/java/com/example/domain/entities/UserRequest.kt b/domain/src/main/java/com/example/domain/models/RequestUserModel.kt
+rename from domain/src/main/java/com/example/domain/entities/UserRequest.kt
+rename to domain/src/main/java/com/example/domain/models/RequestUserModel.kt
+--- a/domain/src/main/java/com/example/domain/entities/UserRequest.kt	
++++ b/domain/src/main/java/com/example/domain/models/RequestUserModel.kt	
+@@ -1,8 +1,8 @@
+-package com.example.domain.entities
++package com.example.domain.models
+ 
+ import com.google.gson.annotations.SerializedName
+ 
+-data class UserRequest(
++data class RequestUserModel(
+     @SerializedName("email") val email: String,
+     @SerializedName("birthday") val birthday: String,
+     @SerializedName("username") val userName: String,
+Index: domain/src/main/java/com/example/domain/entities/LoginResponse.kt
+===================================================================
+diff --git a/domain/src/main/java/com/example/domain/entities/LoginResponse.kt b/domain/src/main/java/com/example/domain/responses/LoginResponse.kt
+rename from domain/src/main/java/com/example/domain/entities/LoginResponse.kt
+rename to domain/src/main/java/com/example/domain/responses/LoginResponse.kt
+--- a/domain/src/main/java/com/example/domain/entities/LoginResponse.kt	
++++ b/domain/src/main/java/com/example/domain/responses/LoginResponse.kt	
+@@ -1,4 +1,4 @@
+-package com.example.domain.entities
++package com.example.domain.responses
+ 
+ import com.google.gson.annotations.SerializedName
+ 
+Index: app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomeFragment.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomeFragment.kt b/app/src/main/java/com/example/juniorgallery/fragments/welcomefragment/WelcomeFragment.kt
+rename from app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomeFragment.kt
+rename to app/src/main/java/com/example/juniorgallery/fragments/welcomefragment/WelcomeFragment.kt
+--- a/app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomeFragment.kt	
++++ b/app/src/main/java/com/example/juniorgallery/fragments/welcomefragment/WelcomeFragment.kt	
+@@ -1,4 +1,4 @@
+-package com.example.juniorgallery.welcomefragment
++package com.example.juniorgallery.fragments.welcomefragment
+ 
+ import android.os.Bundle
+ import android.view.View
+Index: app/src/main/java/com/example/juniorgallery/masks/DateMask.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.juniorgallery.masks\r\n\r\nimport android.text.Editable\r\nimport android.text.TextWatcher\r\nimport android.widget.EditText\r\n\r\nclass DateMask(val input : EditText) {\r\n    fun listen() {\r\n        input.addTextChangedListener(mDateEntryWatcher)\r\n    }\r\n\r\n    private val mDateEntryWatcher = object : TextWatcher {\r\n\r\n        var edited = false\r\n        val dividerCharacter = \"/\"\r\n\r\n        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {\r\n            if (edited) {\r\n                edited = false\r\n                return\r\n            }\r\n\r\n            var working = getEditText()\r\n\r\n            working = manageDateDivider(working, 2, start, before)\r\n            working = manageDateDivider(working, 5, start, before)\r\n\r\n            edited = true\r\n            input.setText(working)\r\n            input.setSelection(input.text.length)\r\n        }\r\n\r\n        private fun manageDateDivider(working: String, position : Int, start: Int, before: Int) : String{\r\n            if (working.length == position) {\r\n                return if (before <= position && start < position)\r\n                    working + dividerCharacter\r\n                else\r\n                    working.dropLast(1)\r\n            }\r\n            return working\r\n        }\r\n\r\n        private fun getEditText() : String {\r\n            return if (input.text.length >= 10)\r\n                input.text.toString().substring(0,10)\r\n            else\r\n                input.text.toString()\r\n        }\r\n\r\n        override fun afterTextChanged(s: Editable) {}\r\n        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}\r\n    }\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/masks/DateMask.kt b/app/src/main/java/com/example/juniorgallery/masks/DateMask.kt
+--- a/app/src/main/java/com/example/juniorgallery/masks/DateMask.kt	
++++ b/app/src/main/java/com/example/juniorgallery/masks/DateMask.kt	
+@@ -12,7 +12,7 @@
+     private val mDateEntryWatcher = object : TextWatcher {
+ 
+         var edited = false
+-        val dividerCharacter = "/"
++        val dividerCharacter = "."
+ 
+         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+             if (edited) {
+Index: app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationView.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationView.kt b/app/src/main/java/com/example/juniorgallery/fragments/registrationfragmnet/RegistrationView.kt
+rename from app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationView.kt
+rename to app/src/main/java/com/example/juniorgallery/fragments/registrationfragmnet/RegistrationView.kt
+--- a/app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationView.kt	
++++ b/app/src/main/java/com/example/juniorgallery/fragments/registrationfragmnet/RegistrationView.kt	
+@@ -1,4 +1,4 @@
+-package com.example.juniorgallery.registrationfragmnet
++package com.example.juniorgallery.fragments.registrationfragmnet
+ 
+ import com.example.juniorgallery.base.base_mvp.BaseView
+ import moxy.viewstate.strategy.OneExecutionStateStrategy
+Index: app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomePresenter.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomePresenter.kt b/app/src/main/java/com/example/juniorgallery/fragments/welcomefragment/WelcomePresenter.kt
+rename from app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomePresenter.kt
+rename to app/src/main/java/com/example/juniorgallery/fragments/welcomefragment/WelcomePresenter.kt
+--- a/app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomePresenter.kt	
++++ b/app/src/main/java/com/example/juniorgallery/fragments/welcomefragment/WelcomePresenter.kt	
+@@ -1,4 +1,4 @@
+-package com.example.juniorgallery.welcomefragment
++package com.example.juniorgallery.fragments.welcomefragment
+ 
+ import com.example.juniorgallery.base.base_mvp.BasePresenter
+ import moxy.InjectViewState
+Index: app/src/main/java/com/example/juniorgallery/loginfragment/LoginFragment.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/loginfragment/LoginFragment.kt b/app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginFragment.kt
+rename from app/src/main/java/com/example/juniorgallery/loginfragment/LoginFragment.kt
+rename to app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginFragment.kt
+--- a/app/src/main/java/com/example/juniorgallery/loginfragment/LoginFragment.kt	
++++ b/app/src/main/java/com/example/juniorgallery/fragments/loginfragment/LoginFragment.kt	
+@@ -1,8 +1,9 @@
+-package com.example.juniorgallery.loginfragment
++package com.example.juniorgallery.fragments.loginfragment
+ 
+ import android.os.Bundle
+-import android.view.MenuItem
+ import android.view.View
++import android.widget.Toast
++import androidx.navigation.findNavController
+ import androidx.navigation.fragment.findNavController
+ import com.example.juniorgallery.MyApp
+ import com.example.juniorgallery.R
+@@ -29,14 +30,26 @@
+                 findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
+             }
+ 
+-            cancelButton.setOnClickListener{
+-                findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
++            toolbarLayout.cancelTextView.setOnClickListener {
++                it.findNavController().popBackStack()
+             }
++
++            signInButton.setOnClickListener {
++                val emailToText = emailSignInEditText.text.toString()
++                val passwordToText = passwordSignInEditText.text.toString()
++                presenter.proceedLogin(emailToText, passwordToText)
++            }
++        }
+ 
+-            /*signInButton.setOnClickListener {
++
++    }
+ 
+-            }*/
+-        }
++    override fun toastsucc() {
++        Toast.makeText(context, "Все отлично", Toast.LENGTH_SHORT).show()
++    }
++
++    override fun toasterr() {
++        Toast.makeText(context, "Хуйнябля", Toast.LENGTH_SHORT).show()
+     }
+ 
+ 
+Index: app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationFragment.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationFragment.kt b/app/src/main/java/com/example/juniorgallery/fragments/registrationfragmnet/RegistrationFragment.kt
+rename from app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationFragment.kt
+rename to app/src/main/java/com/example/juniorgallery/fragments/registrationfragmnet/RegistrationFragment.kt
+--- a/app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationFragment.kt	
++++ b/app/src/main/java/com/example/juniorgallery/fragments/registrationfragmnet/RegistrationFragment.kt	
+@@ -1,8 +1,9 @@
+-package com.example.juniorgallery.registrationfragmnet
++package com.example.juniorgallery.fragments.registrationfragmnet
+ 
+ import android.os.Bundle
+ import android.view.View
+ import android.widget.Toast
++import androidx.navigation.findNavController
+ import androidx.navigation.fragment.findNavController
+ import com.example.juniorgallery.masks.DateMask
+ import com.example.juniorgallery.MyApp
+@@ -34,8 +35,8 @@
+                 findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
+             }
+ 
+-            cancelButton.setOnClickListener {
+-                findNavController().navigate(R.id.action_registrationFragment_to_welcomeFragment)
++            toolbarLayout.cancelTextView.setOnClickListener {
++                it.findNavController().popBackStack()
+             }
+ 
+             DateMask(birthdayEditText).listen()
+@@ -43,7 +44,7 @@
+             signUpButton.setOnClickListener {
+                 val usernameToText = userNameEditText.text.toString()
+                 var dateOfBirth = birthdayEditText.text.toString()
+-                if (dateOfBirth == "") dateOfBirth = "00/00/0001"
++                if (dateOfBirth == "") dateOfBirth = "01.01.2000"
+                 val emailToText = emailSignUpEditText.text.toString()
+                 val passwordToText = passwordSignUpEditText.text.toString()
+                 val confirmPasswordToText = confirmPasswordSignUpEditText.text.toString()
+Index: app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationPresenter.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationPresenter.kt b/app/src/main/java/com/example/juniorgallery/fragments/registrationfragmnet/RegistrationPresenter.kt
+rename from app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationPresenter.kt
+rename to app/src/main/java/com/example/juniorgallery/fragments/registrationfragmnet/RegistrationPresenter.kt
+--- a/app/src/main/java/com/example/juniorgallery/registrationfragmnet/RegistrationPresenter.kt	
++++ b/app/src/main/java/com/example/juniorgallery/fragments/registrationfragmnet/RegistrationPresenter.kt	
+@@ -1,7 +1,7 @@
+-package com.example.juniorgallery.registrationfragmnet
++package com.example.juniorgallery.fragments.registrationfragmnet
+ 
+-import com.example.domain.UserGateway
+-import com.example.domain.entities.UserRequest
++import com.example.domain.gateways.UserGateway
++import com.example.domain.models.RequestUserModel
+ import com.example.juniorgallery.base.base_mvp.BasePresenter
+ import com.example.juniorgallery.validation.*
+ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+@@ -40,7 +40,7 @@
+     ) {
+ 
+         if (validationCheck(username, email, password, confirmPassword)) {
+-            usergateway.postUser(UserRequest(email, date, username, password))
++            usergateway.postUser(RequestUserModel(email, date, username, password))
+                 .subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe({
+Index: app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomeView.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomeView.kt b/app/src/main/java/com/example/juniorgallery/fragments/welcomefragment/WelcomeView.kt
+rename from app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomeView.kt
+rename to app/src/main/java/com/example/juniorgallery/fragments/welcomefragment/WelcomeView.kt
+--- a/app/src/main/java/com/example/juniorgallery/welcomefragment/WelcomeView.kt	
++++ b/app/src/main/java/com/example/juniorgallery/fragments/welcomefragment/WelcomeView.kt	
+@@ -1,4 +1,4 @@
+-package com.example.juniorgallery.welcomefragment
++package com.example.juniorgallery.fragments.welcomefragment
+ 
+ import com.example.juniorgallery.base.base_mvp.BaseView
+ 

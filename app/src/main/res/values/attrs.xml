@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomAppBar">
+        <attr name="app_bar_type" format="enum">
+            <enum name="type_back" value="0" />
+            <enum name="type_search" value="1" />
+            <enum name="type_cancel" value="2" />
+        </attr>
+        <attr name="app_bar_text" format="string" />
+        <attr name="app_bar_end_icon" format="reference"/>
+    </declare-styleable>
+</resources>

@@ -2,6 +2,11 @@ package com.example.juniorgallery.di.module
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.example.data.interceptors.HeaderInterceptor
+import com.example.data.interceptors.RefreshTokenInterceptor
+import com.example.data.managers.tokenmanager.TokenManager
+import com.example.domain.gateways.AuthGateway
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -17,8 +22,14 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(chuckerInterceptor: ChuckerInterceptor) = OkHttpClient.Builder()
+    fun provideOkHttpClient(
+        chuckerInterceptor: ChuckerInterceptor,
+        tokenManager: TokenManager,
+        authGateway: Lazy<AuthGateway>,
+    ) = OkHttpClient.Builder()
+        .authenticator(RefreshTokenInterceptor(authGateway, tokenManager))
         .addInterceptor(chuckerInterceptor)
+        .addInterceptor(HeaderInterceptor(tokenManager))
         .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
         .build()
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConstraintLayoutStates xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <State
+        android:id="@+id/appbarBackState"
+        app:constraints="@layout/layout_custom_appbar_back_state" />
+    <State
+        android:id="@+id/appbarSearchState"
+        app:constraints="@layout/layout_custom_appbar_search_state" />
+    <State
+        android:id="@+id/appbarCancelState"
+        app:constraints="@layout/layout_custom_appbar_cancel_state" />
+</ConstraintLayoutStates>

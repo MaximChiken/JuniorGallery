@@ -1,28 +1,61 @@
 <resources>
     <string name="app_name">JuniorGallery</string>
 
+    <!--Welcome Screens-->
+    <string name="welcome">Welcome!</string>
     <string name="create_account">Create an account</string>
     <string name="have_account">I already have an account</string>
-
     <string name="cancel">Cancel</string>
-
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
 
-    <string name="email_sign_in"><font color='#C4C4C4'>Email</font></string>
-    <string name="password_sign_in"><font color='#C4C4C4'>Password</font></string>
+    <!--Login Screen-->
+    <string name="username_sign_in">Username</string>
+    <string name="password_sign_in">Password</string>
+    <string name="incorrect_username">Incorrect Username</string>
+    <string name="incorrect_password">Incorrect Password</string>
 
-    <string name="wrong_email_or_password"><font color='#FF0000'>Incorrect Email or Password</font></string>
-
-    <string name="username"><font color='#C4C4C4'>User Name</font><font color='#FF0000'>*</font></string>
-    <string name="birthday"><font color='#C4C4C4'>Birthday</font></string>
-    <string name="email_sign_up"><font color='#C4C4C4'>Email</font><font color='#FF0000'>*</font></string>
-    <string name="password_sign_up"><font color='#C4C4C4'>Password</font><font color='#FF0000'>*</font></string>
-    <string name="password_confirm_sign_up"><font color='#C4C4C4'>Confirm Password</font><font color='#FF0000'>*</font></string>
-
+    <!--Registration Screen-->
+    <string name="username">User Name<font color='#FF0000'>*</font></string>
+    <string name="birthday">Birthday</string>
+    <string name="email_sign_up">Email<font color='#FF0000'>*</font></string>
+    <string name="password_sign_up">Password<font color='#FF0000'>*</font></string>
+    <string name="password_confirm_sign_up">Confirm Password<font color='#FF0000'>*</font></string>
     <string name="no_user_name"><font color='#FF0000'>Invalid or empty username</font></string>
     <string name="no_email"><font color='#FF0000'>Invalid or empty email</font></string>
     <string name="no_password"><font color='#FF0000'>Invalid or empty password</font></string>
     <string name="no_confirm_password"><font color='#FF0000'>Password does not match</font></string>
 
+    <!--Home Screen-->
+    <string name="loader">Loading…</string>
+    <string name="search">Search</string>
+
+    <!--Profile Screen-->
+    <string name="personal_data">Personal data</string>
+    <string name="username_settings">User Name</string>
+    <string name="email_settings">E-mail address</string>
+    <string name="email_change_settings">Email</string>
+    <string name="password_settings">Password</string>
+    <string name="old_password_settings">Old password</string>
+    <string name="new_password_settings">New password</string>
+    <string name="confirm_new_password">Confirm password</string>
+    <string name="delete_account">You can delete your account</string>
+    <string name="sign_out">Sign out</string>
+    <string name="same_username">Username can not be the same</string>
+    <string name="same_email">E-mail can not be the same</string>
+    <string name="same_password">Password can not be the same</string>
+    <string name="password_changed">Password changed successfully</string>
+    <string name="change_user_not_working">Sorry, this function not working right now</string>
+    <string name="connection_error">Connection error</string>
+
+    <!--Add Photo Screen-->
+    <string name="take_photo">Take photo</string>
+    <string name="choose_from_gallery">Choose from gallery</string>
+    <string name="choose_method">Choose method</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="empty_name">Name must not be empty</string>
+    <string name="switch_new">New</string>
+    <string name="switch_popular">Popular</string>
+    <string name="not_new_or_popular">Image should be either new or popular</string>
 </resources>
